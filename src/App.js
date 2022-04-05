@@ -2,6 +2,7 @@ import './App.css';
 import Homepage from './components/Homepage';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Next from './components/nextpage'
+import StudentMainpage from './components/StudentMainpage'
 import React from 'react';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Homepage></Homepage>}></Route>
         <Route path='/Next' element={<Next></Next>}></Route>
+        <Route path='/StudentMainpage' element={<StudentMainpage></StudentMainpage>}></Route>
       </Routes> 
     </Router>
     

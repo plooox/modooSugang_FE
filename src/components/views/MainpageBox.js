@@ -75,7 +75,7 @@ export default function MainpageBox() {
         bgcolor: 'background.paper',
         minWidth: 60 
         }}>
-        <Link to = "/Next">
+        <Link to = "/StudentMainpage">
           <Button
             variant="contained"
             disabled={!univ}
