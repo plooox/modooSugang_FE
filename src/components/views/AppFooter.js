@@ -2,8 +2,9 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Container from '@mui/material/Container';
-import Typography from '../components/Typography';
+import Typography from '../assets/Typography';
 
+// Copyright(): 팀 워크스페이스로 이동
 function Copyright() {
   return (
     <React.Fragment>
@@ -16,20 +17,6 @@ function Copyright() {
   );
 }
 
-const iconStyle = {
-  width: 48,
-  height: 48,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor: 'warning.main',
-  mr: 1,
-  '&:hover': {
-    bgcolor: 'warning.dark',
-  },
-};
-
-
 export default function AppFooter() {
   return (
     <Typography
@@ -38,9 +25,11 @@ export default function AppFooter() {
     >
       <Container sx={{ my: 4, display: 'flex' }}>
         <Grid container spacing={5}>
+          {/* 팀 Copyright */}
           <Grid item>
-                <Copyright />
-              </Grid>
+            <Copyright />
+          </Grid>
+          {/*  원래 있던 footer  */}
           <Grid item>
             <Typography variant="caption">
               {'Icons made by '}
