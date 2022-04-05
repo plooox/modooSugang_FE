@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Typography from '../components/Typography';
+import Typography from '../assets/Typography';
 import MainpageBoxLayout from './MainpageBoxLayout';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 const backgroundImage =
   'https://user-images.githubusercontent.com/82520143/161498672-a78000a5-cd2d-4088-94cf-5ae4f2f63557.jpg';
 
-export default function ProductHero() {
+export default function MainpageBox() {
   const [univ, setAge] = React.useState('');
   console.log(univ);
 
