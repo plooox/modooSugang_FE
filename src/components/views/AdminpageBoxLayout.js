@@ -36,7 +36,7 @@ function MainPageBoxLayout(props) {
       <Container
         sx={{
           mt: 3,
-          mb: 14,
+          mb: 4,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',

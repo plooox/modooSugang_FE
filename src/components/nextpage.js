@@ -10,7 +10,8 @@ function Nextpage() {
     <React.Fragment>
       {/* 
         AppBar: 맨 위 상단바 구현
-        MainpageBox: 가운데 이미지박스 + 학교 셀렉트 부분 구현
+        AdminpageBox: 가운데 테이블
+        FileUploadButton: 업로드 버튼 구현
         AppFooter: 페이지 하단바 구현
       */}
       <AppBar></AppBar>

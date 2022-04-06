@@ -41,7 +41,7 @@ export default function FileUploadButton() {
     display: 'none',
   });
   return (
-    <Box display='flex' justifyContent='flex-end'>
+    <Box display='flex' justifyContent='flex-end' sx={{m: 4}}>
       <Stack direction="row" alignItems="center" spacing={2}>
         <div>
           <Button onClick={handleOpen} variant="contained" style={{backgroundColor: "#24527a"}}>Update</Button>
