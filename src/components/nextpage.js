@@ -2,7 +2,7 @@ import * as React from 'react';
 import AppFooter from './views/AppFooter';
 import AppBar from './views/AppBar';
 import withRoot from './withRoot';
-
+import AdminpageBox from './views/AdminpageBox'
 import FileUploadButton from './assets/FileUploadButton'
 
 function Nextpage() {
@@ -14,6 +14,7 @@ function Nextpage() {
         AppFooter: 페이지 하단바 구현
       */}
       <AppBar></AppBar>
+      <AdminpageBox></AdminpageBox>
       <FileUploadButton></FileUploadButton>
       <AppFooter />
     </React.Fragment>

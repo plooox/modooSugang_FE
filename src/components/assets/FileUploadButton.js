@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 
 const style = {
   position: 'absolute',
@@ -18,7 +19,9 @@ const style = {
 };
 
 export default function FileUploadButton() {
-  const [file, setFile] = React.useState(null);
+  // const [file, setFile] = React.useState(null);
+  const [file, changeFile] = React.useState();
+  const [fileName, changeFileName] = React.useState("");
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -27,34 +30,99 @@ export default function FileUploadButton() {
   /**
    * 파일 업로드 확인
    */
-    const onChangeFile = e => {
-    if (e.target.files && e.target.files.length > 0) {
-      setFile(e.target.files[0]);
-      console.log(e.target.files)
-    }
-  }
+  //   const onChangeFile = e => {
+  //   if (e.target.files && e.target.files.length > 0) {
+  //     setFile(e.target.files[0]);
+  //     console.log(e.target.files)
+  //   }
+  // }
 
   const Input = styled('input')({
     display: 'none',
   });
   return (
-    <div>
-      <Button onClick={handleOpen} variant="contained" style={{backgroundColor: "#24527a"}}>Upload</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <label htmlFor="contained-button-file">
-            <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={onChangeFile}/>
-            <Button variant="contained" component="span">
-              Upload
-            </Button>
-          </label>
-        </Box>
-      </Modal>
-    </div>
+    <Stack direction="row" alignItems="center" spacing={2}>
+      <div>
+        <Button onClick={handleOpen} variant="contained" style={{backgroundColor: "#24527a"}}>Update</Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <label htmlFor="contained-button-file">
+              <input type="file" onChange={ (e)=>{
+                changeFile(e.target.files[0]);
+                changeFileName(e.target.files[0].name);
+              } } />
+              <Button 
+                variant="contained" style={{backgroundColor: "#24527a"}} 
+                onClick={ ()=>{
+
+                const formData = new FormData();
+
+                formData.append("file", file);
+                formData.append("fileName", fileName);
+                console.log(file,fileName)
+                // 서버 업로드 부분
+                // try {
+                //   axios.post("http://localhost:3001/fileUpload", formData).then(
+                //     (response)=>{
+                //       console.log(response);
+                //     }
+                //   )
+
+                // } catch (exception) {
+                //   console.log(exception);
+                // }
+
+              } }>업로드!!</Button>
+            </label>
+          </Box>
+        </Modal>
+      </div>
+
+      <div>
+        <Button onClick={handleOpen} variant="contained" style={{backgroundColor: "#24527a"}}>Upload</Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <label htmlFor="contained-button-file">
+              <input type="file" onChange={ (e)=>{
+                changeFile(e.target.files[0]);
+                changeFileName(e.target.files[0].name);
+              } } />
+              <Button 
+                variant="contained" style={{backgroundColor: "#24527a"}} 
+                onClick={ ()=>{
+
+                const formData = new FormData();
+
+                formData.append("file", file);
+                formData.append("fileName", fileName);
+                console.log(file,fileName)
+                // 서버 업로드 부분
+                // try {
+                //   axios.post("http://localhost:3001/fileUpload", formData).then(
+                //     (response)=>{
+                //       console.log(response);
+                //     }
+                //   )
+
+                // } catch (exception) {
+                //   console.log(exception);
+                // }
+
+              } }>업로드!!</Button>
+            </label>
+          </Box>
+        </Modal>
+      </div>
+    </Stack>
   );
 }
