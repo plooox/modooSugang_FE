@@ -3,6 +3,8 @@ import AppFooter from './views/AppFooter';
 import AppBar from './views/AppBar';
 import withRoot from './withRoot';
 
+import FileUploadButton from './assets/FileUploadButton'
+
 function Nextpage() {
   return (
     <React.Fragment>
@@ -12,6 +14,7 @@ function Nextpage() {
         AppFooter: 페이지 하단바 구현
       */}
       <AppBar></AppBar>
+      <FileUploadButton></FileUploadButton>
       <AppFooter />
     </React.Fragment>
   );
