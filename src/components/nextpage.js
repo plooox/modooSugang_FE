@@ -16,7 +16,7 @@ function Nextpage() {
       */}
       <AppBar></AppBar>
       <AdminpageBox></AdminpageBox>
-      <FileUploadButton></FileUploadButton>
+      {/* <FileUploadButton></FileUploadButton> */}
       <AppFooter />
     </React.Fragment>
   );
