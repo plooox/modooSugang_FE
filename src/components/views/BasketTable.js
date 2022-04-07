@@ -7,34 +7,18 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { Button, Modal } from '@mui/material';
+import { Button, Stack, Switch, Typography } from '@mui/material';
 import { useTable, useGlobalFilter, useSortBy } from 'react-table'
 import Search from '../assets/Search'
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import { Box } from '@mui/material';
-import { Typography } from '@mui/material';
-
-const modalStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  pt: 2,
-  px: 4,
-  pb: 3,
-};
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 export default function BasketTable({columns, data}) {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  
-  const [modalOpen, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
   const tableEvent = (hooks) => {
     hooks.visibleColumns.push((columns) => [
         ...columns,
@@ -42,25 +26,7 @@ export default function BasketTable({columns, data}) {
         id: "enrollment",
         Header: "신청/취소",
         Cell: ({row}) => (
-              // <Button onClick={() => alert(row.values.code)}>신청</Button>
-              <div>
-                <Button>신청</Button>
-                <Modal
-                  open={modalOpen}
-                  onClose={handleClose}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box sx={modalStyle}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                      Text in a modal
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                      Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography>
-                  </Box>
-                </Modal>
-              </div>
+              <Button onClick={() => alert(row.values.code)}>신청</Button>
           ),
         },
     ]);
@@ -74,22 +40,65 @@ export default function BasketTable({columns, data}) {
     prepareRow,
     setGlobalFilter,
   } = useTable({ columns, data }, useGlobalFilter, useSortBy, tableEvent);
-
-
-
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
+  const [category, setcategory] = React.useState('');
+  const handleChangeCategory = (event) => {
+    setcategory(event.target.value);
+  };
+
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
-        <Search onSubmit={setGlobalFilter} />
+        <Box sx={{mt: 8, display: 'flex', flexwrap: 'wrap'}}>
+          <Typography variant="h7">
+            [ 신청 교과목 조회 ]
+          </Typography>
+          <FormGroup>
+            <FormControlLabel control={<Switch defaultChecked />} label="과목추천" />
+          </FormGroup>
+          <FormGroup>
+            <FormControlLabel control={<Switch defaultChecked />} label="동시간대 과목 필터링" />
+          </FormGroup>
+          <FormControl sx={{ m: 1, minWidth: 100 }}>
+            <InputLabel id="demo-simple-select-label">전공/교양 선택</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={category}
+              label="Age"
+              onChange={handleChangeCategory}
+            >
+              <MenuItem value={10}>전공</MenuItem>
+              <MenuItem value={20}>교양</MenuItem>
+              <MenuItem value={30}>실험실습</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl sx={{ m: 1, minWidth: 80 }}>
+            <InputLabel id="demo-simple-select-label">학년</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={category}
+              label="Age"
+              onChange={handleChangeCategory}
+            >
+              <MenuItem value={10}>1학년</MenuItem>
+              <MenuItem value={20}>2학년</MenuItem>
+              <MenuItem value={30}>3학년</MenuItem>
+              <MenuItem value={30}>4학년</MenuItem>
+            </Select>
+          </FormControl>
+          <Search onSubmit={setGlobalFilter} />
+        </Box>
         <Table {...getTableProps()} stickyHeader aria-label="sticky table"> 
           <TableHead>
             {headerGroups.map((headerGroup) => (

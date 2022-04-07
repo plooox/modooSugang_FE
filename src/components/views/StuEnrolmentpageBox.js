@@ -83,6 +83,7 @@ export default function StuEnrolmentpageBox() {
         <>
         <StuEnrolmentpageBoxLayout>
             <BasketTable columns={columns} data={data}></BasketTable>
+            <EnrolledTable columns={columns} data={data}></EnrolledTable>
         </StuEnrolmentpageBoxLayout>
         </>
     );
