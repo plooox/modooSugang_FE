@@ -1,12 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
 import Homepage from './components/Homepage';
+import SignIn from './components/SignIn';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <Homepage></Homepage>  {/* 첫 메인페이지 */}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Homepage/>}/>
+        <Route path="signIn/*" element={<SignIn/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

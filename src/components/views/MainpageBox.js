@@ -19,8 +19,6 @@ export default function MainpageBox() {
     setAge(event.target.value);
   };
 
-
-
   return (
     <MainpageBoxLayout
       sxBackground={{
@@ -65,15 +63,17 @@ export default function MainpageBox() {
             <MenuItem value={30}>배민 대학교</MenuItem>
           </Select>
           <Button
-            href='/SignIn/' 
+            onClick={()=>window.location.href="./SignIn"}
             variant="contained"
             disabled={!univ}
             >
               확인
+              
           </Button>
         </FormControl>
       </Box>
       
     </MainpageBoxLayout>
+    
   );
 }
