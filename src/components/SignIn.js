@@ -22,6 +22,22 @@ function Copyright(props) {
   );
 }
 
+function getCheckboxValue()  {
+  // 선택된 목록 가져오기
+  const query = 'input[name="LogIn_CheckBox"]:checked';
+  const selectedEls = 
+      document.querySelectorAll(query);
+  
+  // 선택된 목록에서 value 찾기
+  let result = '';
+  selectedEls.forEach((el) => {
+    result += el.value;
+  });
+  if(result == 'manager') { window.location.href = "../manage"}
+  else {window.location.href = "../student"}
+
+}
+
 function SignIn() {
   return (
     <Container component="main" maxWidth="xs">
@@ -34,14 +50,14 @@ function SignIn() {
           }}
         >
         <FormControlLabel
-            control={<Checkbox value="manager" color="primary" />}
+            control={<Checkbox value="manager" name="LogIn_CheckBox" color="primary" />}
             label="관리자"
         />
         <TextField margin="normal" required fullWidth id="email" label="Username" name="email" autoComplete="email" autoFocus />
         <TextField margin="normal" required fullWidth id="password" label="Password" name="password" type="password" autoComplete="current-password" />
         
         <Stack spacint={2} direction="row">
-        <Button type="submit" halfWidth variant="contained" sx={{ mt: 3, mb: 2}}> SIGN IN </Button>
+        <Button type="submit" halfWidth variant="contained" sx={{ mt: 3, mb: 2}} onClick={getCheckboxValue} > SIGN IN </Button>
         <Button type="submit" halfWidth variant="contained" sx={{ mt: 3, mb: 2, ml: 5 }}> ID/PW찾기 </Button>
         </Stack>
 
