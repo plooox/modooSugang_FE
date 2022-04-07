@@ -7,11 +7,34 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { Button } from '@mui/material';
+import { Button, Modal } from '@mui/material';
 import { useTable, useGlobalFilter, useSortBy } from 'react-table'
 import Search from '../assets/Search'
+import { Box } from '@mui/material';
+import { Typography } from '@mui/material';
+
+const modalStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
 
 export default function BasketTable({columns, data}) {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  
+  const [modalOpen, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const tableEvent = (hooks) => {
     hooks.visibleColumns.push((columns) => [
         ...columns,
@@ -19,7 +42,25 @@ export default function BasketTable({columns, data}) {
         id: "enrollment",
         Header: "신청/취소",
         Cell: ({row}) => (
-              <Button onClick={() => alert(row.values.code)}>신청</Button>
+              // <Button onClick={() => alert(row.values.code)}>신청</Button>
+              <div>
+                <Button>신청</Button>
+                <Modal
+                  open={modalOpen}
+                  onClose={handleClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={modalStyle}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                      Text in a modal
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                    </Typography>
+                  </Box>
+                </Modal>
+              </div>
           ),
         },
     ]);
@@ -33,8 +74,7 @@ export default function BasketTable({columns, data}) {
     prepareRow,
     setGlobalFilter,
   } = useTable({ columns, data }, useGlobalFilter, useSortBy, tableEvent);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
 
 
   const handleChangePage = (event, newPage) => {
