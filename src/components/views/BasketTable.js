@@ -7,59 +7,48 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { Button } from '@mui/material';
 
 const columns = [
-  { id: 'code', label: '과목코드', minWidth: 170 },
-  { id: 'name', label: '과목명', minWidth: 100 },
+  { id: 'code', label: '과목코드', minWidth: 100 },
+  { id: 'name', label: '과목명', minWidth: 170 },
+  { id: 'department', label: '학과', minWidth: 100 },
+  { id: 'category', label: '전공/교양', minWidth: 100 },
+  { id: 'time', label: '시간', minWidth: 230 },
   {
-    id: 'population',
-    label: 'Population',
-    minWidth: 170,
+    id: 'classes',
+    label: '분반',
+    minWidth: 100,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'size',
-    label: 'Size\u00a0(km\u00b2)',
-    minWidth: 170,
+    id: 'score',
+    label: '학점',
+    minWidth: 100,
     align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
+    format: (value) => value.toFixed(1),
   },
-  {
-    id: 'density',
-    label: 'Density',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toFixed(2),
-  },
+  { id: 'to', label: '잔여 인원', minWidth: 100 },
 ];
 
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
+function createData(code, name, department, category, time, classes, score, to) {
+  return { code, name, department, category, time, classes, score, to };
 }
 
 const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
+  createData('AAA-0001', '알고리즘개론', '컴퓨터공학과', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
+  createData('AAA-0002', '자료구조개론', '컴퓨터공학과', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
+  createData('BBB-0003', '해석학1', '수학과', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
+  createData('DDD-0004', '논어', '공통', '교양', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
+  createData('EEE-0005', '전자기학', '전기전자공학부', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
+
 ];
 
 export default function StickyHeadTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [enrollBtn, setenrollBtn] = React.useState(false);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -69,6 +58,10 @@ export default function StickyHeadTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  const onClickEnroll = () => {
+    setenrollBtn(!enrollBtn)
+  }
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -85,6 +78,7 @@ export default function StickyHeadTable() {
                   {column.label}
                 </TableCell>
               ))}
+              <TableCell align='center'>{'TEST'}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -103,9 +97,15 @@ export default function StickyHeadTable() {
                         </TableCell>
                       );
                     })}
+                    <TableCell>
+                      <Button variant='outlined' onClick={onClickEnroll}>
+                        {enrollBtn ? '삭제' : '신청'}
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 );
               })}
+              
           </TableBody>
         </Table>
       </TableContainer>

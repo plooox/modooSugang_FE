@@ -2,15 +2,13 @@ import * as React from 'react';
 import AppFooter from './views/AppFooter';
 import AppBar from './views/AppBar';
 import withRoot from './withRoot';
-import BasketTable from './views/BasketTable'
-import EnrolledTable from './views/EnrolledTable'
+import StuEnrolmentpageBox from './views/StuEnrolmentpageBox'
 
 function StudentEnrolmentpage() {
   return (
     <React.Fragment>
         <AppBar></AppBar>
-        <BasketTable></BasketTable>
-        <EnrolledTable></EnrolledTable>
+        <StuEnrolmentpageBox></StuEnrolmentpageBox>
         <AppFooter></AppFooter>
     </React.Fragment>
   );
