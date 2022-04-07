@@ -8,47 +8,34 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { Button } from '@mui/material';
+import { useTable, useGlobalFilter, useSortBy } from 'react-table'
+import Search from '../assets/Search'
 
-const columns = [
-  { id: 'code', label: '과목코드', minWidth: 100 },
-  { id: 'name', label: '과목명', minWidth: 170 },
-  { id: 'department', label: '학과', minWidth: 100 },
-  { id: 'category', label: '전공/교양', minWidth: 100 },
-  { id: 'time', label: '시간', minWidth: 230 },
-  {
-    id: 'classes',
-    label: '분반',
-    minWidth: 100,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'score',
-    label: '학점',
-    minWidth: 100,
-    align: 'right',
-    format: (value) => value.toFixed(1),
-  },
-  { id: 'to', label: '잔여 인원', minWidth: 100 },
-];
+export default function BasketTable({columns, data}) {
+  const tableEvent = (hooks) => {
+    hooks.visibleColumns.push((columns) => [
+        ...columns,
+        {
+        id: "enrollment",
+        Header: "신청/취소",
+        Cell: ({row}) => (
+              <Button onClick={() => alert(row.values.code)}>신청</Button>
+          ),
+        },
+    ]);
+  };
 
-function createData(code, name, department, category, time, classes, score, to) {
-  return { code, name, department, category, time, classes, score, to };
-}
-
-const rows = [
-  createData('AAA-0001', '알고리즘개론', '컴퓨터공학과', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
-  createData('AAA-0002', '자료구조개론', '컴퓨터공학과', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
-  createData('BBB-0003', '해석학1', '수학과', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
-  createData('DDD-0004', '논어', '공통', '교양', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
-  createData('EEE-0005', '전자기학', '전기전자공학부', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
-
-];
-
-export default function StickyHeadTable() {
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    setGlobalFilter,
+  } = useTable({ columns, data }, useGlobalFilter, useSortBy, tableEvent);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [enrollBtn, setenrollBtn] = React.useState(false);
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -59,53 +46,38 @@ export default function StickyHeadTable() {
     setPage(0);
   };
 
-  const onClickEnroll = () => {
-    setenrollBtn(!enrollBtn)
-  }
-
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
+        <Search onSubmit={setGlobalFilter} />
+        <Table {...getTableProps()} stickyHeader aria-label="sticky table"> 
           <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-              <TableCell align='center'>{'TEST'}</TableCell>
-            </TableRow>
+            {headerGroups.map((headerGroup) => (
+              <TableRow {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <TableCell {...column.getHeaderProps(column.getSortByToggleProps())}>
+                    {column.render("Header")}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
           </TableHead>
-          <TableBody>
+          <TableBody {...getTableBodyProps()}>
             {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
+                prepareRow(row);
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                    <TableCell>
-                      <Button variant='outlined' onClick={onClickEnroll}>
-                        {enrollBtn ? '삭제' : '신청'}
-                      </Button>
-                    </TableCell>
+                  console.log(row),
+                  <TableRow {...row.getRowProps()} hover role="checkbox" tabIndex={-1} key={row.id}>
+                    {row.cells.map((cell) => (
+                      <TableCell {...cell.getCellProps()}>{cell.render("Cell")}</TableCell>
+                    ))}
                   </TableRow>
                 );
-              })}
-              
+                
+            })}
+            
           </TableBody>
         </Table>
       </TableContainer>
