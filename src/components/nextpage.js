@@ -1,10 +1,9 @@
 import * as React from 'react';
 import AppFooter from './views/AppFooter';
-import MainpageBox from './views/MainpageBox';
 import AppBar from './views/AppBar';
 import withRoot from './withRoot';
 
-function Homepage() {
+function Nextpage() {
   return (
     <React.Fragment>
       {/* 
@@ -13,10 +12,9 @@ function Homepage() {
         AppFooter: 페이지 하단바 구현
       */}
       <AppBar></AppBar>
-      <MainpageBox></MainpageBox>
       <AppFooter />
     </React.Fragment>
   );
 }
 
-export default withRoot(Homepage);
+export default withRoot(Nextpage);

@@ -1,22 +1,22 @@
 import * as React from 'react';
 import AppFooter from './views/AppFooter';
-import MainpageBox from './views/MainpageBox';
 import AppBar from './views/AppBar';
 import withRoot from './withRoot';
+import StuFirstPageBox from './views/StuFirstPageBox'
 
-function Homepage() {
+function Nextpage() {
   return (
     <React.Fragment>
       {/* 
         AppBar: 맨 위 상단바 구현
-        MainpageBox: 가운데 이미지박스 + 학교 셀렉트 부분 구현
+        StuFirstPageBox: 가운데 이미지 버튼
         AppFooter: 페이지 하단바 구현
       */}
       <AppBar></AppBar>
-      <MainpageBox></MainpageBox>
-      <AppFooter />
+      <StuFirstPageBox></StuFirstPageBox>
+      <AppFooter></AppFooter>
     </React.Fragment>
   );
 }
 
-export default withRoot(Homepage);
+export default withRoot(Nextpage);
