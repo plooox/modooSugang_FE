@@ -1,5 +1,5 @@
 import * as React from 'react';
-import BasketTable from './EnrollmentTable'
+import EnrollmentTable from './EnrollmentTable'
 import EnrolledTable from './EnrolledTable'
 import { Button } from '@mui/material';
 
@@ -76,7 +76,7 @@ export default function StuEnrolmentpageBox() {
       
     return (
         <>
-        <BasketTable columns={columns} data={data}></BasketTable>
+        <EnrollmentTable columns={columns} data={data}></EnrollmentTable>
         <EnrolledTable columns={columns} data={data}></EnrolledTable>
         </>
     );
