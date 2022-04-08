@@ -8,7 +8,6 @@ import { AiOutlineUser, AiTwotoneHome } from "react-icons/ai";
 
 const Info = styled.h1``;
 
-
 function StudentMyPage() {
   return (
     <div>

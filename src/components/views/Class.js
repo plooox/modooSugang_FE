@@ -69,4 +69,5 @@ export default function Class() {
         <ClassTable columns={columns} data={data}></ClassTable>
         </>
     );
+    
 }
