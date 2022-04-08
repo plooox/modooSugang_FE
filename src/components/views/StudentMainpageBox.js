@@ -73,9 +73,9 @@ export default function MainpageBox() {
         bgcolor: 'background.paper',
         minWidth: 60 
         }}>
-        <Link to = "/StudentMainpage">
+        <Link to = "/SignIn">
           <Button
-            onClick={()=>window.location.href="./SignIn"}
+            // onClick={()=>window.location.href="./SignIn"}
             variant="contained"
             disabled={!univ}
             >
