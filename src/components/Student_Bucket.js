@@ -24,7 +24,6 @@ function StudentBucket() {
         </div>
         <Container>
           <div>
-
           </div>
         </Container>
     </div>

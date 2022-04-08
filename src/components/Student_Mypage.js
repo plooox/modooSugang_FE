@@ -24,7 +24,6 @@ function StudentMyPage() {
         </div>
         <Container>
           <div>
-
           </div>
         </Container>
     </div>
