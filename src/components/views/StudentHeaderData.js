@@ -9,7 +9,7 @@ export const SidebarData = [
   },
   {
     title: '수강신청',
-    path: '/student',
+    path: '/student/enrolment',
     icon: <BsIcons.BsMouse2 />,
     cName: 'nav-text'
   },
