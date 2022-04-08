@@ -13,7 +13,7 @@ import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
-export default function EnrolledTable({columns, data}) {
+export default function Timetable({columns, data}) {
   const {
     getTableProps,
     getTableBodyProps,
@@ -43,7 +43,7 @@ export default function EnrolledTable({columns, data}) {
         <TableContainer sx={{ maxHeight: 440 }}>
           <Box sx={{mt: 8, display: 'flex', flexwrap: 'wrap'}}>
             <Typography variant="h7">
-              [ 신청 교과목 조회 ]
+              [ 시간표 ]
             </Typography>
           </Box>
           <Table {...getTableProps()} stickyHeader aria-label="sticky table"> 
@@ -87,12 +87,6 @@ export default function EnrolledTable({columns, data}) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <Grid  container justifyContent='flex-end'>
-        <Link to='../student/mypage'>
-          <Button variant='contained' style={{backgroundColor: "#24527a"}}>My page 이동</Button>
-        </Link>
-      </Grid>
-      
     </>
 
   );

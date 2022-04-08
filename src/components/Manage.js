@@ -29,7 +29,7 @@ function Manage_UploadTimeTable() {
           </div>
           <Container>
               <ManagerBoxLayout>
-              <NoticeBoard></NoticeBoard>
+                <NoticeBoard></NoticeBoard>
               </ManagerBoxLayout>
           </Container>
       </div>

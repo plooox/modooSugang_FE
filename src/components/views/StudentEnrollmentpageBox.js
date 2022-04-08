@@ -1,15 +1,9 @@
 import * as React from 'react';
-import { Box } from '@mui/system';
-import { styled } from '@mui/material/styles';
-import ButtonBase from '@mui/material/ButtonBase';
-import Container from '@mui/material/Container';
-import Typography from '../assets/Typography';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import BasketTable from './EnrollmentTable'
 import EnrolledTable from './EnrolledTable'
-import StuEnrolmentpageBoxLayout from './StudentEnrollmentpageBoxLayout'
 import { Button } from '@mui/material';
 
+// 데이터 객체 생성
 function createData(code, lecture, department, category, time, classroom, score, to) {
     return { 
         code: code,
@@ -29,6 +23,7 @@ function createData(code, lecture, department, category, time, classroom, score,
   }
 
 export default function StuEnrolmentpageBox() {
+    // Column 정보 입력
     const columns = React.useMemo(
         () => [
             {

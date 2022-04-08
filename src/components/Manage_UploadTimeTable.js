@@ -24,7 +24,6 @@ function Manage_UploadTimeTable() {
               <div class="Logout"><input type='button' class='Logout_button' value='LogOut' onClick={() => window.location.href = "../"}/></div>
               <div class="Message"><BsIcons.BsEnvelopeFill size={35}/></div>
               <div class="Home"><AiTwotoneHome size={35} onClick={() => window.location.href = "../"}/></div>
-
             </div>
           </div>
           <Container>
