@@ -8,10 +8,7 @@ import styled from "styled-components";
 import * as BsIcons from 'react-icons/bs';
 import { Container } from '@mui/material';
 import { AiOutlineUser, AiTwotoneHome } from "react-icons/ai";
-
 const Info = styled.h1``;
-
-
 function StudentMyPage() {
   return (
     <div>
@@ -104,6 +101,4 @@ function StudentMyPage() {
     </div>
   );
 }
-
-
 export default StudentMyPage
