@@ -19,7 +19,6 @@ function ManagePeriod() {
             <div class="Logout"><input type='button' class='Logout_button' value='LogOut' onClick={() => window.location.href = "../"}/></div>
             <div class="Message"><BsIcons.BsEnvelopeFill size={35}/></div>
             <div class="Home"><AiTwotoneHome size={35} onClick={() => window.location.href = "../"}/></div>
-
           </div>
         </div>
         <Container>
@@ -27,9 +26,9 @@ function ManagePeriod() {
             <form>
                 <AiFillCarryOut size={30}/>
                 <div class="Period_title">장바구니 기간</div>
-                <div class="Period_start"><input type="date" value=""/></div> 
+                <div class="Period_start"><input type="datetime-local"/></div> 
                 <div class="Period_blank"><text>~</text></div> 
-                <div class="Period_end"><input type="date" value=""/></div> 
+                <div class="Period_end"><input type="datetime-local"/></div> 
                 <div class="Period_submit"><input type="submit" value="확인"/></div> 
             </form>
             </div>
@@ -37,9 +36,9 @@ function ManagePeriod() {
             <form>
                 <AiFillCarryOut size={30}/>
                 <div class="Period_title">수강신청 기간</div>
-                <div class="Period_start"><input type="date" value=""/></div> 
+                <div class="Period_start"><input type="datetime-local"/></div> 
                 <div class="Period_blank"><text>~</text></div> 
-                <div class="Period_end"><input type="date" value=""/></div> 
+                <div class="Period_end"><input type="datetime-local"/></div> 
                 <div class="Period_submit"><input type="submit" value="확인"/></div> 
             </form>
             </div>
@@ -47,9 +46,9 @@ function ManagePeriod() {
             <form>
                 <AiFillCarryOut size={30}/>
                 <div class="Period_title">수강정정 기간</div>
-                <div class="Period_start"><input type="date" value=""/></div> 
+                <div class="Period_start"><input type="datetime-local"/></div> 
                 <div class="Period_blank"><text>~</text></div> 
-                <div class="Period_end"><input type="date" value=""/></div> 
+                <div class="Period_end"><input type="datetime-local"/></div> 
                 <div class="Period_submit"><input type="submit" value="확인"/></div> 
             </form>
             </div>
@@ -57,9 +56,9 @@ function ManagePeriod() {
             <form>
                 <AiFillCarryOut size={30}/>
                 <div class="Period_title">수강취소 기간</div>
-                <div class="Period_start"><input type="date" value=""/></div> 
+                <div class="Period_start"><input type="datetime-local"/></div> 
                 <div class="Period_blank"><text>~</text></div> 
-                <div class="Period_end"><input type="date" value=""/></div> 
+                <div class="Period_end"><input type="datetime-local"/></div> 
                 <div class="Period_submit"><input type="submit" value="확인"/></div> 
             </form>
             </div>
@@ -70,4 +69,3 @@ function ManagePeriod() {
 
 
 export default ManagePeriod
-
