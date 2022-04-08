@@ -21,7 +21,6 @@ function StudentMyPage() {
             <div class="Message"><BsIcons.BsEnvelopeFill size={35}/></div>
             <div class="Home"><AiTwotoneHome size={35} onClick={() => window.location.href = "../"}/></div>
           </div>
-
         </div>
         <Container>
           <div>
