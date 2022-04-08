@@ -9,7 +9,7 @@ export const SidebarData = [
   },
   {
     title: '시간표 업로드/수정',
-    path: '/manage',
+    path: '/manage/timetable',
     icon: <BsIcons.BsCloudArrowUpFill />,
     cName: 'nav-text'
   },

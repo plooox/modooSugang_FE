@@ -9,9 +9,9 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Button from '@mui/material/Button';
 
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
-import Next from '../nextpage'
 import { Home } from '@mui/icons-material';
 import Homepage from '../Homepage';
+import FileUploadButton from '../assets/FileUploadButton';
 
 const backgroundImage =
   'https://user-images.githubusercontent.com/82520143/161498672-a78000a5-cd2d-4088-94cf-5ae4f2f63557.jpg';
@@ -73,9 +73,9 @@ export default function MainpageBox() {
         bgcolor: 'background.paper',
         minWidth: 60 
         }}>
-        <Link to = "/StudentMainpage">
+        <Link to = "/SignIn">
           <Button
-            onClick={()=>window.location.href="./SignIn"}
+            // onClick={()=>window.location.href="./SignIn"}
             variant="contained"
             disabled={!univ}
             >
@@ -84,7 +84,6 @@ export default function MainpageBox() {
           </Button>
         </Link>
       </Box>
-
     </MainpageBoxLayout>
     
   );
