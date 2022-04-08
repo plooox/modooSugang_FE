@@ -2,7 +2,7 @@ import * as React from 'react';
 import AppFooter from './views/AppFooter';
 import AppBar from './views/AppBar';
 import withRoot from './withRoot';
-import StuFirstPageBox from './views/StuFirstPageBox'
+import StuFirstPageBox from './views/StudentFirstPageBox'
 
 function Nextpage() {
   return (

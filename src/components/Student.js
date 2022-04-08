@@ -7,7 +7,7 @@ import { Container } from '@mui/material';
 import { AiOutlineUser, AiTwotoneHome } from "react-icons/ai";
 import AppFooter from './views/AppFooter';
 import withRoot from './withRoot';
-import StuFirstPageBox from './views/StuFirstPageBox'
+import StuFirstPageBox from './views/StudentFirstPageBox'
 
 const Info = styled.h1``;
 

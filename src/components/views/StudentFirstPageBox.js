@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 import { styled } from '@mui/material/styles';
 import ButtonBase from '@mui/material/ButtonBase';
 import Container from '@mui/material/Container';
-import StupageBoxLayout from './StupageBoxLayout'
+import StupageBoxLayout from './StudentpageBoxLayout'
 import Typography from '../assets/Typography';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 
@@ -61,21 +61,21 @@ const images = [
         id: 1,
         url: 'https://images.unsplash.com/photo-1530971013997-e06bb52a2372?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGFjYWRlbWljfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
         title: '수강신청',
-        link: '/Enrolment',
+        link: '../student/enrolment',
         width: '40%',
     },
     {
         id: 2,
         url: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YWNhZGVtaWN8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60',
         title: '교과목 조회',
-        link: '/Inquiry',
+        link: '../student/class',
         width: '40%',  
     },
     {
         id: 3,
         url: 'https://images.unsplash.com/photo-1506784365847-bbad939e9335?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1168&q=80',
         title: '장바구니',
-        link: '/Basket',
+        link: '../student/bucket',
         width: '40%',
     }
 ];

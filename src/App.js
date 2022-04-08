@@ -29,9 +29,7 @@ function App() {
         <Route path="student/class" element={<StudentClass/>}/>
         <Route path="student/mypage" element={<StudentMyPage/>}/>
         <Route path='/StudentMainpage' element={<StudentMainpage></StudentMainpage>}></Route>
-        <Route path='/Enrolment' element={<StudentEnrollmentpage></StudentEnrollmentpage>}></Route>
-        {/* <Route path='/Inquiry' element={<Next></Next>}></Route>
-        <Route path='/Basket' element={<Next></Next>}></Route> */}
+        <Route path='student/enrolment' element={<StudentEnrollmentpage></StudentEnrollmentpage>}></Route>
       </Routes>
     </BrowserRouter>
 // =======

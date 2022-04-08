@@ -10,7 +10,7 @@ const StupageBoxLayoutRoot = styled('section')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   [theme.breakpoints.up('sm')]: {
-    height: '100vh',
+    height: '70vh',
     minHeight: 500,
     maxHeight: 1300,
   },
