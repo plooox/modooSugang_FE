@@ -10,8 +10,6 @@ import TableRow from '@mui/material/TableRow';
 import { Button, Grid, Modal, Stack, Switch, Typography } from '@mui/material';
 import { useTable, useGlobalFilter, useSortBy, useRowSelect } from 'react-table'
 import Search from '../assets/Search'
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import { Box } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';

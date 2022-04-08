@@ -1,14 +1,5 @@
 import * as React from 'react';
-import { Box } from '@mui/system';
-import { styled } from '@mui/material/styles';
-import ButtonBase from '@mui/material/ButtonBase';
-import Container from '@mui/material/Container';
-import Typography from '../assets/Typography';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import ClassTable from './ClassTable'
-import EnrolledTable from './EnrolledTable'
-import StuEnrolmentpageBoxLayout from './StudentEnrollmentpageBoxLayout'
-import { Button } from '@mui/material';
 
 function createData(code, lecture, department, category, time, classroom, score, to) {
     return { 
