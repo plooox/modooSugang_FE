@@ -1,4 +1,9 @@
 import React from "react";
+import { Button } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import SearchIcon from "@mui/icons-material/Search";
+import IconButton from "@mui/material/IconButton";
+
 
 function Search({ onSubmit }) {
   const handleSubmit = (event) => {
@@ -8,10 +13,14 @@ function Search({ onSubmit }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input name="filter" />
-      <button>Search</button>
+      <TextField name="filter" type="search" variant="standard" />
+      <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+        <SearchIcon />
+      </IconButton>
     </form>
   );
+  
 }
 
 export default Search;
+
