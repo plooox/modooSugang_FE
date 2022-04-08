@@ -2,7 +2,7 @@ import * as React from 'react';
 import AppFooter from './views/AppFooter';
 import AppBar from './views/AppBar';
 import withRoot from './withRoot';
-import AdminpageBox from './views/AdminpageBox'
+import AdminpageBox from './views/ManagerBox'
 import FileUploadButton from './assets/FileUploadButton'
 
 function Nextpage() {

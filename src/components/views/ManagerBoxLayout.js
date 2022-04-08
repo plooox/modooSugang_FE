@@ -60,8 +60,6 @@ function MainPageBoxLayout(props) {
           <Background sx={sxBackground} />
         
         </Container>
-        <FileUploadButton></FileUploadButton>
-
       </MainPageBoxLayoutRoot>
     </>
 

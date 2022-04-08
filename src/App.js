@@ -1,6 +1,7 @@
 import './App.css';
 import Homepage from './components/Homepage';
 import SignIn from './components/SignIn';
+import Manage from './components/Manage'
 import Manage_UploadTimeTable from './components/Manage_UploadTimeTable';
 import Manage_UploadStudent from './components/Manage_UploadStudent';
 import ManagePeriod from './components/Manage_Period';
@@ -20,7 +21,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage/>}/>
         <Route path="signIn/*" element={<SignIn/>}/>
-        <Route path="manage/" element={<Manage_UploadTimeTable/>}/>
+        <Route path="manage/" element={<Manage/>}/>
+        <Route path="manage/timetable" element={<Manage_UploadTimeTable/>}/>
         <Route path="manage/info" element={<Manage_UploadStudent/>}/>
         <Route path="manage/period" element={<ManagePeriod/>}/>
         <Route path="manage/search" element={<ManageSearch/>}/>

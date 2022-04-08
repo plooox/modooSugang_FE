@@ -4,7 +4,7 @@ import AppBar from './views/AppBar';
 import withRoot from './withRoot';
 import StuEnrolmentpageBox from './views/StudentEnrollmentpageBox'
 import './Manage.css';
-import SideBar from '../components/views/Student_Header';
+import SideBar from './views/StudentHeader';
 import styled from "styled-components";
 import * as BsIcons from 'react-icons/bs';
 import { Container } from '@mui/material';

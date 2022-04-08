@@ -8,7 +8,7 @@ import { AiOutlineUser, AiTwotoneHome } from "react-icons/ai";
 
 const Info = styled.h1``;
 
-function Manage() {
+function Manage_UploadTimeTable() {
   return (
     <div>
         <SideBar></SideBar>
@@ -30,4 +30,4 @@ function Manage() {
 }
 
 
-export default Manage
+export default Manage_UploadTimeTable
