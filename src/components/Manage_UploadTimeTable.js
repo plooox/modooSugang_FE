@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './Manage.css';
-import SideBar from '../components/views/Manage_Header';
+import SideBar from './views/Manage_Header';
 import styled from "styled-components";
 import * as BsIcons from 'react-icons/bs';
 import { Container } from '@mui/material';
