@@ -135,5 +135,6 @@ export default function AppFooter() {
             </Box>
         </Container>
     </StupageBoxLayout>
+    
   );
 }
