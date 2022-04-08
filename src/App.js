@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Homepage from './components/Homepage';
 import SignIn from './components/SignIn';
@@ -10,7 +9,10 @@ import Student from './components/Student';
 import StudentBucket from './components/Student_Bucket';
 import StudentClass from './components/Student_Class';
 import StudentMyPage from './components/Student_Mypage';
+import StudentMainpage from './components/Student_Mainpage'
+import StudentEnrollmentpage from './components/Student_Enrollmentpage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React from 'react';
 
 function App() {
   return (
@@ -26,8 +28,31 @@ function App() {
         <Route path="student/bucket" element={<StudentBucket/>}/>
         <Route path="student/class" element={<StudentClass/>}/>
         <Route path="student/mypage" element={<StudentMyPage/>}/>
+        <Route path='/StudentMainpage' element={<StudentMainpage></StudentMainpage>}></Route>
+        <Route path='student/enrolment' element={<StudentEnrollmentpage></StudentEnrollmentpage>}></Route>
       </Routes>
     </BrowserRouter>
+// =======
+// import {HashRouter as Router, Routes, Route} from 'react-router-dom'
+// import Next from './components/nextpage'
+// import StudentMainpage from './components/StudentMainpage'
+// import StudentEnrolmentpage from './components/StudentEnrolmentpage';
+// import React from 'react';
+
+// function App() {
+//   return (
+//     <Router>
+//       <Routes>
+//         <Route path='/' element={<Homepage></Homepage>}></Route>
+//         <Route path='/Next' element={<Next></Next>}></Route>
+
+//       </Routes> 
+//     </Router>
+    
+    
+//     // <div className="App">
+//     //   <Homepage></Homepage>  {/* 첫 메인페이지 */}  
+//     // </div>
   );
 }
 

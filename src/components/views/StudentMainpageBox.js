@@ -8,6 +8,11 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Button from '@mui/material/Button';
 
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
+import Next from '../nextpage'
+import { Home } from '@mui/icons-material';
+import Homepage from '../Homepage';
+
 const backgroundImage =
   'https://user-images.githubusercontent.com/82520143/161498672-a78000a5-cd2d-4088-94cf-5ae4f2f63557.jpg';
 
@@ -62,6 +67,13 @@ export default function MainpageBox() {
             <MenuItem value={20}>네이버 대학교</MenuItem>
             <MenuItem value={30}>배민 대학교</MenuItem>
           </Select>
+        </FormControl>
+      </Box>
+      <Box sx={{ 
+        bgcolor: 'background.paper',
+        minWidth: 60 
+        }}>
+        <Link to = "/StudentMainpage">
           <Button
             onClick={()=>window.location.href="./SignIn"}
             variant="contained"
@@ -70,9 +82,9 @@ export default function MainpageBox() {
               확인
               
           </Button>
-        </FormControl>
+        </Link>
       </Box>
-      
+
     </MainpageBoxLayout>
     
   );
