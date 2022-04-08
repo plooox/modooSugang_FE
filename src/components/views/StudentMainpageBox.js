@@ -9,7 +9,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Button from '@mui/material/Button';
 
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
-import Next from '../nextpage'
 import { Home } from '@mui/icons-material';
 import Homepage from '../Homepage';
 import FileUploadButton from '../assets/FileUploadButton';

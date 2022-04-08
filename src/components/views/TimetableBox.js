@@ -8,6 +8,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import FileUploadButton from '../assets/FileUploadButton';
+import { Grid } from '@mui/material';
 
 const columns = [
     { id: 'code', label: '과목코드', minWidth: 100 },
@@ -107,6 +109,9 @@ export default function AdminpageBox() {
         />
         </Paper>
 
+        <Grid container justifyContent='flex-end'>
+            <FileUploadButton></FileUploadButton>
+        </Grid>
     </AdminpageBoxLayout>
   );
 }
