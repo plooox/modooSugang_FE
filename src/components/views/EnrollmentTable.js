@@ -7,8 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { Button, Modal, Stack, Switch, Typography } from '@mui/material';
-import { useTable, useGlobalFilter, useSortBy } from 'react-table'
+import { Button, Grid, Modal, Stack, Switch, Typography } from '@mui/material';
+import { useTable, useGlobalFilter, useSortBy, useRowSelect } from 'react-table'
 import Search from '../assets/Search'
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -17,7 +17,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import EnrollModal from '../assets/EnrollModal'
+
 
 const style = {
   position: 'absolute',
@@ -36,6 +36,7 @@ export default function BasketTable({columns, data}) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  // 수강신청 버튼
   const tableEvent = (hooks) => {
     hooks.visibleColumns.push((columns) => [
         ...columns,
@@ -49,6 +50,23 @@ export default function BasketTable({columns, data}) {
     ]);
   };
 
+  const IndeterminateCheckbox = React.forwardRef(
+    ({ indeterminate, ...rest }, ref) => {
+      const defaultRef = React.useRef()
+      const resolvedRef = ref || defaultRef
+  
+      React.useEffect(() => {
+        resolvedRef.current.indeterminate = indeterminate
+      }, [resolvedRef, indeterminate])
+  
+      return (
+        <>
+          <input type="checkbox" ref={resolvedRef} {...rest} />
+        </>
+      )
+    }
+  )
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -56,7 +74,42 @@ export default function BasketTable({columns, data}) {
     rows,
     prepareRow,
     setGlobalFilter,
-  } = useTable({ columns, data }, useGlobalFilter, useSortBy, tableEvent);
+    selectedFlatRows,
+    state: {selectedRowIds},
+  } = useTable(
+    { columns, data }, 
+    useGlobalFilter, 
+    useSortBy, 
+    tableEvent, 
+    useRowSelect,
+    hooks => {
+      hooks.visibleColumns.push(columns => [
+        // Let's make a column for selection
+        {
+          id: 'selection',
+          // The header can use the table's getToggleAllRowsSelectedProps method
+          // to render a checkbox
+          Header: ({ getToggleAllRowsSelectedProps }) => (
+            <>
+              <div>증원신청</div>
+              <div>
+                <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
+              </div>
+            </>
+          ),
+          // The cell can use the individual row's getToggleRowSelectedProps method
+          // to the render a checkbox
+          Cell: ({ row }) => (
+            <div>
+              <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
+            </div>
+          ),
+        },
+        ...columns,
+      ])
+    }
+  );
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const handleChangePage = (event, newPage) => {
@@ -74,6 +127,7 @@ export default function BasketTable({columns, data}) {
 
   return (
     <>
+      {/* 팝업 창 UI Rendering */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -90,6 +144,8 @@ export default function BasketTable({columns, data}) {
           </div>
         </Box>
       </Modal>
+
+      {/* 상단 바 UI Rendering */}
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Box sx={{mt: 8, display: 'flex', flexwrap: 'wrap'}}>
@@ -133,6 +189,8 @@ export default function BasketTable({columns, data}) {
             </FormControl>
             <Search onSubmit={setGlobalFilter} />
           </Box>
+
+          {/* Table */}
           <Table {...getTableProps()} stickyHeader aria-label="sticky table"> 
             <TableHead>
               {headerGroups.map((headerGroup) => (
@@ -174,6 +232,29 @@ export default function BasketTable({columns, data}) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
+      
+      {/* 증원신청 버튼 */}
+      <Grid container justifyContent='flex-end'>
+        <Button variant='contained' style={{backgroundColor: "#24527a"}} onClick={
+          ()=>{
+            console.log(selectedRowIds)
+          }
+        }>증원신청</Button>
+      </Grid>
     </>
   );
 }
+
+// 증원신청 값 조회
+{/* <code>
+          {JSON.stringify(
+            {
+              selectedRowIds: selectedRowIds,
+              'selectedFlatRows[].original': selectedFlatRows.map(
+                d => d.original
+              ),
+            },
+            null,
+            2
+          )}
+        </code> */}

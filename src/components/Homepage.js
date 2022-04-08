@@ -1,6 +1,6 @@
 import * as React from 'react';
 import AppFooter from './views/AppFooter';
-import MainpageBox from './views/MainpageBox';
+import MainpageBox from './views/StudentMainpageBox';
 import AppBar from './views/AppBar';
 import withRoot from './withRoot';
 

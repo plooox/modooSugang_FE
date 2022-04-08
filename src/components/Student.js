@@ -5,13 +5,16 @@ import styled from "styled-components";
 import * as BsIcons from 'react-icons/bs';
 import { Container } from '@mui/material';
 import { AiOutlineUser, AiTwotoneHome } from "react-icons/ai";
+import AppFooter from './views/AppFooter';
+import withRoot from './withRoot';
+import StuFirstPageBox from './views/StuFirstPageBox'
 
 const Info = styled.h1``;
 
 
 function Student() {
   return (
-    <div>
+    <React.Fragment>
         <SideBar></SideBar>
         <div class="top_bar">
             <div class="title"><h1>수강신청</h1></div>
@@ -24,12 +27,12 @@ function Student() {
         </div>
         <Container>
           <div>
-
+          <StuFirstPageBox></StuFirstPageBox>
           </div>
         </Container>
-    </div>
+        <AppFooter></AppFooter>
+    </React.Fragment>
   );
 }
 
-
-export default Student
+export default withRoot(Student);

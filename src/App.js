@@ -9,7 +9,10 @@ import Student from './components/Student';
 import StudentBucket from './components/Student_Bucket';
 import StudentClass from './components/Student_Class';
 import StudentMyPage from './components/Student_Mypage';
+import StudentMainpage from './components/Student_Mainpage'
+import StudentEnrollmentpage from './components/Student_Enrollmentpage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React from 'react';
 
 function App() {
   return (
@@ -25,6 +28,10 @@ function App() {
         <Route path="student/bucket" element={<StudentBucket/>}/>
         <Route path="student/class" element={<StudentClass/>}/>
         <Route path="student/mypage" element={<StudentMyPage/>}/>
+        <Route path='/StudentMainpage' element={<StudentMainpage></StudentMainpage>}></Route>
+        <Route path='/Enrolment' element={<StudentEnrollmentpage></StudentEnrollmentpage>}></Route>
+        {/* <Route path='/Inquiry' element={<Next></Next>}></Route>
+        <Route path='/Basket' element={<Next></Next>}></Route> */}
       </Routes>
     </BrowserRouter>
 // =======
@@ -40,11 +47,7 @@ function App() {
 //       <Routes>
 //         <Route path='/' element={<Homepage></Homepage>}></Route>
 //         <Route path='/Next' element={<Next></Next>}></Route>
-//         <Route path='/StudentMainpage' element={<StudentMainpage></StudentMainpage>}></Route>
-        
-//         <Route path='/Enrolment' element={<StudentEnrolmentpage></StudentEnrolmentpage>}></Route>
-//         <Route path='/Inquiry' element={<Next></Next>}></Route>
-//         <Route path='/Basket' element={<Next></Next>}></Route>
+
 //       </Routes> 
 //     </Router>
     

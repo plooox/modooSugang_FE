@@ -5,9 +5,9 @@ import ButtonBase from '@mui/material/ButtonBase';
 import Container from '@mui/material/Container';
 import Typography from '../assets/Typography';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
-import BasketTable from './BasketTable'
+import BasketTable from './EnrollmentTable'
 import EnrolledTable from './EnrolledTable'
-import StuEnrolmentpageBoxLayout from './StuEnrolmentpageBoxLayout'
+import StuEnrolmentpageBoxLayout from './StudentEnrollmentpageBoxLayout'
 import { Button } from '@mui/material';
 
 function createData(code, lecture, department, category, time, classroom, score, to) {

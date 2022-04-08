@@ -9,14 +9,9 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { Button, Stack, Switch, Typography } from '@mui/material';
 import { useTable, useGlobalFilter, useSortBy } from 'react-table'
-import Search from '../assets/Search'
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import { Box } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { Link } from 'react-router-dom';
+import { Grid } from '@mui/material';
 
 export default function BasketTable({columns, data}) {
   const {
@@ -43,53 +38,62 @@ export default function BasketTable({columns, data}) {
   };
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Box sx={{mt: 8, display: 'flex', flexwrap: 'wrap'}}>
-          <Typography variant="h7">
-            [ 신청 교과목 조회 ]
-          </Typography>
-        </Box>
-        <Table {...getTableProps()} stickyHeader aria-label="sticky table"> 
-          <TableHead>
-            {headerGroups.map((headerGroup) => (
-              <TableRow {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <TableCell {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    {column.render("Header")}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
-          </TableHead>
-          <TableBody {...getTableBodyProps()}>
-            {rows
-              // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                prepareRow(row);
-                return (
-                  console.log(row),
-                  <TableRow {...row.getRowProps()} hover role="checkbox" tabIndex={-1} key={row.id}>
-                    {row.cells.map((cell) => (
-                      <TableCell {...cell.getCellProps()}>{cell.render("Cell")}</TableCell>
-                    ))}
-                  </TableRow>
-                );
-                
-            })}
-            
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
+    <>
+      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+        <TableContainer sx={{ maxHeight: 440 }}>
+          <Box sx={{mt: 8, display: 'flex', flexwrap: 'wrap'}}>
+            <Typography variant="h7">
+              [ 신청 교과목 조회 ]
+            </Typography>
+          </Box>
+          <Table {...getTableProps()} stickyHeader aria-label="sticky table"> 
+            <TableHead>
+              {headerGroups.map((headerGroup) => (
+                <TableRow {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <TableCell {...column.getHeaderProps(column.getSortByToggleProps())}>
+                      {column.render("Header")}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableHead>
+            <TableBody {...getTableBodyProps()}>
+              {rows
+                // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row) => {
+                  prepareRow(row);
+                  return (
+                    console.log(row),
+                    <TableRow {...row.getRowProps()} hover role="checkbox" tabIndex={-1} key={row.id}>
+                      {row.cells.map((cell) => (
+                        <TableCell {...cell.getCellProps()}>{cell.render("Cell")}</TableCell>
+                      ))}
+                    </TableRow>
+                  );
+                  
+              })}
+              
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Paper>
+      <Grid  container justifyContent='flex-end'>
+        <Link to='../student/mypage'>
+          <Button variant='contained' style={{backgroundColor: "#24527a"}}>My page 이동</Button>
+        </Link>
+      </Grid>
+      
+    </>
+
   );
 }
