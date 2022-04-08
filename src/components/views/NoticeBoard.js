@@ -26,6 +26,9 @@ const styles = (theme) => ({
         paddingRight: undefined,
       }),
     },
+    "&::-webkit-scrollbar": {
+      width: 20
+      },
   },
   tableRow: {
     cursor: 'pointer',
@@ -179,13 +182,13 @@ for (let i = 0; i < 200; i += 1) {
 
 export default function ReactVirtualizedTable() {
   return (
-    <Paper style={{ height: 450, width: 900, position: 'absolute', left: '25%', top: '15%' }}>
+    <Paper style={{ height: 600, width: 800 }}>
       <VirtualizedTable
         rowCount={rows.length}
         rowGetter={({ index }) => rows[index]}
         columns={[
           {
-            width: 1000,
+            width: 900,
             label: '☑ 알림 및 공지사항',
             dataKey: 'notice',
           }

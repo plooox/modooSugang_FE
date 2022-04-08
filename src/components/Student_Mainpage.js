@@ -2,18 +2,18 @@ import * as React from 'react';
 import AppFooter from './views/AppFooter';
 import AppBar from './views/AppBar';
 import withRoot from './withRoot';
-import StuFirstPageBox from './views/StudentFirstPageBox'
+import StudentFirstPageBox from './views/StudentFirstPageBox'
 
 function Nextpage() {
   return (
     <React.Fragment>
       {/* 
         AppBar: 맨 위 상단바 구현
-        StuFirstPageBox: 가운데 이미지 버튼
+        StudentFirstPageBox: 가운데 이미지 버튼
         AppFooter: 페이지 하단바 구현
       */}
       <AppBar></AppBar>
-      <StuFirstPageBox></StuFirstPageBox>
+      <StudentFirstPageBox></StudentFirstPageBox>
       <AppFooter></AppFooter>
     </React.Fragment>
   );
