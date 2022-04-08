@@ -5,23 +5,19 @@ import ManagerBoxLayout from './ManagerBoxLayout';
 import FileUploadButton from '../assets/FileUploadButton';
 import { Grid } from '@mui/material';
 import Search from '../assets/Search'
+import SearchLogTable from './SearchLogTable';
 
 // 데이터 객체 생성
-function createData(code, lecture, department, category, time, classroom, score, to) {
+function createData(code, lecture, score, category, retake, enrolldate, canceldate, isEnrolled) {
     return { 
         code: code,
         lecture: lecture,
-        department: department,
-        category: category,
-        time: time,
-        classroom: classroom,
         score: score,
-        to: to,
-        btn: row =>(
-            <div>
-                <Button >신청</Button>
-            </div>
-        ),
+        category: category,
+        retake: retake? 'Y' : 'N',
+        enrolldate: enrolldate,
+        canceldate: canceldate,
+        isEnrolled: isEnrolled? 'Y' : 'N',
     };
   }
 
@@ -38,28 +34,28 @@ export default function ManagerSearchLogBox() {
                 Header:     '과목명',
             },
             {
-                accessor: 'department',
-                Header: '학과'
-            },
-            {
-                accessor:  'category' ,
-                Header: '전공/교양'
-            },
-            {
-                accessor:   'time',
-                Header: '시간'
-            },
-            {
-                accessor:  'classroom' ,
-                Header: '분반'
-            },
-            {
-                accessor:  'score' ,
+                accessor: 'score',
                 Header: '학점'
             },
             {
-                accessor:  'to' ,
-                Header: '잔여 인원',
+                accessor:  'category' ,
+                Header: '이수 구분'
+            },
+            {
+                accessor:   'retake',
+                Header: '재수강 여부'
+            },
+            {
+                accessor:   'enrolldate',
+                Header: '신청 내역'
+            },
+            {
+                accessor:   'canceldate',
+                Header: '신청 내역'
+            },
+            {
+                accessor:  'isEnrolled' ,
+                Header: '수강 여부'
             },
         ],
         []
@@ -67,11 +63,11 @@ export default function ManagerSearchLogBox() {
     
     const data = React.useMemo(
         () => [
-            createData('AAA-0001', '알고리즘개론', '컴퓨터공학과', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
-            createData('AAA-0002', '자료구조개론', '컴퓨터공학과', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
-            createData('BBB-0003', '해석학1', '수학과', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
-            createData('DDD-0004', '논어', '공통', '교양', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
-            createData('EEE-0005', '전자기학', '전기전자공학부', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
+            createData('AAA-0001', '알고리즘개론', 3, '전공필수', false, '2021-03-30', '2021-04-30', true),
+            createData('AAA-0002', '자료구조개론', 3, '전공필수', false, '2021-03-30', '2021-04-30', true),
+            createData('BBB-0003', '해석학1', 3, '전공필수', false, '2021-03-30', '2021-04-30', true),
+            createData('DDD-0004', '논어', 2, '교양', true, '2021-03-30', '2021-04-30', true),
+            createData('EEE-0005', '전자기학', 3, '전공필수', true, '2021-03-30', '2021-04-30', true),
           ],
           []
     );
@@ -79,7 +75,7 @@ export default function ManagerSearchLogBox() {
       
     return (
         <ManagerBoxLayout>
-            <Search></Search>
+            <SearchLogTable columns={columns} data={data}></SearchLogTable>
         </ManagerBoxLayout>
     );
 }
