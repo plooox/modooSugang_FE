@@ -5,10 +5,9 @@ import styled from "styled-components";
 import * as BsIcons from 'react-icons/bs';
 import { Container } from '@mui/material';
 import { AiOutlineUser, AiTwotoneHome } from "react-icons/ai";
-import TimetableBox from './views/TimetableBox'
+import ManagerTimetableBox from './views/ManagerTimetableBox'
 import AppFooter from './views/AppFooter';
 import withRoot from './withRoot';
-import FileUploadButton from './assets/FileUploadButton';
 
 const Info = styled.h1``;
 
@@ -27,7 +26,7 @@ function Manage_UploadTimeTable() {
             </div>
           </div>
           <Container>
-            <TimetableBox></TimetableBox>
+            <ManagerTimetableBox></ManagerTimetableBox>
           </Container>
       </div>
       <AppFooter></AppFooter>
