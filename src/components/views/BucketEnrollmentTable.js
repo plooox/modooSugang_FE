@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { Button, Grid, Modal, Stack, Switch, Typography } from '@mui/material';
+import { Button, Grid, Modal, Switch, Typography } from '@mui/material';
 import { useTable, useGlobalFilter, useSortBy, useRowSelect } from 'react-table'
 import Search from '../assets/Search'
 import FormGroup from '@mui/material/FormGroup';
@@ -74,7 +74,6 @@ export default function BucketEnrollmentTable({columns, data}) {
     rows,
     prepareRow,
     setGlobalFilter,
-    selectedFlatRows,
     state: {selectedRowIds},
   } = useTable(
     { columns, data }, 

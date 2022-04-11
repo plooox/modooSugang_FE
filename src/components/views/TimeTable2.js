@@ -7,11 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { Button, Stack, Switch, Typography } from '@mui/material';
 import { useTable, useGlobalFilter, useSortBy } from 'react-table'
 import { Box } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { Grid } from '@mui/material';
 import Search from '../assets/Search'
 
 export default function Timetable({columns, data}) {
@@ -33,16 +30,11 @@ export default function Timetable({columns, data}) {
     setPage(0);
   };
 
-  const [category, setcategory] = React.useState('');
-  const handleChangeCategory = (event) => {
-    setcategory(event.target.value);
-  };
-
   return (
     <>
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 440 }}>
-          <Box sx={{mt: 8, display: 'flex', flexwrap: 'wrap'}}>
+          <Box sx={{m: 2, display: 'flex', flexwrap: 'wrap'}}>
             <Search onSubmit={setGlobalFilter} /> 
           </Box>
           <Table {...getTableProps()} stickyHeader aria-label="sticky table"> 
