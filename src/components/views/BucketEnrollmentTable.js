@@ -31,7 +31,7 @@ const style = {
   p: 4,
 };
 
-export default function BucketTable({columns, data}) {
+export default function BucketEnrollmentTable({columns, data}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -50,6 +50,22 @@ export default function BucketTable({columns, data}) {
     ]);
   };
 
+  const IndeterminateCheckbox = React.forwardRef(
+    ({ indeterminate, ...rest }, ref) => {
+      const defaultRef = React.useRef()
+      const resolvedRef = ref || defaultRef
+  
+      React.useEffect(() => {
+        resolvedRef.current.indeterminate = indeterminate
+      }, [resolvedRef, indeterminate])
+  
+      return (
+        <>
+          <input type="checkbox" ref={resolvedRef} {...rest} />
+        </>
+      )
+    }
+  )
 
   const {
     getTableProps,
@@ -58,11 +74,39 @@ export default function BucketTable({columns, data}) {
     rows,
     prepareRow,
     setGlobalFilter,
+    selectedFlatRows,
+    state: {selectedRowIds},
   } = useTable(
     { columns, data }, 
     useGlobalFilter, 
     useSortBy, 
     tableEvent, 
+    useRowSelect,
+    hooks => {
+      hooks.visibleColumns.push(columns => [
+        // Let's make a column for selection
+        {
+          id: 'selection',
+          // The header can use the table's getToggleAllRowsSelectedProps method
+          // to render a checkbox
+          Header: ({ getToggleAllRowsSelectedProps }) => (
+            <>
+              <div>
+                <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
+              </div>
+            </>
+          ),
+          // The cell can use the individual row's getToggleRowSelectedProps method
+          // to the render a checkbox
+          Cell: ({ row }) => (
+            <div>
+              <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
+            </div>
+          ),
+        },
+        ...columns,
+      ])
+    }
   );
 
   const [page, setPage] = React.useState(0);
@@ -103,10 +147,43 @@ export default function BucketTable({columns, data}) {
       {/* 상단 바 UI Rendering */}
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 440 }}>
-          <Box sx={{mt: 2, display: 'flex', flexwrap: 'wrap', justifyContent: 'space-between'}}>
+          <Box sx={{mt: 8, display: 'flex', flexwrap: 'wrap', justifyContent:'space-around'}}>
             <Typography variant="h7">
               [ 교과목 조회 ]
             </Typography>
+            <FormGroup>
+              <FormControlLabel control={<Switch defaultChecked />} label="과목추천" />
+            </FormGroup>
+            <FormControl sx={{ m: 1, minWidth: 100 }}>
+              <InputLabel id="demo-simple-select-label">전공/교양 선택</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={category}
+                label="Age"
+                onChange={handleChangeCategory}
+              >
+                <MenuItem value={10}>전공</MenuItem>
+                <MenuItem value={20}>교양</MenuItem>
+                <MenuItem value={30}>실험실습</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl sx={{ m: 1, minWidth: 80 }}>
+              <InputLabel id="demo-simple-select-label">학년</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={category}
+                label="Age"
+                onChange={handleChangeCategory}
+              >
+                <MenuItem value={10}>1학년</MenuItem>
+                <MenuItem value={20}>2학년</MenuItem>
+                <MenuItem value={30}>3학년</MenuItem>
+                <MenuItem value={30}>4학년</MenuItem>
+              </Select>
+            </FormControl>
+            <Search onSubmit={setGlobalFilter} />
           </Box>
 
           {/* Table */}
@@ -151,6 +228,15 @@ export default function BucketTable({columns, data}) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
+      
+      {/* 증원신청 버튼 */}
+      <Grid container justifyContent='flex-end'>
+        <Button variant='contained' style={{backgroundColor: "#24527a"}} onClick={
+          ()=>{
+            console.log(selectedRowIds)
+          }
+        }>한꺼번에 담기</Button>
+      </Grid>
     </>
   );
 }

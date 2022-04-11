@@ -7,9 +7,9 @@ import styled from "styled-components";
 import * as BsIcons from 'react-icons/bs';
 import { Container } from '@mui/material';
 import { AiOutlineUser, AiTwotoneHome } from "react-icons/ai";
+import BucketEnrollmentTableBox from './views/BucketEnrollmentTableBox';
 
 const Info = styled.h1``;
-
 
 function StudentBucket() {
   return (
@@ -26,6 +26,7 @@ function StudentBucket() {
         </div>
         <Container>
           <div>
+            <BucketEnrollmentTableBox></BucketEnrollmentTableBox>
             <BucketTableBox></BucketTableBox>
             <StudentTimeTable></StudentTimeTable>
           </div>
