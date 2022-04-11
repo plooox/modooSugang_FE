@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ClassTable from './ClassTable'
+import ClassTable from './ClassSearchTable'
 
 function createData(code, lecture, department, category, time, classroom, score, to) {
     return { 
