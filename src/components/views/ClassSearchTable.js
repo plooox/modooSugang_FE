@@ -70,7 +70,7 @@ export default function ClassTable({columns, data}) {
       {/* 상단 바 UI Rendering */}
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 440 }}>
-          <Box sx={{mt: 8, display: 'flex', flexwrap: 'wrap'}}>
+          <Box sx={{mt: 8, display: 'flex', flexwrap: 'wrap', justifyContent:'space-around'}}>
             <Typography variant="h7">
               [ 교과목 조회 ]
             </Typography>

@@ -41,7 +41,7 @@ export default function BasketTable({columns, data}) {
     <>
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 440 }}>
-          <Box sx={{mt: 8, display: 'flex', flexwrap: 'wrap'}}>
+          <Box sx={{mt: 8, display: 'flex', flexwrap: 'wrap', justifyContent:'space-around'}}>
             <Typography variant="h7">
               [ 수강신청 결과 ]
             </Typography>

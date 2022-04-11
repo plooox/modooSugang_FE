@@ -41,7 +41,7 @@ export default function Timetable({columns, data}) {
     <>
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 440 }}>
-          <Box sx={{mt: 8, display: 'flex', flexwrap: 'wrap'}}>
+          <Box sx={{m: 2, display: 'flex', flexwrap: 'wrap'}}>
             <Typography variant="h7">
               [ 시간표 ]
             </Typography>
