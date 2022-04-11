@@ -98,7 +98,8 @@ function StudentMyPage() {
             <br></br><br></br>
           </div>
         </Container>
+        <AppFooter></AppFooter>
     </div>
   );
 }
-export default StudentMyPage
+export default withRoot(StudentMyPage)

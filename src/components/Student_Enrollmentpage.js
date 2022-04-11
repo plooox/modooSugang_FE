@@ -28,9 +28,9 @@ function StudentEnrolmentpage() {
         <Container>
           <div>
               <StuEnrolmentpageBox></StuEnrolmentpageBox>
-              <AppFooter></AppFooter>
           </div>
         </Container>
+        <AppFooter></AppFooter>
     </div>
 
   );
