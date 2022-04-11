@@ -62,6 +62,41 @@ export default function StuEnrolmentpageBox() {
         ],
         []
     );
+
+    const columns_basket = React.useMemo(
+        () => [
+            {
+                accessor: 'code' ,
+                Header: '과목코드',
+            },
+            {
+                accessor:  'lecture' ,
+                Header:     '과목명',
+            },
+            {
+                accessor:  'category' ,
+                Header: '전공/교양'
+            },
+            {
+                accessor:   'time',
+                Header: '시간'
+            },
+            {
+                accessor:  'professor' ,
+                Header: '교수명',
+            },
+            {
+                accessor:  'classroom' ,
+                Header: '분반'
+            },
+            {
+                accessor:  'score' ,
+                Header: '학점'
+            },
+        ],
+        []
+    );
+
     
     const data = React.useMemo(
         () => [
@@ -74,10 +109,34 @@ export default function StuEnrolmentpageBox() {
           []
     );
     
-      
+    function createData_basket(code, lecture, category, time, professor, classroom, score) {
+        return { 
+            code: code,
+            lecture: lecture,
+            category: category,
+            time: time,
+            professor : professor,
+            classroom: classroom,
+            score: score,
+        };
+      }
+
+        
+        const data_basket = React.useMemo(
+            () => [
+                createData_basket('AAA-0001', '알고리즘개론', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30','지준영', 'A', 3),
+                createData_basket('AAA-0002', '자료구조개론', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', '지준영', 'A', 3),
+                createData_basket('BBB-0003', '해석학1', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30','지준영', 'A', 3),
+                createData_basket('DDD-0004', '논어', '교양', '[월]10:30~12:00 \[수]9:00~10:30','지준영', 'B', 3),
+                createData_basket('EEE-0005', '전자기학', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30','지준영', 'B', 3),
+              ],
+              []
+        );
+        
     return (
         <>
         <EnrollmentTable columns={columns} data={data}></EnrollmentTable>
+        <BasketTable columns={columns_basket} data={data_basket}></BasketTable>
         <EnrolledTable columns={columns} data={data}></EnrolledTable>
         </>
     );
