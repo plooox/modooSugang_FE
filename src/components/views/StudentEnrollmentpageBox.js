@@ -1,6 +1,7 @@
 import * as React from 'react';
 import EnrollmentTable from './EnrollmentTable'
 import EnrolledTable from './EnrolledTable'
+import BasketTable from './BasketTable'
 import { Button } from '@mui/material';
 
 // 데이터 객체 생성
