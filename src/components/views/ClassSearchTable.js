@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { Typography } from '@mui/material';
-import { useTable, useGlobalFilter, useSortBy, useRowSelect } from 'react-table'
+import { useTable, useGlobalFilter, useSortBy } from 'react-table'
 import Search from '../assets/Search'
 import { Box } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';

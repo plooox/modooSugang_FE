@@ -1,6 +1,7 @@
 import * as React from 'react';
 import EnrollmentTable from './EnrollmentTable'
 import EnrolledTable from './EnrolledTable'
+import BasketTable from './BasketTable'
 import { Button } from '@mui/material';
 
 // 데이터 객체 생성
@@ -123,11 +124,11 @@ export default function StuEnrolmentpageBox() {
         
         const data_basket = React.useMemo(
             () => [
-                createData_basket('AAA-0001', '알고리즘개론', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30','지준영', 'A', 3),
-                createData_basket('AAA-0002', '자료구조개론', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', '지준영', 'A', 3),
-                createData_basket('BBB-0003', '해석학1', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30','지준영', 'A', 3),
-                createData_basket('DDD-0004', '논어', '교양', '[월]10:30~12:00 \[수]9:00~10:30','지준영', 'B', 3),
-                createData_basket('EEE-0005', '전자기학', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30','지준영', 'B', 3),
+                createData_basket('AAA-0001', '알고리즘개론', '전공필수', '[월]10:30~12:00 [수]9:00~10:30','지준영', 'A', 3),
+                createData_basket('AAA-0002', '자료구조개론', '전공필수', '[월]10:30~12:00 [수]9:00~10:30', '지준영', 'A', 3),
+                createData_basket('BBB-0003', '해석학1', '전공필수', '[월]10:30~12:00 [수]9:00~10:30','지준영', 'A', 3),
+                createData_basket('DDD-0004', '논어', '교양', '[월]10:30~12:00 [수]9:00~10:30','지준영', 'B', 3),
+                createData_basket('EEE-0005', '전자기학', '전공필수', '[월]10:30~12:00 [수]9:00~10:30','지준영', 'B', 3),
               ],
               []
         );
