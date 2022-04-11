@@ -1,8 +1,6 @@
 import * as React from 'react';
-import EnrollmentTable from './EnrollmentTable'
-import EnrolledTable from './EnrolledTable'
-import BasketTable from './BasketTable'
 import { Button } from '@mui/material';
+import BucketTable from './BucketTable'
 
 // 데이터 객체 생성
 function createData(code, lecture, department, category, time, classroom, score, to) {
@@ -77,8 +75,7 @@ export default function StuEnrolmentpageBox() {
       
     return (
         <>
-        <EnrollmentTable columns={columns} data={data}></EnrollmentTable>
-        <EnrolledTable columns={columns} data={data}></EnrolledTable>
+        <BucketTable columns={columns} data={data}></BucketTable>
         </>
     );
 }

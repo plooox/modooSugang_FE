@@ -2,6 +2,7 @@ import * as React from 'react';
 import './Manage.css';
 import SideBar from '../components/views/Manage_Header';
 import styled from "styled-components";
+import TimetableBox from './views/TimetableBox2'
 import * as BsIcons from 'react-icons/bs';
 import { Container } from '@mui/material';
 import { AiOutlineUser, AiTwotoneHome } from "react-icons/ai";
@@ -23,7 +24,7 @@ function ManageInfo() {
           </div>
         </div>
         <Container>
-          
+          <TimetableBox></TimetableBox>
         </Container>
     </div>
   );

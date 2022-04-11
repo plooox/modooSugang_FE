@@ -12,8 +12,9 @@ import { useTable, useGlobalFilter, useSortBy } from 'react-table'
 import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Grid } from '@mui/material';
+import Search from '../assets/Search'
 
-export default function EnrolledTable({columns, data}) {
+export default function Timetable({columns, data}) {
   const {
     getTableProps,
     getTableBodyProps,
@@ -42,9 +43,7 @@ export default function EnrolledTable({columns, data}) {
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Box sx={{mt: 8, display: 'flex', flexwrap: 'wrap'}}>
-            <Typography variant="h7">
-              [ 현재 신청 내역 ]
-            </Typography>
+            <Search onSubmit={setGlobalFilter} /> 
           </Box>
           <Table {...getTableProps()} stickyHeader aria-label="sticky table"> 
             <TableHead>
@@ -87,12 +86,6 @@ export default function EnrolledTable({columns, data}) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <Grid  container justifyContent='flex-end'>
-        <Link to='../student/mypage'>
-          <Button variant='contained' style={{backgroundColor: "#24527a"}}>My page 이동</Button>
-        </Link>
-      </Grid>
-      
     </>
 
   );

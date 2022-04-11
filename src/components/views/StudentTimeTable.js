@@ -1,30 +1,10 @@
 import * as React from 'react';
-import './Manage.css';
-import SideBar from '../components/views/StudentHeader';
-import withRoot from './withRoot';
-import Student_Mypage_Table1 from './views/Student_Mypage_Table1'
-import AppFooter from './views/AppFooter';
-import styled from "styled-components";
-import * as BsIcons from 'react-icons/bs';
-import { Container } from '@mui/material';
-import { AiOutlineUser, AiTwotoneHome } from "react-icons/ai";
-const Info = styled.h1``;
-function StudentMyPage() {
-  return (
-    <div>
-        <SideBar></SideBar>
-        <div class="top_bar">
-            <div class="title"><h1>마이페이지 / 신청결과</h1></div>
-          <div class="bar_options">
-            <div class="User"><AiOutlineUser size={35}/></div>
-            <div class="Logout"><input type='button' class='Logout_button' value='LogOut' onClick={() => window.location.href = "../"}/></div>
-            <div class="Message"><BsIcons.BsEnvelopeFill size={35}/></div>
-            <div class="Home"><AiTwotoneHome size={35} onClick={() => window.location.href = "../"}/></div>
-          </div>
-        </div>
-        <Container>
-          <div>
-            <Student_Mypage_Table1></Student_Mypage_Table1>
+
+
+export default function StuEnrolmentpageBox() {
+      
+    return (
+        <div>
             <br></br><br></br>
             <table border="1" bordercolor="gray" width ="100%" height="250" align = "center" >
               <th width ="15%" bgcolor="gray">시간</th>
@@ -82,7 +62,7 @@ function StudentMyPage() {
                   <td></td>
               </tr>
             </table>
-            <br></br><br></br>
+            <br></br>
 
             <table border="1" bordercolor="gray" width ="40%" height="75" align = "left" >
               <th bgcolor="gray">전공 학점</th>
@@ -97,8 +77,5 @@ function StudentMyPage() {
             <br></br><br></br>
             <br></br><br></br>
           </div>
-        </Container>
-    </div>
-  );
+    );
 }
-export default StudentMyPage

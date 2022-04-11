@@ -5,7 +5,9 @@ import styled from "styled-components";
 import * as BsIcons from 'react-icons/bs';
 import { Container } from '@mui/material';
 import { AiOutlineUser, AiTwotoneHome } from "react-icons/ai";
-import Class from './views/Class';
+import ClassSearch from './views/ClassSearch';
+import withRoot from './withRoot';
+import AppFooter from './views/AppFooter';
 
 const Info = styled.h1``;
 
@@ -25,12 +27,12 @@ function StudentClass() {
         </div>
         <Container>
           <div>
-            <Class></Class>
+            <ClassSearch></ClassSearch>
+            <AppFooter></AppFooter>
           </div>
         </Container>
     </div>
   );
 }
 
-
-export default StudentClass
+export default withRoot(StudentClass)

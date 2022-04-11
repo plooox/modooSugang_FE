@@ -1,6 +1,8 @@
 import * as React from 'react';
-import ClassTable from './ClassTable'
+import { Button } from '@mui/material';
+import BucketEnrollmentTable from './BucketEnrollmentTable'
 
+// 데이터 객체 생성
 function createData(code, lecture, department, category, time, classroom, score, to) {
     return { 
         code: code,
@@ -11,10 +13,16 @@ function createData(code, lecture, department, category, time, classroom, score,
         classroom: classroom,
         score: score,
         to: to,
+        btn: row =>(
+            <div>
+                <Button >신청</Button>
+            </div>
+        ),
     };
   }
 
-export default function Class() {
+export default function BucketEnrollmentTableBox() {
+    // Column 정보 입력
     const columns = React.useMemo(
         () => [
             {
@@ -63,10 +71,11 @@ export default function Class() {
           ],
           []
     );
+    
       
     return (
         <>
-        <ClassTable columns={columns} data={data}></ClassTable>
+        <BucketEnrollmentTable columns={columns} data={data}></BucketEnrollmentTable>
         </>
     );
 }
