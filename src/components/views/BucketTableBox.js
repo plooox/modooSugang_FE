@@ -1,9 +1,6 @@
 import * as React from 'react';
 import { Button } from '@mui/material';
-import Timetable from './TimeTable';
-import ManagerBoxLayout from './ManagerBoxLayout';
-import FileUploadButton from '../assets/FileUploadButton';
-import { Grid } from '@mui/material';
+import BucketTable from './BucketTable'
 
 // 데이터 객체 생성
 function createData(code, lecture, department, category, time, classroom, score, to) {
@@ -24,7 +21,7 @@ function createData(code, lecture, department, category, time, classroom, score,
     };
   }
 
-export default function TimetableBox() {
+export default function StuEnrolmentpageBox() {
     // Column 정보 입력
     const columns = React.useMemo(
         () => [
@@ -77,11 +74,8 @@ export default function TimetableBox() {
     
       
     return (
-        <ManagerBoxLayout>
-            <Timetable columns={columns} data={data}></Timetable>
-            <Grid  container justifyContent='flex-end'>
-                <FileUploadButton></FileUploadButton>
-            </Grid>
-        </ManagerBoxLayout>
+        <>
+        <BucketTable columns={columns} data={data}></BucketTable>
+        </>
     );
 }

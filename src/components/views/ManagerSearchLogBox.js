@@ -1,10 +1,6 @@
 import * as React from 'react';
 import { Button } from '@mui/material';
-import Timetable from './TimeTable';
 import ManagerBoxLayout from './ManagerBoxLayout';
-import FileUploadButton from '../assets/FileUploadButton';
-import { Grid } from '@mui/material';
-import Search from '../assets/Search'
 import SearchLogTable from './SearchLogTable';
 
 // 데이터 객체 생성
