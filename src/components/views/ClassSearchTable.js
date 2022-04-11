@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { Button, Grid, Modal, Stack, Switch, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useTable, useGlobalFilter, useSortBy, useRowSelect } from 'react-table'
 import Search from '../assets/Search'
 import { Box } from '@mui/material';
@@ -17,22 +17,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
-
 export default function ClassTable({columns, data}) {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   const {
     getTableProps,
@@ -41,13 +26,10 @@ export default function ClassTable({columns, data}) {
     rows,
     prepareRow,
     setGlobalFilter,
-    selectedFlatRows,
-    state: {selectedRowIds},
   } = useTable(
     { columns, data }, 
     useGlobalFilter, 
     useSortBy, 
-    useRowSelect,
   );
 
   const [page, setPage] = React.useState(0);
@@ -148,7 +130,6 @@ export default function ClassTable({columns, data}) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      
     </>
   );
 }

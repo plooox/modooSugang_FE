@@ -7,16 +7,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { Button, Grid, Modal, Stack, Switch, Typography } from '@mui/material';
-import { useTable, useGlobalFilter, useSortBy, useRowSelect } from 'react-table'
-import Search from '../assets/Search'
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import { Button, Modal, Typography } from '@mui/material';
+import { useTable, useGlobalFilter, useSortBy } from 'react-table'
 import { Box } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+
 
 
 const style = {
@@ -57,7 +51,6 @@ export default function BucketTable({columns, data}) {
     headerGroups,
     rows,
     prepareRow,
-    setGlobalFilter,
   } = useTable(
     { columns, data }, 
     useGlobalFilter, 
@@ -73,11 +66,6 @@ export default function BucketTable({columns, data}) {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
-  };
-
-  const [category, setcategory] = React.useState('');
-  const handleChangeCategory = (event) => {
-    setcategory(event.target.value);
   };
 
   return (

@@ -7,11 +7,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { Button, Stack, Switch, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useTable, useGlobalFilter, useSortBy } from 'react-table'
 import { Box } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { Grid } from '@mui/material';
+
 
 export default function BasketTable({columns, data}) {
   const {
@@ -20,7 +19,6 @@ export default function BasketTable({columns, data}) {
     headerGroups,
     rows,
     prepareRow,
-    setGlobalFilter,
   } = useTable({ columns, data }, useGlobalFilter, useSortBy);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -30,11 +28,6 @@ export default function BasketTable({columns, data}) {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
-  };
-
-  const [category, setcategory] = React.useState('');
-  const handleChangeCategory = (event) => {
-    setcategory(event.target.value);
   };
 
   return (
