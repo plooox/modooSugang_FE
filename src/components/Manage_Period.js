@@ -1,10 +1,12 @@
 import * as React from 'react';
 import './Manage.css';
-import SideBar from '../components/views/Manage_Header';
+import SideBar from './views/Manage_Header';
 import styled from "styled-components";
 import * as BsIcons from 'react-icons/bs';
 import { Container } from '@mui/material';
 import { AiOutlineUser, AiTwotoneHome, AiFillCarryOut } from "react-icons/ai";
+import AppFooter from './views/AppFooter';
+import withRoot from './withRoot';
 
 const Info = styled.h1``;
 
@@ -63,9 +65,10 @@ function ManagePeriod() {
             </form>
             </div>
         </Container>
+        <AppFooter></AppFooter>
     </div>
   );
 }
 
 
-export default ManagePeriod
+export default withRoot(ManagePeriod)

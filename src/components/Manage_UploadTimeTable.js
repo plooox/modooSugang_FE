@@ -13,7 +13,6 @@ const Info = styled.h1``;
 
 function Manage_UploadTimeTable() {
   return (
-    <>
       <div>
           <SideBar></SideBar>
           <div class="top_bar">
@@ -28,9 +27,8 @@ function Manage_UploadTimeTable() {
           <Container>
             <ManagerTimetableBox></ManagerTimetableBox>
           </Container>
+          <AppFooter></AppFooter>
       </div>
-      <AppFooter></AppFooter>
-    </>
   );
 }
 

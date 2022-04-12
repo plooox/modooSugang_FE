@@ -5,7 +5,9 @@ import styled from "styled-components";
 import * as BsIcons from 'react-icons/bs';
 import { Container } from '@mui/material';
 import { AiOutlineUser, AiTwotoneHome } from "react-icons/ai";
-import ManagerSearchLogBox from './views/ManagerSearchLogBox'
+import ManagerSearchLogBox from './views/ManagerSearchLogBox';
+import AppFooter from './views/AppFooter';
+import withRoot from './withRoot';
 
 const Info = styled.h1``;
 
@@ -26,9 +28,9 @@ function ManageSearch() {
         <Container>
           <ManagerSearchLogBox></ManagerSearchLogBox>
         </Container>
+        <AppFooter></AppFooter>
     </div>
   );
 }
 
-
-export default ManageSearch
+export default withRoot(ManageSearch)

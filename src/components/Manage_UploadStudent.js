@@ -6,6 +6,8 @@ import TimetableBox from './views/TimetableBox2'
 import * as BsIcons from 'react-icons/bs';
 import { Container } from '@mui/material';
 import { AiOutlineUser, AiTwotoneHome } from "react-icons/ai";
+import AppFooter from './views/AppFooter';
+import withRoot from './withRoot';
 
 const Info = styled.h1``;
 
@@ -26,9 +28,10 @@ function ManageInfo() {
         <Container>
           <TimetableBox></TimetableBox>
         </Container>
+        <AppFooter></AppFooter>
     </div>
   );
 }
 
 
-export default ManageInfo
+export default withRoot(ManageInfo)

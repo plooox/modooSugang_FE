@@ -3,6 +3,8 @@ import './Manage.css';
 import SideBar from './views/StudentHeader';
 import BucketTableBox from './views/BucketTableBox'
 import StudentTimeTable from './views/StudentTimeTable'
+import withRoot from './withRoot';
+import AppFooter from './views/AppFooter';
 import styled from "styled-components";
 import * as BsIcons from 'react-icons/bs';
 import { Container } from '@mui/material';
@@ -31,9 +33,10 @@ function StudentBucket() {
             <StudentTimeTable></StudentTimeTable>
           </div>
         </Container>
+        <AppFooter></AppFooter>
     </div>
   );
 }
 
 
-export default StudentBucket
+export default withRoot(StudentBucket)
