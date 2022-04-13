@@ -14,6 +14,7 @@ import StudentMainpage from './components/Student_Mainpage'
 import StudentEnrollmentpage from './components/Student_Enrollmentpage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React from 'react';
+import Testpage from './components/Testpage';
 
 function App() {
   return (
