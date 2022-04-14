@@ -8,7 +8,9 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { useLocation } from 'react-router-dom';
+import { Redirect, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import apiAxios from '../apiAxios';
 
 function Copyright(props) {
   return (
@@ -33,17 +35,40 @@ function SignIn() {
   const [userId, setUserId] = React.useState("");
   const [passwd, setPasswd] = React.useState("");
   const [isManager, setManager] = React.useState(false);
-  
-  // Send FormData to Server
-  const handlePost = async(data) =>{
 
+  // Send FormData to Server
+  const handlePost = async(joinData) =>{
+    const dir = joinData.isManager;
+    await axios({
+      url: '/api/login',
+      method: "post",
+      baseURL: 'http://localhost:8080',
+      withCredentials: true,
+      data: joinData
+    })
+    .then(function callback(response){
+
+      // response(isManager)의 값에 따라 이동
+      if (response.data === true){
+        if (dir === true){
+          window.location.href = '/manage';
+        }
+        else{
+          window.location.href = '/student';
+        }
+      }
+      else{
+        alert("회원이 아닙니다.")
+      }
+    })
+    .catch(  function CallbackERROR(response){
+      alert("ERROR!");
+    });
   };
 
   // Handle isManager checkbox
   const handleManager = (e) => {
-    console.log(isManager)
     e.target.checked ? setManager(true) : setManager(false);
-
   }
 
   // Handle Submit
