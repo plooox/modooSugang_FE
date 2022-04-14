@@ -23,31 +23,47 @@ function Copyright(props) {
   );
 }
 
-function getCheckboxValue()  {
-  // 선택된 목록 가져오기
-  const query = 'input[name="LogIn_CheckBox"]:checked';
-  const selectedEls = 
-      document.querySelectorAll(query);
-  
-  // 선택된 목록에서 value 찾기
-  let result = '';
-  selectedEls.forEach((el) => {
-    result += el.value;
-  });
-  if(result === 'manager') { window.location.href = "../manage"}
-  else {window.location.href = "../student"}
-
-}
-
 function SignIn() {
   // Homepage에서 univ값 가져온거 확인 & 변수 할당
   const univ = useLocation()
   const univName = univ.state.value
   // console.log(univName)
 
-  // id, passwd variable
+  // id, passwd, isManager
   const [userId, setUserId] = React.useState("");
   const [passwd, setPasswd] = React.useState("");
+  const [isManager, setManager] = React.useState(false);
+  
+  // Send FormData to Server
+  const handlePost = async(data) =>{
+
+  };
+
+  // Handle isManager checkbox
+  const handleManager = (e) => {
+    console.log(isManager)
+    e.target.checked ? setManager(true) : setManager(false);
+
+  }
+
+  // Handle Submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const data = new FormData(e.currentTarget);
+    const joinData = {
+      univ: univName,
+      id: data.get('userId'),
+      password: data.get('password'),
+      isManager,
+    };
+    // console.log(joinData)
+
+    // Validation check 염두
+    if(true){
+      handlePost(joinData);
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -58,21 +74,26 @@ function SignIn() {
             flexDirection: 'column',
             alignItems: 'center',
           }}
+          component="form"
+          onSubmit={handleSubmit}
         >
         <FormControlLabel
-            control={<Checkbox value="manager" name="LogIn_CheckBox" color="primary" />}
-            label="관리자"
+            control={<Checkbox value={isManager} name="LogIn_CheckBox" id="checkbox" color="primary" onChange={handleManager} />}
+            label="manager"
         />
-        <TextField margin="normal" required fullWidth id="email" label="Username" name="email" autoComplete="email" autoFocus value={userId} />
-        <TextField margin="normal" required fullWidth id="password" label="Password" name="password" type="password" autoComplete="current-password" value={passwd} />
+        <TextField margin="normal" required fullWidth variant='outlined' id="userId" label="Username" name="userId" autoComplete="userId" autoFocus onChange={(e)=>{
+          setUserId(e.target.value)
+        }} />
+        <TextField margin="normal" required fullWidth variant='outlined' id="password" label="Password" name="password" type="password" autoComplete="current-password" onChange={(e) => {
+          setPasswd(e.target.value)
+        }}/>
         
         <Stack spacint={2} direction="row">
-        <Button type="submit" halfWidth variant="contained" sx={{ mt: 3, mb: 2}} onClick={getCheckboxValue} > SIGN IN </Button>
-        <Button type="submit" halfWidth variant="contained" sx={{ mt: 3, mb: 2, ml: 5 }}> ID/PW찾기 </Button>
+        <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2}}> SIGN IN </Button>
+        <Button variant="contained" sx={{ mt: 3, mb: 2, ml: 5 }}> ID/PW찾기 </Button>
         </Stack>
-
-        <Copyright sx={{ mt: 8, mb: 4}} />     
       </Box>
+      <Copyright sx={{ mt: 8, mb: 4}} />     
     </Container>
 
   );
