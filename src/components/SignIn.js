@@ -8,6 +8,7 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { useLocation } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -33,12 +34,21 @@ function getCheckboxValue()  {
   selectedEls.forEach((el) => {
     result += el.value;
   });
-  if(result == 'manager') { window.location.href = "../manage"}
+  if(result === 'manager') { window.location.href = "../manage"}
   else {window.location.href = "../student"}
 
 }
 
 function SignIn() {
+  // Homepage에서 univ값 가져온거 확인 & 변수 할당
+  const univ = useLocation()
+  const univName = univ.state.value
+  // console.log(univName)
+
+  // id, passwd variable
+  const [userId, setUserId] = React.useState("");
+  const [passwd, setPasswd] = React.useState("");
+
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -53,8 +63,8 @@ function SignIn() {
             control={<Checkbox value="manager" name="LogIn_CheckBox" color="primary" />}
             label="관리자"
         />
-        <TextField margin="normal" required fullWidth id="email" label="Username" name="email" autoComplete="email" autoFocus />
-        <TextField margin="normal" required fullWidth id="password" label="Password" name="password" type="password" autoComplete="current-password" />
+        <TextField margin="normal" required fullWidth id="email" label="Username" name="email" autoComplete="email" autoFocus value={userId} />
+        <TextField margin="normal" required fullWidth id="password" label="Password" name="password" type="password" autoComplete="current-password" value={passwd} />
         
         <Stack spacint={2} direction="row">
         <Button type="submit" halfWidth variant="contained" sx={{ mt: 3, mb: 2}} onClick={getCheckboxValue} > SIGN IN </Button>

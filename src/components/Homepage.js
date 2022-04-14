@@ -4,7 +4,7 @@ import MainpageBox from './views/StudentMainpageBox';
 import AppBar from './views/AppBar';
 import withRoot from './withRoot';
 
-function Homepage() {
+function Homepage({location}) {
   return (
     <React.Fragment>
       {/* 
