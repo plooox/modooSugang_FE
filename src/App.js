@@ -21,6 +21,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Homepage/>}/>
+        <Route path="test/" element={<Testpage/>}/>
         <Route path="signIn/*" element={<SignIn/>}/>
         <Route path="manage/" element={<Manage/>}/>
         <Route path="manage/timetable" element={<Manage_UploadTimeTable/>}/>

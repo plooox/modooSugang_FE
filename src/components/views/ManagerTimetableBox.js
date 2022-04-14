@@ -6,15 +6,16 @@ import FileUploadButton from '../assets/FileUploadButton';
 import { Grid } from '@mui/material';
 
 // 데이터 객체 생성
-function createData(code, lecture, department, category, time, classroom, score, to) {
+function createData(code, lecture, department, category, time, grade, score, professor, to) {
     return { 
         code: code,
         lecture: lecture,
         department: department,
         category: category,
         time: time,
-        classroom: classroom,
+        grade: grade,
         score: score,
+        professor: professor,
         to: to,
         btn: row =>(
             <div>
@@ -49,12 +50,16 @@ export default function ManagerTimetableBox() {
                 Header: '시간'
             },
             {
-                accessor:  'classroom' ,
-                Header: '분반'
+                accessor:  'grade' ,
+                Header: '학년'
             },
             {
                 accessor:  'score' ,
                 Header: '학점'
+            },
+            {
+                accessor:  'professor' ,
+                Header: '교수',
             },
             {
                 accessor:  'to' ,
@@ -66,11 +71,11 @@ export default function ManagerTimetableBox() {
     
     const data = React.useMemo(
         () => [
-            createData('AAA-0001', '알고리즘개론', '컴퓨터공학과', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
-            createData('AAA-0002', '자료구조개론', '컴퓨터공학과', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
-            createData('BBB-0003', '해석학1', '수학과', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
-            createData('DDD-0004', '논어', '공통', '교양', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
-            createData('EEE-0005', '전자기학', '전기전자공학부', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
+            createData('AAA-0001', '알고리즘개론', '컴퓨터공학과', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '최정민', '10/60'),
+            createData('AAA-0002', '자료구조개론', '컴퓨터공학과', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3,'최정민',  '10/60'),
+            createData('BBB-0003', '해석학1', '수학과', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '최정민',  '10/60'),
+            createData('DDD-0004', '논어', '공통', '교양', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '최정민', '10/60'),
+            createData('EEE-0005', '전자기학', '전기전자공학부', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '최정민', '10/60'),
           ],
           []
     );

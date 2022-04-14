@@ -6,10 +6,11 @@ import FileUploadButton from '../assets/FileUploadButton';
 import { Grid } from '@mui/material';
 
 // 데이터 객체 생성
-function createData(student_num,name,department,department_sub,grade,contact,grade_cum,average,info) {
+function createData(student_num,name,birth,department,department_sub,grade,contact,grade_cum,average,info) {
     return { 
         student_num : student_num,
         name : name,
+        birth: birth,
         department : department,
         department_sub : department_sub,
         grade : grade,
@@ -36,6 +37,10 @@ export default function TimetableBox() {
             {
                 accessor: 'name' ,
                 Header:  '이름',
+            },
+            {
+                accessor: 'birth' ,
+                Header:  '생년월일',
             },
             {
                 accessor: 'department',
@@ -71,7 +76,8 @@ export default function TimetableBox() {
     
     const data = React.useMemo(
         () => [
-            createData('21611868', '홍길돌', '컴퓨터공학과', '', 3, '010-1234-1112',87, 3.71, '신입'),
+            createData('20181234', '홍길돌','1998-05-21', '컴퓨터공학과', '', 4, '010-1234-1112', 100, 3.71, '신입'),
+            createData('20194567', '김짱구','1999-06-23', '정보통신공학과', '경영학과', 3, '010-4567-5464',87, 3.45, '편입'),
           ],
           []
     );
