@@ -58,7 +58,7 @@ function SignIn() {
         }
       }
       else{
-        alert("회원이 아닙니다.")
+        alert("ID 또는 비밀번호가 잘못되었습니다.")
       }
     })
     .catch(  function CallbackERROR(response){
