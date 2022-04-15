@@ -2,6 +2,10 @@ import * as React from 'react';
 import { Button } from '@mui/material';
 import ManagerBoxLayout from './ManagerBoxLayout';
 import SearchLogTable from './SearchLogTable';
+import TextField from "@mui/material/TextField";
+import SearchIcon from "@mui/icons-material/Search";
+import IconButton from "@mui/material/IconButton";
+import { Box } from '@mui/material';
 
 // 데이터 객체 생성
 function createData(code, lecture, score, category, retake, enrolldate, canceldate, isEnrolled) {
@@ -56,6 +60,13 @@ export default function ManagerSearchLogBox() {
         ],
         []
     );
+
+    // 학번 검색 event handling
+    const [studentId, setId] = React.useState("");
+    const handleSearchStudentId = (e) => {
+        e.preventDefault();
+        console.log(studentId);
+    }
     
     const data = React.useMemo(
         () => [
@@ -70,8 +81,19 @@ export default function ManagerSearchLogBox() {
     
       
     return (
-        <ManagerBoxLayout>
-            <SearchLogTable columns={columns} data={data}></SearchLogTable>
-        </ManagerBoxLayout>
+        <>
+            {/* 학번 검색 */}
+            <Box sx={{m: 4, display: 'flex', flexwrap: 'wrap'}}>
+                <form onSubmit={handleSearchStudentId}>
+                    <TextField name="filter" type="search" variant="standard" placeholder="학번" onChange={(e) => {setId(e.target.value)}}/>
+                    <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+                        <SearchIcon />
+                </IconButton>
+                </form>
+            </Box>
+            <ManagerBoxLayout>
+                <SearchLogTable columns={columns} data={data}></SearchLogTable>
+            </ManagerBoxLayout>
+        </>
     );
 }
