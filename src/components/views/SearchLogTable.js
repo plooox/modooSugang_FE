@@ -36,7 +36,7 @@ export default function EnrolledTable({columns, data}) {
     <>
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         {/* It should be implemented using calculation algorithm */}
-        <TableContainer>
+        {/* <TableContainer>
             <Table sx={{ minWidth: 500 }}>
                 <TableHead>
                 <TableRow>
@@ -59,7 +59,7 @@ export default function EnrolledTable({columns, data}) {
                     </TableRow>
                 </TableBody>
             </Table>
-        </TableContainer>
+        </TableContainer> */}
         {/* --------------------------------------------------------- */}
 
         <TableContainer sx={{ maxHeight: 440 }}>

@@ -58,7 +58,7 @@ export default function ManagerSearchLogBox() {
             }
         })
         .then(function callback(response){
-            console.log(response.data);
+            // console.log(typeof(response.data[0]['cancel']));
             setResData(response.data);
         })
         .catch(function CallbackERROR(response){
