@@ -18,7 +18,6 @@ const backgroundImage =
 
 export default function MainpageBox() {
   const [univ, setAge] = React.useState('');
-  console.log(univ);
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -63,9 +62,9 @@ export default function MainpageBox() {
             onChange={handleChange}
           >
             {/* DB 연동 필요 */}
-            <MenuItem value={10}>카카오 대학교</MenuItem>
-            <MenuItem value={20}>네이버 대학교</MenuItem>
-            <MenuItem value={30}>배민 대학교</MenuItem>
+            <MenuItem value={"Kakao univ"}>카카오 대학교</MenuItem>
+            <MenuItem value={"Naver univ"}>네이버 대학교</MenuItem>
+            <MenuItem value={"Woowa univ"}>배민 대학교</MenuItem>
           </Select>
         </FormControl>
       </Box>
@@ -73,7 +72,7 @@ export default function MainpageBox() {
         bgcolor: 'background.paper',
         minWidth: 60 
         }}>
-        <Link to = "/SignIn">
+        <Link to = "/SignIn" state={{value: univ}}>
           <Button
             // onClick={()=>window.location.href="./SignIn"}
             variant="contained"

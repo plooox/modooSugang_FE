@@ -8,6 +8,9 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { Redirect, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import apiAxios from '../apiAxios';
 
 function Copyright(props) {
   return (
@@ -22,23 +25,71 @@ function Copyright(props) {
   );
 }
 
-function getCheckboxValue()  {
-  // 선택된 목록 가져오기
-  const query = 'input[name="LogIn_CheckBox"]:checked';
-  const selectedEls = 
-      document.querySelectorAll(query);
-  
-  // 선택된 목록에서 value 찾기
-  let result = '';
-  selectedEls.forEach((el) => {
-    result += el.value;
-  });
-  if(result == 'manager') { window.location.href = "../manage"}
-  else {window.location.href = "../student"}
-
-}
-
 function SignIn() {
+  // Homepage에서 univ값 가져온거 확인 & 변수 할당
+  const univ = useLocation()
+  const univName = univ.state.value
+  // console.log(univName)
+
+  // id, passwd, isManager
+  const [userId, setUserId] = React.useState("");
+  const [passwd, setPasswd] = React.useState("");
+  const [isManager, setManager] = React.useState(false);
+
+  // Send FormData to Server
+  const handlePost = async(joinData) =>{
+    const dir = joinData.isManager;
+    await axios({
+      url: '/api/login',
+      method: "post",
+      baseURL: 'http://localhost:8080',
+      withCredentials: true,
+      data: joinData
+    })
+    .then(function callback(response){
+
+      // response(isManager)의 값에 따라 이동
+      if (response.data === true){
+        if (dir === true){
+          window.location.href = '/manage';
+        }
+        else{
+          window.location.href = '/student';
+        }
+      }
+      else{
+        alert("회원이 아닙니다.")
+      }
+    })
+    .catch(  function CallbackERROR(response){
+      alert("ERROR!");
+    });
+  };
+
+  // Handle isManager checkbox
+  const handleManager = (e) => {
+    e.target.checked ? setManager(true) : setManager(false);
+  }
+
+  // Handle Submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const data = new FormData(e.currentTarget);
+    const joinData = {
+      univ: univName,
+      id: data.get('userId'),
+      password: data.get('password'),
+      isManager,
+    };
+    // console.log(joinData)
+
+    // Validation check 염두
+    if(true){
+      handlePost(joinData);
+    }
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -48,21 +99,26 @@ function SignIn() {
             flexDirection: 'column',
             alignItems: 'center',
           }}
+          component="form"
+          onSubmit={handleSubmit}
         >
         <FormControlLabel
-            control={<Checkbox value="manager" name="LogIn_CheckBox" color="primary" />}
-            label="관리자"
+            control={<Checkbox value={isManager} name="LogIn_CheckBox" id="checkbox" color="primary" onChange={handleManager} />}
+            label="manager"
         />
-        <TextField margin="normal" required fullWidth id="email" label="Username" name="email" autoComplete="email" autoFocus />
-        <TextField margin="normal" required fullWidth id="password" label="Password" name="password" type="password" autoComplete="current-password" />
+        <TextField margin="normal" required fullWidth variant='outlined' id="userId" label="Username" name="userId" autoComplete="userId" autoFocus onChange={(e)=>{
+          setUserId(e.target.value)
+        }} />
+        <TextField margin="normal" required fullWidth variant='outlined' id="password" label="Password" name="password" type="password" autoComplete="current-password" onChange={(e) => {
+          setPasswd(e.target.value)
+        }}/>
         
         <Stack spacint={2} direction="row">
-        <Button type="submit" halfWidth variant="contained" sx={{ mt: 3, mb: 2}} onClick={getCheckboxValue} > SIGN IN </Button>
-        <Button type="submit" halfWidth variant="contained" sx={{ mt: 3, mb: 2, ml: 5 }}> ID/PW찾기 </Button>
+        <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2}}> SIGN IN </Button>
+        <Button variant="contained" sx={{ mt: 3, mb: 2, ml: 5 }}> ID/PW찾기 </Button>
         </Stack>
-
-        <Copyright sx={{ mt: 8, mb: 4}} />     
       </Box>
+      <Copyright sx={{ mt: 8, mb: 4}} />     
     </Container>
 
   );
