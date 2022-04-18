@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { Redirect, useLocation } from 'react-router-dom';
+import { Navigate, Route, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import apiAxios from '../apiAxios';
 
@@ -30,6 +30,10 @@ function SignIn() {
   const univ = useLocation()
   const univName = univ.state.value
   // console.log(univName)
+  React.useEffect(() => {
+    localStorage.setItem('univ', univName);
+  }, [univName]);
+  
 
   // id, passwd, isManager
   const [userId, setUserId] = React.useState("");
@@ -41,7 +45,7 @@ function SignIn() {
     const dir = joinData.isManager;
     await axios({
       url: '/api/login',
-      method: "post",
+      method: "POST",
       baseURL: 'http://localhost:8080',
       withCredentials: true,
       data: joinData
@@ -58,7 +62,7 @@ function SignIn() {
         }
       }
       else{
-        alert("회원이 아닙니다.")
+        alert("ID 또는 비밀번호가 잘못되었습니다.")
       }
     })
     .catch(  function CallbackERROR(response){

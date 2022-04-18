@@ -13,7 +13,7 @@ function Search({ onSubmit }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextField name="filter" type="search" variant="standard" />
+      <TextField name="filter" type="search" variant="standard" placeholder="검색" />
       <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
         <SearchIcon />
       </IconButton>

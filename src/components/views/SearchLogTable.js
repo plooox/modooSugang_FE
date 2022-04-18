@@ -11,6 +11,7 @@ import { useTable, useGlobalFilter, useSortBy } from 'react-table'
 import { Box } from '@mui/material';
 import Search from '../assets/Search'
 
+
 export default function EnrolledTable({columns, data}) {
   const {
     getTableProps,
@@ -22,6 +23,7 @@ export default function EnrolledTable({columns, data}) {
   } = useTable({ columns, data }, useGlobalFilter, useSortBy);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -30,16 +32,11 @@ export default function EnrolledTable({columns, data}) {
     setPage(0);
   };
 
-
   return (
     <>
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-        <Box sx={{m: 2, display: 'flex', flexwrap: 'wrap'}}>
-            <Search onSubmit={setGlobalFilter} /> 
-        </Box>
-
         {/* It should be implemented using calculation algorithm */}
-        <TableContainer>
+        {/* <TableContainer>
             <Table sx={{ minWidth: 500 }}>
                 <TableHead>
                 <TableRow>
@@ -62,7 +59,7 @@ export default function EnrolledTable({columns, data}) {
                     </TableRow>
                 </TableBody>
             </Table>
-        </TableContainer>
+        </TableContainer> */}
         {/* --------------------------------------------------------- */}
 
         <TableContainer sx={{ maxHeight: 440 }}>
@@ -84,7 +81,6 @@ export default function EnrolledTable({columns, data}) {
                     .map((row) => {
                     prepareRow(row);
                     return (
-                        console.log(row),
                         <TableRow {...row.getRowProps()} hover role="checkbox" tabIndex={-1} key={row.id}>
                         {row.cells.map((cell) => (
                             <TableCell {...cell.getCellProps()}>{cell.render("Cell")}</TableCell>
@@ -106,6 +102,10 @@ export default function EnrolledTable({columns, data}) {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
+        <Box sx={{m: 1, display: 'flex', flexwrap: 'wrap'}} justifyContent="flex-end">
+            {/* 검색 */}
+            <Search onSubmit={setGlobalFilter} /> 
+        </Box>
       </Paper>     
     </>
 
