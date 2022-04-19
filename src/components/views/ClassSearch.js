@@ -66,7 +66,7 @@ function NullColumnFilter({
 
 export default function Class() {
 
-    // 서버에 api 요청 (GET)
+    // 서버에 api 요청 (POST)
     const [resData, setResData] = React.useState([]);
     const InitGetMethod = async() => {
         await axios({
