@@ -66,17 +66,14 @@ function NullColumnFilter({
 
 export default function Class() {
 
-    // 서버에 api 요청 (POST)
+    // 서버에 api 요청 (GET)
     const [resData, setResData] = React.useState([]);
     const InitGetMethod = async() => {
         await axios({
-            url: 'api/student/class',
-            method: 'POST',
+            url: 'api/student/class/'+sessionStorage.getItem('univ'),
+            method: 'GET',
             baseURL: 'http://localhost:8080',
             withCredentials: true.valueOf,
-            data: {
-                univ: sessionStorage.getItem('univ'),
-            }
         },
         )
         .then(function callback(response){
@@ -154,7 +151,7 @@ export default function Class() {
     React.useEffect(() => {
         const univ = sessionStorage.getItem('univ');
         if(univ !== "" ){
-            console.log(univ);
+            // console.log(univ);
             InitGetMethod();
         }      
     },[]);
