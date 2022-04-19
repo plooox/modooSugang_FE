@@ -8,9 +8,8 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { Navigate, Route, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import apiAxios from '../apiAxios';
 
 function Copyright(props) {
   return (
@@ -29,11 +28,6 @@ function SignIn() {
   // Homepage에서 univ값 가져온거 확인 & 변수 할당
   const univ = useLocation()
   const univName = univ.state.value
-  // console.log(univName)
-  React.useEffect(() => {
-    localStorage.setItem('univ', univName);
-  }, [univName]);
-  
 
   // id, passwd, isManager
   const [userId, setUserId] = React.useState("");
@@ -51,6 +45,9 @@ function SignIn() {
       data: joinData
     })
     .then(function callback(response){
+      // 사용자 정보 SessionStorage에 저장
+      sessionStorage.setItem('univ', univName);
+      sessionStorage.setItem('id', userId);
 
       // response(isManager)의 값에 따라 이동
       if (response.data === true){
@@ -82,11 +79,11 @@ function SignIn() {
     const data = new FormData(e.currentTarget);
     const joinData = {
       univ: univName,
-      id: data.get('userId'),
+      id: univName + '@' + data.get('userId'),
       password: data.get('password'),
       isManager,
     };
-    // console.log(joinData)
+    console.log(joinData)
 
     // Validation check 염두
     if(true){
