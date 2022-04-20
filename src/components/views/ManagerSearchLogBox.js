@@ -25,6 +25,10 @@ export default function ManagerSearchLogBox() {
                 Header: '과목코드',
             },
             {
+                accessor: 'semester',
+                Header: '학기'
+            },
+            {
                 accessor:   'retake',
                 Header: '재수강 여부'
             },
@@ -77,7 +81,7 @@ export default function ManagerSearchLogBox() {
 
     const [univName, setUniv] = React.useState("");
     React.useEffect(() => {
-        const univ = localStorage.getItem('univ');
+        const univ = sessionStorage.getItem('univ');
         if(univ){
             setUniv(univ);
         }
