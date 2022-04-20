@@ -62,7 +62,7 @@ export default function MainpageBox() {
             onChange={handleChange}
           >
             {/* DB 연동 필요 */}
-            <MenuItem value={"Kakao univ"}>카카오 대학교</MenuItem>
+            <MenuItem value={"카카오 대학교"}>카카오 대학교</MenuItem>
             <MenuItem value={"Naver univ"}>네이버 대학교</MenuItem>
             <MenuItem value={"Woowa univ"}>배민 대학교</MenuItem>
           </Select>
