@@ -2,7 +2,7 @@ import * as React from 'react';
 import './Manage.css';
 import SideBar from '../components/views/StudentHeader';
 import withRoot from './withRoot';
-import Student_Mypage_Table1 from './views/Student_Mypage_Table1'
+import StudentMypageLayout from './views/StudentMypageLayout'
 import AppFooter from './views/AppFooter';
 import styled from "styled-components";
 import * as BsIcons from 'react-icons/bs';
@@ -24,8 +24,8 @@ function StudentMyPage() {
         </div>
         <Container>
           <div>
-            <Student_Mypage_Table1></Student_Mypage_Table1>
-            <br></br><br></br>
+            <StudentMypageLayout></StudentMypageLayout>
+            {/* <br></br><br></br>
             <table border="1" bordercolor="gray" width ="100%" height="250" align = "center" >
               <th width ="15%" bgcolor="gray">시간</th>
               <th bgcolor="gray">월</th>
@@ -95,7 +95,7 @@ function StudentMyPage() {
               </tr>
             </table>
             <br></br><br></br>
-            <br></br><br></br>
+            <br></br><br></br> */}
           </div>
         </Container>
         <AppFooter></AppFooter>
