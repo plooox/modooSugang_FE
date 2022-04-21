@@ -26,8 +26,7 @@ function Copyright(props) {
 
 function SignIn() {
   // Homepage에서 univ값 가져온거 확인 & 변수 할당
-  const univ = useLocation()
-  const univName = univ.state.value
+  const univName = sessionStorage.getItem("univ");
 
   // id, passwd, isManager
   const [userId, setUserId] = React.useState("");
@@ -46,7 +45,6 @@ function SignIn() {
     })
     .then(function callback(response){
       // 사용자 정보 SessionStorage에 저장
-      sessionStorage.setItem('univ', univName);
       sessionStorage.setItem('id', userId);
 
       // response(isManager)의 값에 따라 이동
