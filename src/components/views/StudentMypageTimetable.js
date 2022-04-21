@@ -39,23 +39,20 @@ export default function TimeTable({data}) {
             return "<Typography>" + schedule.dayName +"</Typography>";
         }
       };
-    console.log(startDay)
     const pivotDay = parseStrToDate(startDay)
-    console.log(pivotDay)
     const sch = [];
     for (var i=0; i < Object.values(data).length; ++i){
-        console.log(Object.values(data)[i])
         // 시작일자 구하기: 기준일 + 일 + 시 + 분
         var lectureStart = new Date(pivotDay)
         lectureStart.setDate(lectureStart.getDate() + WeekDay[Object.values(data)[i]["lecture_first_sch"].substring(0,2)])
-        console.log(Number(Object.values(data)[i]["lecture_first_sch"].substring(2,4)))
+        // console.log(Number(Object.values(data)[i]["lecture_first_sch"].substring(2,4)))
         lectureStart.setHours(lectureStart.getHours() + Number(Object.values(data)[i]["lecture_first_sch"].substring(2,4)))
         lectureStart.setMinutes(lectureStart.getMinutes() + Number(Object.values(data)[i]["lecture_first_sch"].substring(4,6)))
 
         // 종료일자 구하기: 기준일 + 일 + 시 + 분
         var lectureEnd = new Date(pivotDay)
         lectureEnd.setDate(lectureEnd.getDate() + WeekDay[Object.values(data)[i]["lecture_first_sch"].substring(0,2)])
-        console.log(Number(Object.values(data)[i]["lecture_first_sch"].substring(2,4)))
+        // console.log(Number(Object.values(data)[i]["lecture_first_sch"].substring(2,4)))
         lectureEnd.setHours(lectureEnd.getHours() + Number(Object.values(data)[i]["lecture_first_sch"].substring(6,8)))
         lectureEnd.setMinutes(lectureEnd.getMinutes() + Number(Object.values(data)[i]["lecture_first_sch"].substring(8,10)))
 
@@ -72,13 +69,13 @@ export default function TimeTable({data}) {
         if(Object.values(data)[i]["lecture_second_sch"].length === 10){
             lectureStart = new Date(pivotDay)
             lectureStart.setDate(lectureStart.getDate() + WeekDay[Object.values(data)[i]["lecture_second_sch"].substring(0,2)])
-            console.log(Number(Object.values(data)[i]["lecture_second_sch"].substring(2,4)))
+            // console.log(Number(Object.values(data)[i]["lecture_second_sch"].substring(2,4)))
             lectureStart.setHours(lectureStart.getHours() + Number(Object.values(data)[i]["lecture_second_sch"].substring(2,4)))
             lectureStart.setMinutes(lectureStart.getMinutes() + Number(Object.values(data)[i]["lecture_second_sch"].substring(4,6)))
 
             lectureEnd = new Date(pivotDay)
             lectureEnd.setDate(lectureEnd.getDate() + WeekDay[Object.values(data)[i]["lecture_second_sch"].substring(0,2)])
-            console.log(Number(Object.values(data)[i]["lecture_second_sch"].substring(2,4)))
+            // console.log(Number(Object.values(data)[i]["lecture_second_sch"].substring(2,4)))
             lectureEnd.setHours(lectureEnd.getHours() + Number(Object.values(data)[i]["lecture_second_sch"].substring(6,8)))
             lectureEnd.setMinutes(lectureEnd.getMinutes() + Number(Object.values(data)[i]["lecture_second_sch"].substring(8,10)))
             
@@ -94,7 +91,6 @@ export default function TimeTable({data}) {
 
     }
 
-    console.log(sch);
     return (
         <Calendar
         // ...

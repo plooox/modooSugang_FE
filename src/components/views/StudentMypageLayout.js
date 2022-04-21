@@ -3,7 +3,41 @@ import MypageResultTable from './MypageResultTable'
 import StudentMypageTimetable from './StudentMypageTimetable'
 import axios from 'axios';
 
+class summary extends React.Component{
+    constructor() {
+        super();
+    }
+
+
+}
+
 export default function StuEnrolmentpageBox() {
+
+    const [major, setMajor] = React.useState(0);
+    const [culture, setCulture] = React.useState(0);
+    const [experiment, setExperiment] = React.useState(0);
+
+    const settingSummary = () => {
+        var ma = 0;
+        var cu = 0;
+        var ex = 0;
+        for (var i = 0; i<resData.length; i++) {
+            if (resData[i]["lecture_classify"] === "전공") {
+                console.log("1");
+                ma = ma + resData[i]["lecture_credit"];
+            } else if (resData[i]["lecture_classify"] === "교양") {
+                console.log("2");
+                cu = cu + resData[i]["lecture_credit"];
+            } else if (resData[i]["lecture_classify"] === "실험") {
+                console.log("");
+                ex = ex + resData[i]["lecture_credit"];
+            }
+        }
+        setMajor(ma);
+        setCulture(cu);
+        setExperiment(ex);
+        console.log(major,culture,experiment);
+    }
 
     // 서버에 api 요청 (GET)
     const [resData, setResData] = React.useState([]);
@@ -75,19 +109,32 @@ export default function StuEnrolmentpageBox() {
             },
         ],
         []
-    );
+    );        
 
     React.useEffect(() => {
         const univName = sessionStorage.getItem('univ');
         const ids = sessionStorage.getItem('id');
         if(univName !== "" && ids !== ""){
             InitPostMethod();
+            settingSummary();
         }      
-    },[]);
+    },);
+
       
     return (
         <>
         <MypageResultTable columns={columns} data={resData}></MypageResultTable>
+        <table border="1" bordercolor="gray" width ="40%" height="75" align = "left" >
+            <th bgcolor="gray">전공 학점</th>
+            <th bgcolor="gray">교양 학점</th>
+            <th bgcolor="gray">실험 학점</th>
+            <tr>
+                <td>{major}</td>
+                <td>{culture}</td>
+                <td>{experiment}</td>
+            </tr>
+        </table>
+        <br/><br/><br/><br/>
         <StudentMypageTimetable data={resData}></StudentMypageTimetable>
         </>
     );
