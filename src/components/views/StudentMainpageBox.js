@@ -37,7 +37,7 @@ export default function MainpageBox() {
     });
   }, []);
   
-  
+
   return (
     <MainpageBoxLayout
       sxBackground={{
@@ -90,7 +90,7 @@ export default function MainpageBox() {
         }}>
         <Link to = "/SignIn">
           <Button
-            // onClick={()=>window.location.href="./SignIn"}
+            onClick={()=>sessionStorage.setItem('univ', univ)}
             variant="contained"
             disabled={!univ}
             >
