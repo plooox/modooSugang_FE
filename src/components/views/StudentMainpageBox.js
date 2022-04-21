@@ -37,7 +37,6 @@ export default function MainpageBox() {
     });
   }, []);
   
- // alert(Object.values(univ_list[1]));
 
   return (
     <MainpageBoxLayout
@@ -77,15 +76,11 @@ export default function MainpageBox() {
             label="Univ"
             onChange={handleChange}
           >
-            {/* DB 연동 필요 */ }
             
               {Object.values(univ_list).map(name => (
                 <MenuItem value={name.univname}>{name.univname}</MenuItem>
               ))}
 
-           {/* <MenuItem value={10}>카카오 대학교</MenuItem>
-            <MenuItem value={20}>네이버 대학교</MenuItem>
-              <MenuItem value={30}>배민 대학교</MenuItem> */}
           </Select>
         </FormControl>
       </Box>
@@ -95,7 +90,7 @@ export default function MainpageBox() {
         }}>
         <Link to = "/SignIn">
           <Button
-            // onClick={()=>window.location.href="./SignIn"}
+            onClick={()=>sessionStorage.setItem('univ', univ)}
             variant="contained"
             disabled={!univ}
             >

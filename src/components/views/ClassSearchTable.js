@@ -11,10 +11,8 @@ import { Typography } from '@mui/material';
 import { useTable, useGlobalFilter, useSortBy } from 'react-table'
 import Search from '../assets/Search'
 import { Box } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { useFilters } from 'react-table/dist/react-table.development';
+
 
 
 export default function ClassTable({columns, data}) {
@@ -28,6 +26,7 @@ export default function ClassTable({columns, data}) {
     setGlobalFilter,
   } = useTable(
     { columns, data }, 
+    useFilters,
     useGlobalFilter, 
     useSortBy, 
   );
@@ -42,50 +41,15 @@ export default function ClassTable({columns, data}) {
     setPage(0);
   };
 
-  const [category, setcategory] = React.useState('');
-  const handleChangeCategory = (event) => {
-    setcategory(event.target.value);
-  };
-
   return (
     <>
       {/* 상단 바 UI Rendering */}
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 440 }}>
-          <Box sx={{mt: 8, display: 'flex', flexwrap: 'wrap', justifyContent:'space-around'}}>
+          <Box sx={{m: 2, display: 'flex'}}>
             <Typography variant="h7">
               [ 교과목 조회 ]
             </Typography>
-            <FormControl sx={{ m: 1, ml: 5, minWidth: 150 }}>
-              <InputLabel id="demo-simple-select-label">전공/교양 선택</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={category}
-                label="Age"
-                onChange={handleChangeCategory}
-              >
-                <MenuItem value={10}>전공</MenuItem>
-                <MenuItem value={20}>교양</MenuItem>
-                <MenuItem value={30}>실험실습</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl sx={{ m: 1, ml:5, minWidth: 100 }}>
-              <InputLabel id="demo-simple-select-label">학년</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={category}
-                label="Age"
-                onChange={handleChangeCategory}
-              >
-                <MenuItem value={10}>1학년</MenuItem>
-                <MenuItem value={20}>2학년</MenuItem>
-                <MenuItem value={30}>3학년</MenuItem>
-                <MenuItem value={30}>4학년</MenuItem>
-              </Select>
-            </FormControl>
-            <Search onSubmit={setGlobalFilter} />
           </Box>
 
           {/* Table */}
@@ -101,13 +65,23 @@ export default function ClassTable({columns, data}) {
                 </TableRow>
               ))}
             </TableHead>
+            <TableHead>
+              {headerGroups.map((headerGroup) => (
+                <TableRow {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <TableCell {...column.getHeaderProps(column.getHeaderProps())}>
+                      <div>{column.canFilter ? column.render('Filter') : null}</div>
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableHead>
             <TableBody {...getTableBodyProps()}>
               {rows
                 // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   prepareRow(row);
                   return (
-                    console.log(row),
                     <TableRow {...row.getRowProps()} hover role="checkbox" tabIndex={-1} key={row.id}>
                       {row.cells.map((cell) => (
                         <TableCell {...cell.getCellProps()}>{cell.render("Cell")}</TableCell>
@@ -121,7 +95,7 @@ export default function ClassTable({columns, data}) {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
+          rowsPerPageOptions={[10, 25, 50, 100]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
@@ -129,6 +103,9 @@ export default function ClassTable({columns, data}) {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
+        <Box sx={{m:1 , display:'flex', justifyContent:'right'}}>
+          <Search onSubmit={setGlobalFilter} />
+        </Box>
       </Paper>
     </>
   );
