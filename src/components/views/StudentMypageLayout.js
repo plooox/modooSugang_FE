@@ -88,7 +88,7 @@ export default function StuEnrolmentpageBox() {
     return (
         <>
         <MypageResultTable columns={columns} data={resData}></MypageResultTable>
-        <StudentMypageTimetable></StudentMypageTimetable>
+        <StudentMypageTimetable data={resData}></StudentMypageTimetable>
         </>
     );
 }
