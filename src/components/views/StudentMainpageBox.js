@@ -37,8 +37,7 @@ export default function MainpageBox() {
     });
   }, []);
   
- // alert(Object.values(univ_list[1]));
-
+  
   return (
     <MainpageBoxLayout
       sxBackground={{
@@ -77,22 +76,11 @@ export default function MainpageBox() {
             label="Univ"
             onChange={handleChange}
           >
-<<<<<<< HEAD
-            {/* DB 연동 필요 */}
-            <MenuItem value={"카카오 대학교"}>카카오 대학교</MenuItem>
-            <MenuItem value={"Naver univ"}>네이버 대학교</MenuItem>
-            <MenuItem value={"Woowa univ"}>배민 대학교</MenuItem>
-=======
-            {/* DB 연동 필요 */ }
             
               {Object.values(univ_list).map(name => (
                 <MenuItem value={name.univname}>{name.univname}</MenuItem>
               ))}
 
-           {/* <MenuItem value={10}>카카오 대학교</MenuItem>
-            <MenuItem value={20}>네이버 대학교</MenuItem>
-              <MenuItem value={30}>배민 대학교</MenuItem> */}
->>>>>>> a9afad7be3bda9146e7920668c41187ca1f6d3d2
           </Select>
         </FormControl>
       </Box>
