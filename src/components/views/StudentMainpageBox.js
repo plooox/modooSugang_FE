@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from "react";
 import Typography from '../assets/Typography';
 import MainpageBoxLayout from './MainpageBoxLayout';
 import Box from '@mui/material/Box';
@@ -7,7 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Button from '@mui/material/Button';
-
+import Axios from "axios";
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import { Home } from '@mui/icons-material';
 import Homepage from '../Homepage';
@@ -18,10 +18,26 @@ const backgroundImage =
 
 export default function MainpageBox() {
   const [univ, setAge] = React.useState('');
+  console.log(univ);
 
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+  
+  // call the list of university 
+  const [univ_list, setUser] = useState("");
+  useEffect(() => {
+    Axios.post("/home/univ").then((response) => {
+      if (response.data) {
+        console.log(response.data);
+        setUser(response.data);   
+      } else {
+        alert("failed to ");
+      }
+    });
+  }, []);
+  
+ // alert(Object.values(univ_list[1]));
 
   return (
     <MainpageBoxLayout
@@ -61,10 +77,22 @@ export default function MainpageBox() {
             label="Univ"
             onChange={handleChange}
           >
+<<<<<<< HEAD
             {/* DB 연동 필요 */}
             <MenuItem value={"카카오 대학교"}>카카오 대학교</MenuItem>
             <MenuItem value={"Naver univ"}>네이버 대학교</MenuItem>
             <MenuItem value={"Woowa univ"}>배민 대학교</MenuItem>
+=======
+            {/* DB 연동 필요 */ }
+            
+              {Object.values(univ_list).map(name => (
+                <MenuItem value={name.univname}>{name.univname}</MenuItem>
+              ))}
+
+           {/* <MenuItem value={10}>카카오 대학교</MenuItem>
+            <MenuItem value={20}>네이버 대학교</MenuItem>
+              <MenuItem value={30}>배민 대학교</MenuItem> */}
+>>>>>>> a9afad7be3bda9146e7920668c41187ca1f6d3d2
           </Select>
         </FormControl>
       </Box>
@@ -72,7 +100,7 @@ export default function MainpageBox() {
         bgcolor: 'background.paper',
         minWidth: 60 
         }}>
-        <Link to = "/SignIn" state={{value: univ}}>
+        <Link to = "/SignIn">
           <Button
             // onClick={()=>window.location.href="./SignIn"}
             variant="contained"
