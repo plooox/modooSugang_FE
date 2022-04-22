@@ -3,20 +3,13 @@ import MypageResultTable from './MypageResultTable'
 import StudentMypageTimetable from './StudentMypageTimetable'
 import axios from 'axios';
 
-class summary extends React.Component{
-    constructor() {
-        super();
-    }
-
-
-}
-
 export default function StuEnrolmentpageBox() {
 
     const [major, setMajor] = React.useState(0);
     const [culture, setCulture] = React.useState(0);
     const [experiment, setExperiment] = React.useState(0);
 
+    // 전공, 교양, 실험 학점 계산기
     const settingSummary = () => {
         var ma = 0;
         var cu = 0;
@@ -36,10 +29,9 @@ export default function StuEnrolmentpageBox() {
         setMajor(ma);
         setCulture(cu);
         setExperiment(ex);
-        console.log(major,culture,experiment);
     }
 
-    // 서버에 api 요청 (GET)
+    // 서버에 api 요청 (POST)
     const [resData, setResData] = React.useState([]);
     const InitPostMethod = async() => {
         await axios({
@@ -54,7 +46,7 @@ export default function StuEnrolmentpageBox() {
         },
         )
         .then(function callback(response){
-            console.log(response.data)
+            // Table data -> 서버에서 받은 데이터
             setResData(response.data);
         })
         .catch(function CallbackERROR(response){
@@ -110,16 +102,18 @@ export default function StuEnrolmentpageBox() {
         ],
         []
     );        
-
+    // 한번만 실행
     React.useEffect(() => {
         const univName = sessionStorage.getItem('univ');
         const ids = sessionStorage.getItem('id');
         if(univName !== "" && ids !== ""){
             InitPostMethod();
-            settingSummary();
         }      
+    },[]);
+    // 값이 바뀔때마다 반복 실행
+    React.useEffect(() => { 
+        settingSummary();
     },);
-
       
     return (
         <>
