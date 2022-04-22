@@ -57,7 +57,6 @@ export default function BasketTable({columns, data}) {
                 .map((row) => {
                   prepareRow(row);
                   return (
-                    console.log(row),
                     <TableRow {...row.getRowProps()} hover role="checkbox" tabIndex={-1} key={row.id}>
                       {row.cells.map((cell) => (
                         <TableCell {...cell.getCellProps()}>{cell.render("Cell")}</TableCell>
