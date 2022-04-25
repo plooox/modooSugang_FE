@@ -27,15 +27,15 @@ export default function FileUploadButton() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  /**
-   * 파일 업로드 확인
-   */
-    const onChangeFile = e => {
-    if (e.target.files && e.target.files.length > 0) {
-      React.setFile(e.target.files[0]);
-      console.log(e.target.files)
-    }
-  }
+  // /**
+  //  * 파일 업로드 확인
+  //  */
+  //   const onChangeFile = e => {
+  //   if (e.target.files && e.target.files.length > 0) {
+  //     React.setFile(e.target.files[0]);
+  //     console.log(e.target.files)
+  //   }
+  // }
 
   const Input = styled('input')({
     display: 'none',
