@@ -13,6 +13,8 @@ import { Box } from '@mui/material';
 
 
 
+// 장바구니 페이지 2번 테이블 [장바구니 신청내역] 
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -38,7 +40,7 @@ export default function BucketTable({columns, data}) {
         id: "enrollment",
         Header: "신청/취소",
         Cell: ({row}) => (
-              <Button onClick={handleOpen}>신청</Button>
+              <Button onClick={handleOpen}>취소</Button>
           ),
         },
     ]);
@@ -79,7 +81,7 @@ export default function BucketTable({columns, data}) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            신청하시겠습니까?
+            취소하시겠습니까?
           </Typography>
           <div>
             <Button onClick={handleClose}>Yes</Button>
@@ -93,7 +95,7 @@ export default function BucketTable({columns, data}) {
         <TableContainer sx={{ maxHeight: 440 }}>
           <Box sx={{mt: 2, display: 'flex', flexwrap: 'wrap', justifyContent: 'space-between'}}>
             <Typography variant="h7">
-              [ 교과목 조회 ]
+              [ 장바구니 신청내역 ]
             </Typography>
           </Box>
 

@@ -17,7 +17,10 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import axios from 'axios';
 
+
+// 장바구니 페이지 1번 테이블 [교과목 조회]
 
 const style = {
   position: 'absolute',
@@ -36,6 +39,47 @@ export default function BucketEnrollmentTable({columns, data}) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  if (data.length > 0) {
+    var step;
+    for (step = 0; step < data.length; step++) {
+      var session_code_value = data[step]['index'];
+      var session_code_key = "lectureCodeB" + step;
+      sessionStorage.setItem(session_code_key, session_code_value);
+    }
+  }
+
+  function SelectCode(row){  
+    var index = row.index;
+    var CodeBysessionKey = "lectureCodeB" + index;
+    const code = sessionStorage.getItem(CodeBysessionKey);
+    sessionStorage.setItem('codeB', code); // 선택한 항목의 code값 가져오기
+    setOpen(true);
+    };
+
+  //수강신청 요청 (API) , bool
+  const handleApply = async() =>{
+    const RequestEnroll = { // value 수정 필요
+      id : 4,
+      code : sessionStorage.getItem("codeB"), // 세션에 저장된 code값
+      univ : "구름대학교",
+    };  
+    await axios({
+      url: 'api/student/enroll/apply/basket',
+      method: "post",
+      baseURL: 'http://localhost:8080',
+      withCredentials: true,
+      data: RequestEnroll,
+    })
+    .then(function callback(response){
+        alert("장바구니에 담겼습니다.");
+        window.location.href = '/student/bucket';  
+    })
+    .catch(  function CallbackERROR(response){
+      alert("ERROR!");
+    });
+   };
+  //const id = sessionStorage.getItem("id");
+
   // 수강신청 버튼
   const tableEvent = (hooks) => {
     hooks.visibleColumns.push((columns) => [
@@ -43,11 +87,14 @@ export default function BucketEnrollmentTable({columns, data}) {
         {
         id: "enrollment",
         Header: "신청/취소",
-        Cell: ({row}) => (
-              <Button onClick={handleOpen}>신청</Button>
+        Cell: ({row}) => ( 
+          <Button onClick={() => {
+            SelectCode(row);
+              }}>신청</Button>
           ),
-        },
-    ]);
+        }, 
+    ], 
+    );
   };
 
   const IndeterminateCheckbox = React.forwardRef(
@@ -137,7 +184,7 @@ export default function BucketEnrollmentTable({columns, data}) {
             신청하시겠습니까?
           </Typography>
           <div>
-            <Button onClick={handleClose}>Yes</Button>
+            <Button onClick={()=>{handleApply()}}>Yes</Button>
             <Button onClick={handleClose}>No</Button>
           </div>
         </Box>

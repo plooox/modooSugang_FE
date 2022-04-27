@@ -13,6 +13,9 @@ import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
+
+// 수강신청 페이지 3번 테이블 [현재 신청 내역]
+
 export default function EnrolledTable({columns, data}) {
   const {
     getTableProps,

@@ -17,8 +17,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import axios from 'axios';
 
-
+// 수강신청 페이지 2번 테이블 [장바구니 신청목록]
 
 const style = {
   position: 'absolute',
@@ -37,20 +38,63 @@ export default function BasketTable({columns, data}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-    // 수강신청 버튼
+
+  function SelectCode(row,data){
+    var index = row['index'];
+    // var code = data[index]['index'];
+    // alert(code);
+    // sessionStorage.setItem('code', code); // 선택한 항목의 code값 가져오기
+    setOpen(true);
+    };
+    
+    
+  ///수강신청 요청 (API) , bool
+  const handleApply = async() =>{
+    // value 수정 필요
+    const RequestEnroll = {
+      id : "1",
+      code : sessionStorage.getItem("code"), // 세션에 저장된 code값
+      univ : "구름대학교",
+    };  
+    await axios({
+      url: 'api/student/enroll/apply/lecture',
+      method: "post",
+      baseURL: 'http://localhost:8080',
+      withCredentials: true,
+      data: RequestEnroll,
+    })
+    .then(function callback(response){
+      if (response.data === true){ 
+        alert("신청에 성공했습니다.");
+        window.location.href = '/student/enrolment';
+      }
+      else {
+        alert("신청 불가 또는 잔여 여석이 없습니다.");
+        window.location.href = '/student/enrolment';
+      }
+    })
+    .catch(  function CallbackERROR(response){
+      alert("ERROR!");
+    });
+   };
+  //const id = sessionStorage.getItem("id");
+
     const tableEvent = (hooks) => {
       hooks.visibleColumns.push((columns) => [
           ...columns,
           {
           id: "enrollment",
           Header: "신청/취소",
-          Cell: ({row}) => (
-                <Button onClick={handleOpen}>신청</Button>
-            ),
-          },
-      ]);
-    };
-
+          Cell: ({row}) => ( 
+            <Button onClick={() => {
+              SelectCode(row,data);
+                }}>신청</Button>
+            // <Button onClick={handleOpen}>신청</Button>
+        ),
+      }, 
+  ], 
+  );
+};
     
   const {
     getTableProps,
@@ -89,7 +133,8 @@ export default function BasketTable({columns, data}) {
             신청하시겠습니까?
           </Typography>
           <div>
-            <Button onClick={handleClose}>Yes</Button>
+            <Button onClick={()=>{handleApply()}}>Yes</Button>
+            {/* <Button onClick={handleClose}>Yes</Button> */}
             <Button onClick={handleClose}>No</Button>
           </div>
         </Box>

@@ -1,44 +1,58 @@
 import * as React from 'react';
 import { Button } from '@mui/material';
 import BucketTable from './BucketTable'
+import axios from 'axios';
 
-// 데이터 객체 생성
-function createData(code, lecture, department, category, time, classroom, score, to) {
-    return { 
-        code: code,
-        lecture: lecture,
-        department: department,
-        category: category,
-        time: time,
-        classroom: classroom,
-        score: score,
-        to: to,
-        btn: row =>(
-            <div>
-                <Button >신청</Button>
-            </div>
-        ),
-    };
-  }
+// 장바구니 2번 테이블 프레임
 
 export default function StuEnrolmentpageBox() {
+
+                    
+    const [data, setResData] = React.useState([]); // 1번테이블에 띄울 data 호출
+    const handleEnroll = async(joinData) =>{
+        await axios({
+          url: 'api/student/enrolled/basket_list/',
+          method: "post",
+          baseURL: 'http://localhost:8080',
+          withCredentials: true,
+          data: joinData
+        })
+        .then(function callback(response){
+            setResData(response.data);
+        })
+        .catch(  function CallbackERROR(response){
+          alert("ERROR!");
+        });
+      };
+
+      React.useEffect(() => {
+        handleEnroll(joinData);
+      }, []);
+    
+      const joinData = { 
+        semester : "2022_1",
+        id : '21611868',
+        univ : "구름대학교",
+      };
+
+
     // Column 정보 입력
     const columns = React.useMemo(
         () => [
             {
-                accessor: 'code' ,
+                accessor: 'index' ,
                 Header: '과목코드',
             },
             {
-                accessor:  'lecture' ,
-                Header:     '과목명',
+                accessor: 'name' ,
+                Header:    '과목명',
             },
             {
-                accessor: 'department',
+                accessor: 'major',
                 Header: '학과'
             },
             {
-                accessor:  'category' ,
+                accessor:  'classify' ,
                 Header: '전공/교양'
             },
             {
@@ -46,31 +60,18 @@ export default function StuEnrolmentpageBox() {
                 Header: '시간'
             },
             {
-                accessor:  'classroom' ,
+                accessor:  'classes' ,
                 Header: '분반'
             },
             {
-                accessor:  'score' ,
+                accessor:  'credit' ,
                 Header: '학점'
-            },
-            {
-                accessor:  'to' ,
-                Header: '잔여 인원',
             },
         ],
         []
     );
-    
-    const data = React.useMemo(
-        () => [
-            createData('AAA-0001', '알고리즘개론', '컴퓨터공학과', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
-            createData('AAA-0002', '자료구조개론', '컴퓨터공학과', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
-            createData('BBB-0003', '해석학1', '수학과', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
-            createData('DDD-0004', '논어', '공통', '교양', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
-            createData('EEE-0005', '전자기학', '전기전자공학부', '전공필수', '[월]10:30~12:00 \[수]9:00~10:30', 1, 3, '10/60'),
-          ],
-          []
-    );
+
+
     
       
     return (

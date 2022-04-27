@@ -75,7 +75,6 @@ export default function ManagerSearchLogBox() {
     const handleSearchStudentId = (e) => {
         e.preventDefault();
         console.log(univName);
-
         handleGetMethod(studentId);
     }
 
