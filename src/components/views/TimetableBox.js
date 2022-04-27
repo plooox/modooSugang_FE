@@ -1,59 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import ManagerTimeTable from './ManagerTimeTable';
+import * as React from 'react';
+import { Button } from '@mui/material';
+import Timetable from './TimeTable';
 import ManagerBoxLayout from './ManagerBoxLayout';
-import FileUploadButton from '../assets/FileUploadButton';
+import StudentUploadButton from '../assets/StudentUploadButton';
 import { Grid } from '@mui/material';
 import axios from 'axios';
 
-export default function ManagerTimetableBox() {
+
+export default function TimetableBox() {
+    // Column 정보 입력
     const columns = React.useMemo(
         () => [
             {
-                accessor: 'lecture_id' ,
-                Header: '과목코드',
+                accessor: 'student_id' ,
+                Header: '학번',
             },
             {
-                accessor:  'lecture_name' ,
-                Header:     '과목명',
+                accessor: 'student_name' ,
+                Header:  '이름',
             },
             {
-                accessor: 'lecture_major',
-                Header: '학과'
+                accessor: 'student_birth' ,
+                Header:  '생년월일',
             },
             {
-                accessor:  'lecture_classify' ,
-                Header: '전공/교양'
+                accessor: 'student_major',
+                Header: '전공'
             },
             {
-                accessor:   'lecture_time',
-                Header: '시간'
+                accessor:  'student_second',
+                Header: '부/복수 전공'
             },
             {
-                accessor:  'lecture_class' ,
-                Header: '분반'
+                accessor:   'student_grade',
+                Header: '학년'
             },
             {
-                accessor:  'lecture_credit' ,
-                Header: '학점'
+                accessor:  'student_phone' ,
+                Header: '연락처'
             },
             {
-                accessor:  'lecture_professor' ,
-                Header: '교수',
+                accessor:  'student_credit' ,
+                Header: '취득학점'
             },
             {
-                accessor:  'lecture_room' ,
-                Header: '강의실',
+                accessor:  'student_enroll' ,
+                Header: '입학 정보',
             },
         ],
         []
     );
 
-    sessionStorage.setItem('univ','카카오대학교'); //임시
+    sessionStorage.setItem('univ','카카오대학교');
     // 서버에 api 요청 (GET)
     const [resData, setResData] = React.useState([]);
     const InitGetMethod = async() => {
         await axios({
-            url: '/api/manage/timetable/'+ sessionStorage.getItem('univ'),
+            url: '/api/manage/info/'+ sessionStorage.getItem('univ'),
             method: 'GET',
             baseURL: 'http://localhost:8080',
             withCredentials: true.valueOf,
@@ -71,7 +74,6 @@ export default function ManagerTimetableBox() {
             alert("ERROR");
         });
     }
-
     const [univName, setUniv] = React.useState("");
     React.useEffect(() => {
         const univ = sessionStorage.getItem('univ');
@@ -84,12 +86,12 @@ export default function ManagerTimetableBox() {
     React.useEffect(()=> {
         InitGetMethod();
     },[]);
-    
+
     return (
         <ManagerBoxLayout>
-            <ManagerTimeTable columns={columns} data={resData}></ManagerTimeTable>
+            <Timetable columns={columns} data={resData}></Timetable>
             <Grid  container justifyContent='flex-end'>
-                <FileUploadButton></FileUploadButton>
+                <StudentUploadButton></StudentUploadButton>
             </Grid>
         </ManagerBoxLayout>
     );
