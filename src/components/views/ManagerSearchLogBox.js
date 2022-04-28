@@ -54,7 +54,7 @@ export default function ManagerSearchLogBox() {
         await axios({
             url: 'api/manage/search',
             method: 'POST',
-            baseURL: 'http://localhost:8080',
+            baseURL: process.env.REACT_APP_TEST_URL,
             withCredentials: true.valueOf,
             data: {
                 univ: univName,

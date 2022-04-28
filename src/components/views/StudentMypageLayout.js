@@ -37,7 +37,7 @@ export default function StuEnrolmentpageBox() {
         await axios({
             url: 'api/student/Mypage',
             method: 'POST',
-            baseURL: 'http://localhost:8080',
+            baseURL: process.env.REACT_APP_TEST_URL,
             withCredentials: true.valueOf,
             data: {
                 univ: sessionStorage.getItem('univ'),

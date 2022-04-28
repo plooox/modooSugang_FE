@@ -88,7 +88,7 @@ function AxiosPeriodBasket(e){
     await axios({
       url: 'api/manager/FormPeriod/basket',
       method: "post",
-      baseURL: 'http://localhost:8080',
+      baseURL: process.env.REACT_APP_TEST_URL,
       withCredentials: true,
       data: joinData
     })
@@ -124,7 +124,7 @@ function AxiosPeriodRegister(e){
     await axios({
       url: 'api/manager/FormPeriod/register',
       method: "post",
-      baseURL: 'http://localhost:8080',
+      baseURL: process.env.REACT_APP_TEST_URL,
       withCredentials: true,
       data: joinData
     })
@@ -162,7 +162,7 @@ function AxiosPeriodModify(e){
     await axios({
       url: 'api/manager/FormPeriod/modify',
       method: "post",
-      baseURL: 'http://localhost:8080',
+      baseURL: process.env.REACT_APP_TEST_URL,
       withCredentials: true,
       data: joinData
     })
@@ -200,7 +200,7 @@ function AxiosPeriodCancle(e){
     await axios({
       url: 'api/manager/FormPeriod/cancle',
       method: "post",
-      baseURL: 'http://localhost:8080',
+      baseURL: process.env.REACT_APP_TEST_URL,
       withCredentials: true,
       data: joinData
     })

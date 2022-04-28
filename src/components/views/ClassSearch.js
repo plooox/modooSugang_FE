@@ -72,7 +72,7 @@ export default function Class() {
         await axios({
             url: 'api/student/class/'+sessionStorage.getItem('univ'),
             method: 'GET',
-            baseURL: 'http://localhost:8080',
+            baseURL: process.env.REACT_APP_TEST_URL,
             withCredentials: true.valueOf,
         },
         )

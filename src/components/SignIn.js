@@ -39,7 +39,7 @@ function SignIn() {
     await axios({
       url: '/api/login',
       method: "POST",
-      baseURL: 'http://localhost:8080',
+      baseURL: process.env.REACT_APP_TEST_URL,
       withCredentials: true,
       data: joinData
     })
