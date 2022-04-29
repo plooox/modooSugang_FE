@@ -23,11 +23,9 @@ export default function MainpageBox() {
   const handleChange = (event) => {
     setAge(event.target.value);
   };
-  
-  // call the list of university 
-  const [univ_list, setUser] = useState("");
-  useEffect(() => {
-    Axios({
+
+  const InitSelectBar = async() => {
+    await Axios({
       baseURL: '/api/home/univ',
       method: "GET",
       withCredentials: true,
@@ -40,6 +38,12 @@ export default function MainpageBox() {
         alert("failed to ");
       }
     });
+  }
+  
+  // call the list of university 
+  const [univ_list, setUser] = useState("");
+  useEffect(() => {
+    InitSelectBar();
   }, []);
   
 
