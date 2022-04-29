@@ -29,7 +29,7 @@ export default function MainpageBox() {
   useEffect(() => {
     Axios({
       baseURL: process.env.SERVER_URL,
-      url: '/api/home/univ',
+      baseURL: '/api/home/univ',
       method: "GET",
       withCredentials: true,
     })
