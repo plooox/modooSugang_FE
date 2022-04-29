@@ -28,7 +28,8 @@ export default function MainpageBox() {
   const [univ_list, setUser] = useState("");
   useEffect(() => {
     Axios({
-      baseURL: process.env.SERVER_URL+'/api/home/univ',
+      baseURL: process.env.SERVER_URL,
+      url: '/api/home/univ',
       method: "GET",
       withCredentials: true,
     })
