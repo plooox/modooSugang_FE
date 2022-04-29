@@ -29,7 +29,7 @@ export default function MainpageBox() {
   useEffect(() => {
     Axios({
       baseURL: '/api/home/univ',
-      method: "POST",
+      method: "GET",
       withCredentials: true,
     })
     .then((response) => {
