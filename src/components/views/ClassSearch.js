@@ -70,9 +70,8 @@ export default function Class() {
     const [resData, setResData] = React.useState([]);
     const InitGetMethod = async() => {
         await axios({
-            url: 'api/student/class/'+sessionStorage.getItem('univ'),
+            baseURL: '/api/student/class/'+sessionStorage.getItem('univ'),
             method: 'GET',
-            baseURL: 'http://localhost:8080',
             withCredentials: true.valueOf,
         },
         )

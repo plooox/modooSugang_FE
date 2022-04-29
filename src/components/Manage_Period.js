@@ -86,9 +86,8 @@ function AxiosPeriodBasket(e){
 
   const handlePost = async(joinData) =>{
     await axios({
-      url: 'api/manager/FormPeriod/basket',
-      method: "post",
-      baseURL: 'http://localhost:8080',
+      baseURL: '/api/manager/FormPeriod/basket',
+      method: "POST",
       withCredentials: true,
       data: joinData
     })
@@ -122,9 +121,8 @@ function AxiosPeriodRegister(e){
   
   const handlePost = async(joinData) =>{
     await axios({
-      url: 'api/manager/FormPeriod/register',
-      method: "post",
-      baseURL: 'http://localhost:8080',
+      baseURL: '/api/manager/FormPeriod/register',
+      method: "POST",
       withCredentials: true,
       data: joinData
     })
@@ -160,9 +158,8 @@ function AxiosPeriodModify(e){
   
   const handlePost = async(joinData) =>{
     await axios({
-      url: 'api/manager/FormPeriod/modify',
-      method: "post",
-      baseURL: 'http://localhost:8080',
+      baseURL: '/api/manager/FormPeriod/modify',
+      method: "POST",
       withCredentials: true,
       data: joinData
     })
@@ -198,9 +195,8 @@ function AxiosPeriodCancle(e){
   
   const handlePost = async(joinData) =>{
     await axios({
-      url: 'api/manager/FormPeriod/cancle',
-      method: "post",
-      baseURL: 'http://localhost:8080',
+      baseURL: 'api/manager/FormPeriod/cancle',
+      method: "POST",
       withCredentials: true,
       data: joinData
     })

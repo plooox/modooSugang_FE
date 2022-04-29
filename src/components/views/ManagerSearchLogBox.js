@@ -48,13 +48,12 @@ export default function ManagerSearchLogBox() {
         []
     );
 
-    // 서버에 api 요청 (GET)
+    // 서버에 api 요청 (POST)
     const [resData, setResData] = React.useState([]);
     const handleGetMethod = async(id) => {
         await axios({
-            url: 'api/manage/search',
+            baseURL: '/api/manage/search',
             method: 'POST',
-            baseURL: 'http://localhost:8080',
             withCredentials: true.valueOf,
             data: {
                 univ: univName,
