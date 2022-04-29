@@ -27,7 +27,12 @@ export default function MainpageBox() {
   // call the list of university 
   const [univ_list, setUser] = useState("");
   useEffect(() => {
-    Axios.post("api/home/univ").then((response) => {
+    Axios({
+      baseURL: '/api/home/univ',
+      method: "POST",
+      withCredentials: true,
+    })
+    .then((response) => {
       if (response.data) {
         console.log(response.data);
         setUser(response.data);   
