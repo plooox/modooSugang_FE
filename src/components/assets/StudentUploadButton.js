@@ -18,7 +18,7 @@ const style = {
   p: 4,
 };
 
-export default function FileUploadButton() {
+export default function StudentUploadButton() {
   // const [file, setFile] = React.useState(null);
   const [file, changeFile] = React.useState();
   const [fileName, changeFileName] = React.useState("");
@@ -26,16 +26,6 @@ export default function FileUploadButton() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  // /**
-  //  * 파일 업로드 확인
-  //  */
-  //   const onChangeFile = e => {
-  //   if (e.target.files && e.target.files.length > 0) {
-  //     React.setFile(e.target.files[0]);
-  //     console.log(e.target.files)
-  //   }
-  // }
 
   const Input = styled('input')({
     display: 'none',
@@ -73,29 +63,29 @@ export default function FileUploadButton() {
 }
 
 function UploadAddress(e){
-  const handlePost = async(joinData) =>{
-    await axios({
-      url :'api/manage/upload/timetable',
-      method: "post",
-      baseURL:'http://localhost:8080',
-      withCredentials: true,
-      data: joinData
-    }).then(function callback(response){
-      console.log("응답");
-    })
-    .catch(  function CallbackERROR(response){
-      alert("ERROR!");
-    });
-  };
-  let url = document.getElementById('UploadAddress').value;
-
-  if(url === ""){
-    alert("주소를 입력해주세요.")
-  }else{
-    const joinData = {
-      url: url,
+    const handlePost = async(joinData) =>{
+      await axios({
+        url :'api/manage/upload/studentInfo',
+        method: "post",
+        baseURL:'http://localhost:8080',
+        withCredentials: true,
+        data: joinData
+      }).then(function callback(response){
+        console.log("응답");
+      })
+      .catch(  function CallbackERROR(response){
+        alert("ERROR!");
+      });
     };
-    handlePost(joinData);
-    console.log(joinData);
+    let url = document.getElementById('UploadAddress').value;
+  
+    if(url == ""){
+      alert("주소를 입력해주세요.")
+    }else{
+      const joinData = {
+        url: url,
+      };
+      handlePost(joinData);
+      console.log(joinData);
+    }
   }
-}

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import './Manage.css';
 import SideBar from './views/Manage_Header';
 import styled from "styled-components";
@@ -8,6 +7,7 @@ import { AiOutlineUser, AiTwotoneHome } from "react-icons/ai";
 import ManagerTimetableBox from './views/ManagerTimetableBox'
 import AppFooter from './views/AppFooter';
 import withRoot from './withRoot';
+import apiAxios from '../apiAxios';
 
 const Info = styled.h1``;
 
