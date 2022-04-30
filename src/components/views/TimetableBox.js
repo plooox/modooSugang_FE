@@ -13,7 +13,7 @@ export default function TimetableBox() {
         () => [
             {
                 accessor: 'student_id' ,
-                Header: '학번',
+                Header: 'ID (학교@학번)',
             },
             {
                 accessor: 'student_name' ,
@@ -51,14 +51,13 @@ export default function TimetableBox() {
         []
     );
 
-    sessionStorage.setItem('univ','카카오대학교');
     // 서버에 api 요청 (GET)
     const [resData, setResData] = React.useState([]);
     const InitGetMethod = async() => {
         await axios({
-            url: '/api/manage/info/'+ sessionStorage.getItem('univ'),
             method: 'GET',
-            baseURL: 'http://localhost:8080',
+            baseURL: 'http://localhost:8080/api/manage/info/'+ sessionStorage.getItem('univ'),
+            // baseURL: '/api/manage/upload/studentInfo',
             withCredentials: true.valueOf,
             data: {
                 univ:univName,
@@ -85,7 +84,7 @@ export default function TimetableBox() {
     
     React.useEffect(()=> {
         InitGetMethod();
-    },[]);
+    });
 
     return (
         <ManagerBoxLayout>

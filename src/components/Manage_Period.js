@@ -110,6 +110,8 @@ function AxiosPeriodBasket(e){
     start: start,
     end : end,
     semester : semester,
+    univ : sessionStorage.getItem("univ"),
+    id: sessionStorage.getItem("id"),
   };
   if(true){
     handlePost(joinData);
@@ -145,6 +147,8 @@ function AxiosPeriodRegister(e){
     start: start,
     end : end,
     semester : semester,
+    univ : sessionStorage.getItem("univ"),
+    id: sessionStorage.getItem("id"),
   };
   if(true){
     handlePost(joinData);
@@ -182,6 +186,8 @@ function AxiosPeriodModify(e){
     start: start,
     end : end,
     semester : semester,
+    univ : sessionStorage.getItem("univ"),
+    id: sessionStorage.getItem("id"),
   };
   if(true){
     handlePost(joinData);
@@ -195,7 +201,7 @@ function AxiosPeriodCancle(e){
   
   const handlePost = async(joinData) =>{
     await axios({
-      baseURL: 'http://localhost:8080api/manager/FormPeriod/cancle',
+      baseURL: 'http://localhost:8080/api/manager/FormPeriod/cancel',
       method: "POST",
       withCredentials: true,
       data: joinData
@@ -219,6 +225,8 @@ function AxiosPeriodCancle(e){
     start: start,
     end : end,
     semester : semester,
+    univ : sessionStorage.getItem("univ"),
+    id: sessionStorage.getItem("id"),
   };
   if(true){
     handlePost(joinData);

@@ -19,13 +19,30 @@ const style = {
 };
 
 export default function StudentUploadButton() {
-  // const [file, setFile] = React.useState(null);
-  const [file, changeFile] = React.useState();
-  const [fileName, changeFileName] = React.useState("");
-
+  
+  const [file, setFile] = React.useState();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const uploadFile = async() => {
+    const formData = new FormData();
+    formData.append('univ', sessionStorage.getItem('univ'));
+    formData.append('file', file)
+    await axios({
+      method: "POST",
+      baseURL: 'http://localhost:8080/api/manage/upload/studentInfo',
+      // baseURL: '/api/manage/upload/studentInfo',
+      withCredentials: true,
+      data: formData
+    }).then(function callback(response){
+      console.log("응답");
+      handleClose();
+    })
+    .catch(  function CallbackERROR(response){
+      alert("ERROR!");
+    });
+  }
 
   const Input = styled('input')({
     display: 'none',
@@ -44,15 +61,10 @@ export default function StudentUploadButton() {
             <Box sx={style}>
               <label htmlFor="contained-button-file">
                 <input type="file" onChange={ (e)=>{
-                  changeFile(e.target.files[0]);
-                  changeFileName(e.target.files[0].name);
+                  setFile(e.target.files[0]);
                 } } />
-                <form>
-                  <div class = "address"><input type="text" id='UploadAddress'/>
-                  <Button  variant="contained" style={{backgroundColor: "#24527a"}} 
-                    onClick={ (e) => UploadAddress() }>업로드</Button>
-                  </div>
-                </form>
+                <Button  variant="contained" style={{backgroundColor: "#24527a"}} 
+                  onClick={ () => uploadFile() }>업로드</Button>
               </label>
             </Box>
           </Modal>
@@ -61,31 +73,3 @@ export default function StudentUploadButton() {
     </Box>
   );
 }
-
-function UploadAddress(e){
-    const handlePost = async(joinData) =>{
-      await axios({
-        url :'api/manage/upload/studentInfo',
-        method: "post",
-        baseURL:'http://localhost:8080',
-        withCredentials: true,
-        data: joinData
-      }).then(function callback(response){
-        console.log("응답");
-      })
-      .catch(  function CallbackERROR(response){
-        alert("ERROR!");
-      });
-    };
-    let url = document.getElementById('UploadAddress').value;
-  
-    if(url == ""){
-      alert("주소를 입력해주세요.")
-    }else{
-      const joinData = {
-        url: url,
-      };
-      handlePost(joinData);
-      console.log(joinData);
-    }
-  }

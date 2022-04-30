@@ -19,27 +19,19 @@ const style = {
 };
 
 export default function FileUploadButton() {
-  const [file, changeFile] = React.useState();
+  const [file, setFile] = React.useState();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  // /**
-  //  * 파일 업로드 확인
-  //  */
-  //   const onChangeFile = e => {
-  //   if (e.target.files && e.target.files.length > 0) {
-  //     setCsv(e.target.files[0]);
-  //     console.log(e.target.files)
-  //   }
-  // }
   const uploadFile = async() => {
     const formData = new FormData();
     formData.append('univ', sessionStorage.getItem('univ'));
     formData.append('file', file)
     await axios({
-      method: "post",
+      method: "POST",
       baseURL: 'http://localhost:8080/api/manage/upload/timetable',
+      // baseURL: '/api/manage/upload/timetable',
       withCredentials: true,
       data: formData
     }).then(function callback(response){
@@ -68,7 +60,7 @@ export default function FileUploadButton() {
             <Box sx={style}>
               <label htmlFor="contained-button-file">
                 <input type="file" onChange={ (e)=>{
-                  changeFile(e.target.files[0]);
+                  setFile(e.target.files[0]);
                 } } />
                 <Button  variant="contained" style={{backgroundColor: "#24527a"}} 
                   onClick={ () => uploadFile() }>업로드</Button>
