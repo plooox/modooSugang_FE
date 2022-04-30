@@ -30,8 +30,8 @@ export default function FileUploadButton() {
     formData.append('file', file)
     await axios({
       method: "POST",
-      baseURL: 'http://localhost:8080/api/manage/upload/timetable',
-      // baseURL: '/api/manage/upload/timetable',
+      // baseURL: 'http://localhost:8080/api/manage/upload/timetable',
+      baseURL: '/api/manage/upload/timetable',
       withCredentials: true,
       data: formData
     }).then(function callback(response){

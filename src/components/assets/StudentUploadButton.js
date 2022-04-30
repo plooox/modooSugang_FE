@@ -31,8 +31,8 @@ export default function StudentUploadButton() {
     formData.append('file', file)
     await axios({
       method: "POST",
-      baseURL: 'http://localhost:8080/api/manage/upload/studentInfo',
-      // baseURL: '/api/manage/upload/studentInfo',
+      // baseURL: 'http://localhost:8080/api/manage/upload/studentInfo',
+      baseURL: '/api/manage/upload/studentInfo',
       withCredentials: true,
       data: formData
     }).then(function callback(response){
