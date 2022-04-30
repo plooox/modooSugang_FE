@@ -19,10 +19,7 @@ const style = {
 };
 
 export default function FileUploadButton() {
-  // const [file, setFile] = React.useState(null);
   const [file, changeFile] = React.useState();
-  const [fileName, changeFileName] = React.useState("");
-
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -32,11 +29,28 @@ export default function FileUploadButton() {
   //  */
   //   const onChangeFile = e => {
   //   if (e.target.files && e.target.files.length > 0) {
-  //     React.setFile(e.target.files[0]);
+  //     setCsv(e.target.files[0]);
   //     console.log(e.target.files)
   //   }
   // }
-
+  const uploadFile = async() => {
+    const formData = new FormData();
+    formData.append('univ', sessionStorage.getItem('univ'));
+    formData.append('file', file)
+    await axios({
+      method: "post",
+      baseURL: 'http://localhost:8080/api/manage/upload/timetable',
+      withCredentials: true,
+      data: formData
+    }).then(function callback(response){
+      console.log("응답");
+      handleClose();
+    })
+    .catch(  function CallbackERROR(response){
+      alert("ERROR!");
+    });
+  }
+  
   const Input = styled('input')({
     display: 'none',
   });
@@ -55,14 +69,9 @@ export default function FileUploadButton() {
               <label htmlFor="contained-button-file">
                 <input type="file" onChange={ (e)=>{
                   changeFile(e.target.files[0]);
-                  changeFileName(e.target.files[0].name);
                 } } />
-                <form>
-                  <div class = "address"><input type="text" id='UploadAddress'/>
-                  <Button  variant="contained" style={{backgroundColor: "#24527a"}} 
-                    onClick={ (e) => UploadAddress() }>업로드</Button>
-                  </div>
-                </form>
+                <Button  variant="contained" style={{backgroundColor: "#24527a"}} 
+                  onClick={ () => uploadFile() }>업로드</Button>
               </label>
             </Box>
           </Modal>
@@ -70,32 +79,4 @@ export default function FileUploadButton() {
       </Stack>
     </Box>
   );
-}
-
-function UploadAddress(e){
-  const handlePost = async(joinData) =>{
-    await axios({
-      url :'api/manage/upload/timetable',
-      method: "post",
-      baseURL:'http://localhost:8080',
-      withCredentials: true,
-      data: joinData
-    }).then(function callback(response){
-      console.log("응답");
-    })
-    .catch(  function CallbackERROR(response){
-      alert("ERROR!");
-    });
-  };
-  let url = document.getElementById('UploadAddress').value;
-
-  if(url === ""){
-    alert("주소를 입력해주세요.")
-  }else{
-    const joinData = {
-      url: url,
-    };
-    handlePost(joinData);
-    console.log(joinData);
-  }
 }

@@ -48,18 +48,13 @@ export default function ManagerTimetableBox() {
         []
     );
 
-    sessionStorage.setItem('univ','카카오대학교'); //임시
     // 서버에 api 요청 (GET)
     const [resData, setResData] = React.useState([]);
     const InitGetMethod = async() => {
         await axios({
-            url: '/api/manage/timetable/'+ sessionStorage.getItem('univ'),
+            baseURL: 'http://localhost:8080/api/manage/timetable/'+sessionStorage.getItem('univ'),
             method: 'GET',
-            baseURL: 'http://localhost:8080',
             withCredentials: true.valueOf,
-            data: {
-                univ:univName,
-            }
         },
         )
         .then(function callback(response){
@@ -76,14 +71,13 @@ export default function ManagerTimetableBox() {
     React.useEffect(() => {
         const univ = sessionStorage.getItem('univ');
         if(univ !== "" ){
-            // console.log(univ);
             InitGetMethod();
         }      
     },[]);
     
     React.useEffect(()=> {
         InitGetMethod();
-    },[]);
+    });
     
     return (
         <ManagerBoxLayout>
