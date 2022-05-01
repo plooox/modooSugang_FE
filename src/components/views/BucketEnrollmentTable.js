@@ -64,9 +64,8 @@ export default function BucketEnrollmentTable({columns, data}) {
       univ : sessionStorage.getItem("univ"),
     };  
     await axios({
-      url: 'api/student/enroll/apply/basket',
+      baseURL: '/api/student/enroll/apply/basket',
       method: "post",
-      baseURL: 'http://localhost:8080',
       withCredentials: true,
       data: RequestEnroll,
     })

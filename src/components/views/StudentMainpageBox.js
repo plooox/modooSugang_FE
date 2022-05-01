@@ -26,8 +26,8 @@ export default function MainpageBox() {
 
   const InitSelectBar = async() => {
     await axios({
-      // baseURL: '/api/home/univ',
-      baseURL: 'http://localhost:8080/api/home/univ',
+      baseURL: '/api/home/univ',
+      // baseURL: 'http://localhost:8080/api/home/univ',
       method: "GET",
       withCredentials: true,
     })

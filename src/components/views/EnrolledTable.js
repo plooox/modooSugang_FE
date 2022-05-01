@@ -62,9 +62,8 @@ export default function EnrolledTable({columns, data}) {
         semester : "2022_1",
       };  
       await axios({
-        url: 'api/student/enroll/drop/lecture',
+        baseURL: '/api/student/enroll/drop/lecture',
         method: "post",
-        baseURL: 'http://localhost:8080',
         withCredentials: true,
         data: RequestEnroll,
       })

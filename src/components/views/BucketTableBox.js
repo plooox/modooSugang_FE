@@ -11,11 +11,10 @@ export default function StuEnrolmentpageBox() {
     const [data, setResData] = React.useState([]); // 1번테이블에 띄울 data 호출
     const handleEnroll = async(joinData) =>{
         await axios({
-          url: 'api/student/enrolled/basket_list/',
-          method: "post",
-          baseURL: 'http://localhost:8080',
-          withCredentials: true,
-          data: joinData
+            baseURL: '/api/student/enrolled/basket_list/',
+            method: "post",
+            withCredentials: true,
+            data: joinData
         })
         .then(function callback(response){
             setResData(response.data);

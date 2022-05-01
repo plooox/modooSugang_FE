@@ -67,9 +67,8 @@ export default function BasketTable({columns, data}) {
         univ : sessionStorage.getItem("univ"),
       };  
       await axios({
-        url: 'api/student/enroll/apply/lecture',
+        baseURL: '/api/student/enroll/apply/lecture',
         method: "post",
-        baseURL: 'http://localhost:8080',
         withCredentials: true,
         data: RequestEnroll,
       })
@@ -127,9 +126,8 @@ export default function BasketTable({columns, data}) {
   const recommend = async() =>{
     alert("test");
     await axios({
-      url: 'api/student/enroll/lecture_list/recommend',
+      baseURL: '/api/student/enroll/lecture_list/recommend',
       method: "post",
-      baseURL: 'http://localhost:8080',
       withCredentials: true,
       data: joinData
     })
@@ -203,9 +201,8 @@ export default function BasketTable({columns, data}) {
   const [data_enroll, setResData] = React.useState([]);
   const TableEnroll = async(joinData) =>{
       await axios({
-        url: 'api/student/enroll/lecture_list/',
+        baseURL: '/api/student/enroll/lecture_list/',
         method: "post",
-        baseURL: 'http://localhost:8080',
         withCredentials: true,
         data: joinData
       })

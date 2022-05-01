@@ -52,7 +52,8 @@ export default function ManagerTimetableBox() {
     const [resData, setResData] = React.useState([]);
     const InitGetMethod = async() => {
         await axios({
-            baseURL: 'http://localhost:8080/api/manage/timetable/'+sessionStorage.getItem('univ'),
+            // baseURL: 'http://localhost:8080/api/manage/timetable/'+sessionStorage.getItem('univ'),
+            baseURL: '/api/manage/timetable/'+sessionStorage.getItem('univ'),
             method: 'GET',
             withCredentials: true.valueOf,
         },

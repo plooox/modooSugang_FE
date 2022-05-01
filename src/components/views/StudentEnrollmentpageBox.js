@@ -13,9 +13,8 @@ export default function StuEnrolmentpageBox() {
         const [data_enroll, setResData] = React.useState([]);
         const handleEnroll = async(joinData) =>{
             await axios({
-              url: 'api/student/enroll/lecture_list/',
+              url: '/api/student/enroll/lecture_list/',
               method: "post",
-              baseURL: 'http://localhost:8080',
               withCredentials: true,
               data: joinData
             })
@@ -79,11 +78,10 @@ export default function StuEnrolmentpageBox() {
     const [data_basket, setBasketData] = React.useState([]);
     const handleBasket = async(joinData) =>{
         await axios({
-          url: 'api/student/enrolled/basket_list/',
-          method: "post",
-          baseURL: 'http://localhost:8080',
-          withCredentials: true,
-          data: joinData
+            baseURL: '/api/student/enrolled/basket_list/',
+            method: "post",
+            withCredentials: true,
+            data: joinData
         })
         .then(function callback(response){
             setBasketData(response.data);
@@ -135,11 +133,10 @@ export default function StuEnrolmentpageBox() {
     const [data_my, setMyData] = React.useState([]);
     const handleMy = async(joinData) =>{
         await axios({
-          url: 'api/student/enroll/myenroll/',
-          method: "post",
-          baseURL: 'http://localhost:8080',
-          withCredentials: true,
-          data: joinData
+            baseURL: '/api/student/enroll/myenroll/',
+            method: "post",
+            withCredentials: true,
+            data: joinData
         })
         .then(function callback(response){
             setMyData(response.data);

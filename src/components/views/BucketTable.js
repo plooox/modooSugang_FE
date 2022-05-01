@@ -53,16 +53,15 @@ export default function BucketTable({columns, data}) {
     const handledrop = async() =>{
       // value 수정 필요
       const RequestEnroll = {
-        id : "1",
+        id : sessionStorage.getItem("id"),
         code : sessionStorage.getItem("code"), // 세션에 저장된 code값
         univ : sessionStorage.getItem("univ"),
         student : sessionStorage.getItem("id"),
         semester : "2022_1",
       };  
       await axios({
-        url: 'api/student/enroll/drop/basket',
+        baseURL: '/api/student/enroll/drop/basket',
         method: "post",
-        baseURL: 'http://localhost:8080',
         withCredentials: true,
         data: RequestEnroll,
       })

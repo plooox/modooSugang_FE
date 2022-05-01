@@ -68,9 +68,8 @@ export default function BasketTable({columns, data}) {
       semester : "2022_1",
     };  
     await axios({
-      url: 'api/student/enroll/apply/lecture',
+      baseURL: '/api/student/enroll/apply/lecture',
       method: "post",
-      baseURL: 'http://localhost:8080',
       withCredentials: true,
       data: RequestEnroll,
     })
