@@ -268,6 +268,17 @@ export default function BasketTable({columns, data}) {
                 </TableRow>
               ))}
             </TableHead>
+            <TableHead>
+              {headerGroups.map((headerGroup) => (
+                <TableRow {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <TableCell {...column.getHeaderProps(column.getHeaderProps())}>
+                      <div>{column.canFilter ? column.render('Filter') : null}</div>
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableHead>
             <TableBody {...getTableBodyProps()}>
               {rows
                 // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
