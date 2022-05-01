@@ -18,6 +18,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import axios from 'axios';
+import { useFilters } from 'react-table/dist/react-table.development';
 
 
 // 수강신청 페이지 1번 테이블 [신청 교과목 조회]
@@ -152,6 +153,7 @@ export default function BasketTable({columns, data}) {
   } = useTable(
     { columns, data }, 
     useGlobalFilter, 
+    useFilters,
     useSortBy, 
     tableEvent, 
     useRowSelect,
@@ -251,42 +253,6 @@ export default function BasketTable({columns, data}) {
             <Typography variant="h7">
               [ 신청 교과목 조회 ]
             </Typography>
-            <FormGroup>
-              <FormControlLabel control={<Switch onClick={recommend}/>} label="과목추천" />
-            </FormGroup>
-            <FormGroup>
-              <FormControlLabel control={<Switch defaultChecked />} label="동시간대 과목 필터링" />
-            </FormGroup>
-            <FormControl sx={{ m: 1, minWidth: 100 }}>
-              <InputLabel id="demo-simple-select-label">전공/교양 선택</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={category}
-                label="Age"
-                onChange={handleChangeCategory}
-              >
-                <MenuItem value={10}>전공</MenuItem>
-                <MenuItem value={20}>교양</MenuItem>
-                <MenuItem value={30}>실험실습</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl sx={{ m: 1, minWidth: 80 }}>
-              <InputLabel id="demo-simple-select-label">학년</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={category}
-                label="Age"
-                onChange={handleChangeCategory}
-              >
-                <MenuItem value={10}>1학년</MenuItem>
-                <MenuItem value={20}>2학년</MenuItem>
-                <MenuItem value={30}>3학년</MenuItem>
-                <MenuItem value={30}>4학년</MenuItem>
-              </Select>
-            </FormControl>
-            <Search onSubmit={setGlobalFilter} />
           </Box>
 
           {/* Table */}
@@ -334,6 +300,7 @@ export default function BasketTable({columns, data}) {
       
       {/* 증원신청 버튼 */}
       <Grid container justifyContent='flex-end'>
+        <Search onSubmit={setGlobalFilter} />
         <Button variant='contained' style={{backgroundColor: "#24527a"}} onClick={
           ()=>{
             console.log(selectedRowIds)
