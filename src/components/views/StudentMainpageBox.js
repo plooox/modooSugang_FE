@@ -7,7 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Button from '@mui/material/Button';
-import Axios from "axios";
+import axios from 'axios';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import { Home } from '@mui/icons-material';
 import Homepage from '../Homepage';
@@ -25,18 +25,40 @@ export default function MainpageBox() {
   };
   
   // call the list of university 
+  // const [univ_list, setUser] = useState("");
+  // useEffect(() => {
+  //   Axios.post("api/home/univ").then((response) => {
+  //     if (response.data) {
+  //       alert(response.data)
+  //       console.log(response.data);
+  //       setUser(response.data);   
+  //     } else {
+  //       alert("failed to ");
+  //     }
+  //   });
+  // }, []);
+
+    // call the list of university 
   const [univ_list, setUser] = useState("");
   useEffect(() => {
-    Axios.post("api/home/univ").then((response) => {
-      if (response.data) {
-        console.log(response.data);
-        setUser(response.data);   
-      } else {
-        alert("failed to ");
-      }
-    });
+    CallUnivList();
   }, []);
-  
+
+  const CallUnivList = async() => {
+    await axios({
+    url: 'api/home/univ',
+    method: "post",
+    baseURL: 'http://localhost:8080',
+    withCredentials: true,
+  })
+  .then(function callback(response){
+    setUser(response.data);  
+  })
+  .catch(  function CallbackERROR(response){
+    alert("ERROR!");
+  });
+  }
+
 
   return (
     <MainpageBoxLayout

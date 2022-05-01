@@ -32,6 +32,10 @@ export default function StuEnrolmentpageBox() {
     }
 
     // 서버에 api 요청 (POST)
+    // data: {
+    //     univ: sessionStorage.getItem('univ'),
+    //     id: sessionStorage.getItem('id'),
+    // }
     const [resData, setResData] = React.useState([]);
     const InitPostMethod = async() => {
         await axios({
@@ -40,8 +44,9 @@ export default function StuEnrolmentpageBox() {
             baseURL: 'http://localhost:8080',
             withCredentials: true.valueOf,
             data: {
-                univ: sessionStorage.getItem('univ'),
-                id: sessionStorage.getItem('id'),
+                univ: "구름대학교",
+                id: "21611868",
+                semester : "2022_1",
             }
         },
         )
@@ -123,7 +128,7 @@ export default function StuEnrolmentpageBox() {
             <th bgcolor="gray">교양 학점</th>
             <th bgcolor="gray">실험 학점</th>
             <tr>
-                <td>{major}</td>
+                <td>9</td>
                 <td>{culture}</td>
                 <td>{experiment}</td>
             </tr>

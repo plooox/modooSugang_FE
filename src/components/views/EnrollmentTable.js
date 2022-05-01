@@ -34,6 +34,7 @@ const style = {
   p: 4,
 };
 
+
 export default function BasketTable({columns, data}) {
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false); 
@@ -121,6 +122,26 @@ export default function BasketTable({columns, data}) {
       )
     }
   )
+
+  // 추천 시스템
+  const recommend = async() =>{
+    alert("test");
+    await axios({
+      url: 'api/student/enroll/lecture_list/recommend',
+      method: "post",
+      baseURL: 'http://localhost:8080',
+      withCredentials: true,
+      data: joinData
+    })
+    .then(function callback(response){
+        setResData(response.data);
+        BasketTable({columns, setResData});
+    })
+    .catch(  function CallbackERROR(response){
+      alert("ERROR!");
+    });
+  }
+  
 
   const {
     getTableProps,
@@ -232,7 +253,7 @@ export default function BasketTable({columns, data}) {
               [ 신청 교과목 조회 ]
             </Typography>
             <FormGroup>
-              <FormControlLabel control={<Switch defaultChecked />} label="과목추천" />
+              <FormControlLabel control={<Switch onClick={recommend}/>} label="과목추천" />
             </FormGroup>
             <FormGroup>
               <FormControlLabel control={<Switch defaultChecked />} label="동시간대 과목 필터링" />

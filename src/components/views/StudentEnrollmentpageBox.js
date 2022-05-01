@@ -34,6 +34,7 @@ export default function StuEnrolmentpageBox() {
           const joinData = {
             semester : "2022_1",
             id : '21611868',
+            univ : "구름대학교",
           };
 
         const columns_Enroll = React.useMemo(
@@ -78,7 +79,7 @@ export default function StuEnrolmentpageBox() {
     const [data_basket, setBasketData] = React.useState([]);
     const handleBasket = async(joinData) =>{
         await axios({
-          url: 'api/student/enroll/basket_list/',
+          url: 'api/student/enrolled/basket_list/',
           method: "post",
           baseURL: 'http://localhost:8080',
           withCredentials: true,
@@ -96,19 +97,22 @@ export default function StuEnrolmentpageBox() {
         handleBasket(joinData);
       }, []);
 
-
     const columns_basket = React.useMemo(
         () => [
             {
-                accessor: 'code' ,
+                accessor: 'index' ,
                 Header: '과목코드',
             },
             {
-                accessor:  'lecture' ,
-                Header:     '과목명',
+                accessor: 'name' ,
+                Header:    '과목명',
             },
             {
-                accessor:  'category' ,
+                accessor: 'major',
+                Header: '학과'
+            },
+            {
+                accessor:  'classify' ,
                 Header: '전공/교양'
             },
             {
@@ -116,20 +120,17 @@ export default function StuEnrolmentpageBox() {
                 Header: '시간'
             },
             {
-                accessor:  'professor' ,
-                Header: '교수명',
-            },
-            {
-                accessor:  'classroom' ,
+                accessor:  'classes' ,
                 Header: '분반'
             },
             {
-                accessor:  'score' ,
+                accessor:  'credit' ,
                 Header: '학점'
             },
         ],
         []
     );
+
 
     const [data_my, setMyData] = React.useState([]);
     const handleMy = async(joinData) =>{

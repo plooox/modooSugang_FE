@@ -39,22 +39,33 @@ export default function BasketTable({columns, data}) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  function SelectCode(row,data){
-    var index = row['index'];
-    // var code = data[index]['index'];
-    // alert(code);
-    // sessionStorage.setItem('code', code); // 선택한 항목의 code값 가져오기
+  if (data.length > 0) {
+    var step;
+    for (step = 0; step < data.length; step++) {
+      var session_code_value = data[step]['index'];
+      var session_code_key = "lectureCodeC" + step;
+      sessionStorage.setItem(session_code_key, session_code_value);
+    }
+  }
+
+
+  function SelectCode(row){  
+    var index = row.index;
+    var CodeBysessionKey = "lectureCodeC" + index;
+    const code = sessionStorage.getItem(CodeBysessionKey);
+    sessionStorage.setItem('codeC', code); // 선택한 항목의 code값 가져오기
     setOpen(true);
     };
-    
+
     
   ///수강신청 요청 (API) , bool
   const handleApply = async() =>{
     // value 수정 필요
     const RequestEnroll = {
       id : "1",
-      code : sessionStorage.getItem("code"), // 세션에 저장된 code값
+      code : sessionStorage.getItem("codeC"), // 세션에 저장된 code값
       univ : "구름대학교",
+      semester : "2022_1",
     };  
     await axios({
       url: 'api/student/enroll/apply/lecture',

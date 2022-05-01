@@ -6,10 +6,9 @@ import axios from 'axios';
 // 장바구니 페이지 1번 테이블 [교과목 조회]
 
 export default function BucketEnrollmentTableBox() {
-    // Column 정보 입력
 
                 
-    const [data, setResData] = React.useState([]);
+    const [data, setResData] = React.useState([]); // 1번테이블에 띄울 data 호출
     const handleEnroll = async(joinData) =>{
         await axios({
           url: 'api/student/enroll/lecture_list/',
@@ -24,15 +23,13 @@ export default function BucketEnrollmentTableBox() {
         .catch(  function CallbackERROR(response){
           alert("ERROR!");
         });
-        
       };
 
       React.useEffect(() => {
         handleEnroll(joinData);
       }, []);
     
-
-      const joinData = {
+      const joinData = { 
         semester : "2022_1",
         id : '21611868',
       };
@@ -46,8 +43,8 @@ export default function BucketEnrollmentTableBox() {
                 Header: '과목코드',
             },
             {
-                accessor:  'name' ,
-                Header:     '과목명',
+                accessor: 'name' ,
+                Header:    '과목명',
             },
             {
                 accessor: 'major',
