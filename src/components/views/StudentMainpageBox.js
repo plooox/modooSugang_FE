@@ -7,7 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Button from '@mui/material/Button';
-import Axios from "axios";
+import axios from 'axios';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import { Home } from '@mui/icons-material';
 import Homepage from '../Homepage';
@@ -25,7 +25,7 @@ export default function MainpageBox() {
   };
 
   const InitSelectBar = async() => {
-    await Axios({
+    await axios({
       // baseURL: '/api/home/univ',
       baseURL: 'http://localhost:8080/api/home/univ',
       method: "GET",

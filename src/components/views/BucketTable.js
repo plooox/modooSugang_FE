@@ -10,8 +10,11 @@ import TableRow from '@mui/material/TableRow';
 import { Button, Modal, Typography } from '@mui/material';
 import { useTable, useGlobalFilter, useSortBy } from 'react-table'
 import { Box } from '@mui/material';
+import axios from 'axios';
 
 
+
+// 장바구니 페이지 2번 테이블 [장바구니 신청내역] 
 
 const style = {
   position: 'absolute',
@@ -29,6 +32,55 @@ export default function BucketTable({columns, data}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  
+  if (data.length > 0) {
+    var step;
+    for (step = 0; step < data.length; step++) {
+      var session_code_value = data[step]['index'];
+      var session_code_key = "DeleteCodeB" + step;
+      sessionStorage.setItem(session_code_key, session_code_value);
+    }
+  }
+  
+  function SelectCode(row){  
+    var index = row.index;
+    var CodeBysessionKey = "DeleteCodeB" + index;
+    const code = sessionStorage.getItem(CodeBysessionKey);
+    sessionStorage.setItem('code', code); // 선택한 항목의 code값 가져오기
+    setOpen(true);
+    };
+
+    const handledrop = async() =>{
+      // value 수정 필요
+      const RequestEnroll = {
+        id : "1",
+        code : sessionStorage.getItem("code"), // 세션에 저장된 code값
+        univ : "구름대학교",
+        student : "21611868",
+        semester : "2022_1",
+      };  
+      await axios({
+        url: 'api/student/enroll/drop/basket',
+        method: "post",
+        baseURL: 'http://localhost:8080',
+        withCredentials: true,
+        data: RequestEnroll,
+      })
+      .then(function callback(response){
+        if (response.data === true){ 
+          alert("장바구니에서 제거하였습니다.");
+          window.location.href = '/student/bucket';
+        }
+        else {
+          alert("알 수 없는 이유로 취소에 실패했습니다..");
+          window.location.href = '/student/bucket';
+        }
+      })
+      .catch(  function CallbackERROR(response){
+        alert("ERROR!");
+      });
+  };
+
 
   // 수강신청 버튼
   const tableEvent = (hooks) => {
@@ -38,7 +90,9 @@ export default function BucketTable({columns, data}) {
         id: "enrollment",
         Header: "신청/취소",
         Cell: ({row}) => (
-              <Button onClick={handleOpen}>신청</Button>
+          <Button onClick={() => {
+            SelectCode(row);
+              }}>취소</Button>
           ),
         },
     ]);
@@ -79,10 +133,10 @@ export default function BucketTable({columns, data}) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            신청하시겠습니까?
+            취소하시겠습니까?
           </Typography>
           <div>
-            <Button onClick={handleClose}>Yes</Button>
+            <Button onClick={()=>{handledrop()}}>Yes</Button>
             <Button onClick={handleClose}>No</Button>
           </div>
         </Box>
@@ -93,7 +147,7 @@ export default function BucketTable({columns, data}) {
         <TableContainer sx={{ maxHeight: 440 }}>
           <Box sx={{mt: 2, display: 'flex', flexwrap: 'wrap', justifyContent: 'space-between'}}>
             <Typography variant="h7">
-              [ 교과목 조회 ]
+              [ 장바구니 신청내역 ]
             </Typography>
           </Box>
 

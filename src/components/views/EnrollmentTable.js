@@ -17,7 +17,10 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import axios from 'axios';
 
+
+// 수강신청 페이지 1번 테이블 [신청 교과목 조회]
 
 const style = {
   position: 'absolute',
@@ -31,10 +34,60 @@ const style = {
   p: 4,
 };
 
+
 export default function BasketTable({columns, data}) {
   const [open, setOpen] = React.useState(false);
+  const handleClose = () => setOpen(false); 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
+  if (data.length > 0) {
+  var step;
+  for (step = 0; step < data.length; step++) {
+    var session_code_value = data[step]['index'];
+    var session_code_key = "lectureCode" + step;
+    sessionStorage.setItem(session_code_key, session_code_value);
+  }
+}
+
+  function SelectCode(row){  
+    var index = row.index;
+    var CodeBysessionKey = "lectureCode" + index;
+    const code = sessionStorage.getItem(CodeBysessionKey);
+    sessionStorage.setItem('code', code); // 선택한 항목의 code값 가져오기
+    setOpen(true);
+    };
+
+
+  ///수강신청 요청 (API) , bool
+  const handleApply = async() =>{
+      // value 수정 필요
+      const RequestEnroll = {
+        id : "1",
+        code : sessionStorage.getItem("code"), // 세션에 저장된 code값
+        univ : "구름대학교",
+      };  
+      await axios({
+        url: 'api/student/enroll/apply/lecture',
+        method: "post",
+        baseURL: 'http://localhost:8080',
+        withCredentials: true,
+        data: RequestEnroll,
+      })
+      .then(function callback(response){
+        if (response.data === true){ 
+          alert("신청에 성공했습니다.");
+          window.location.href = '/student/enrolment';
+        }
+        else {
+          alert("신청 불가 또는 잔여 여석이 없습니다.");
+          window.location.href = '/student/enrolment';
+        }
+      })
+      .catch(  function CallbackERROR(response){
+        alert("ERROR!");
+      });
+     };
+    //const id = sessionStorage.getItem("id");
 
   // 수강신청 버튼
   const tableEvent = (hooks) => {
@@ -43,11 +96,14 @@ export default function BasketTable({columns, data}) {
         {
         id: "enrollment",
         Header: "신청/취소",
-        Cell: ({row}) => (
-              <Button onClick={handleOpen}>신청</Button>
+        Cell: ({row}) => ( 
+          <Button onClick={() => {
+            SelectCode(row);
+              }}>신청</Button>
           ),
-        },
-    ]);
+        }, 
+    ], 
+    );
   };
 
   const IndeterminateCheckbox = React.forwardRef(
@@ -66,6 +122,26 @@ export default function BasketTable({columns, data}) {
       )
     }
   )
+
+  // 추천 시스템
+  const recommend = async() =>{
+    alert("test");
+    await axios({
+      url: 'api/student/enroll/lecture_list/recommend',
+      method: "post",
+      baseURL: 'http://localhost:8080',
+      withCredentials: true,
+      data: joinData
+    })
+    .then(function callback(response){
+        setResData(response.data);
+        BasketTable({columns, setResData});
+    })
+    .catch(  function CallbackERROR(response){
+      alert("ERROR!");
+    });
+  }
+  
 
   const {
     getTableProps,
@@ -123,6 +199,31 @@ export default function BasketTable({columns, data}) {
   const handleChangeCategory = (event) => {
     setcategory(event.target.value);
   };
+              
+  const [data_enroll, setResData] = React.useState([]);
+  const TableEnroll = async(joinData) =>{
+      await axios({
+        url: 'api/student/enroll/lecture_list/',
+        method: "post",
+        baseURL: 'http://localhost:8080',
+        withCredentials: true,
+        data: joinData
+      })
+      .then(function callback(response){
+          setResData(response.data);
+      })
+      .catch(  function CallbackERROR(response){
+        alert("ERROR!");
+      });
+    };
+
+    const joinData = {
+      semester : "2022_1",
+    };
+    React.useEffect(() => {
+      TableEnroll(joinData);
+    }, []);
+
 
   return (
     <>
@@ -138,7 +239,7 @@ export default function BasketTable({columns, data}) {
             신청하시겠습니까?
           </Typography>
           <div>
-            <Button onClick={handleClose}>Yes</Button>
+            <Button onClick={()=>{handleApply()}}>Yes</Button>
             <Button onClick={handleClose}>No</Button>
           </div>
         </Box>
@@ -152,7 +253,7 @@ export default function BasketTable({columns, data}) {
               [ 신청 교과목 조회 ]
             </Typography>
             <FormGroup>
-              <FormControlLabel control={<Switch defaultChecked />} label="과목추천" />
+              <FormControlLabel control={<Switch onClick={recommend}/>} label="과목추천" />
             </FormGroup>
             <FormGroup>
               <FormControlLabel control={<Switch defaultChecked />} label="동시간대 과목 필터링" />

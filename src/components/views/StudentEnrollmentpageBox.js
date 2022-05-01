@@ -3,44 +3,56 @@ import EnrollmentTable from './EnrollmentTable'
 import EnrolledTable from './EnrolledTable'
 import BasketTable from './BasketTable'
 import { Button } from '@mui/material';
+import axios from 'axios';
 
-// 데이터 객체 생성
-function createData(code, lecture, department, category, time, classroom, score, to) {
-    return { 
-        code: code,
-        lecture: lecture,
-        department: department,
-        category: category,
-        time: time,
-        classroom: classroom,
-        score: score,
-        to: to,
-        btn: row =>(
-            <div>
-                <Button >신청</Button>
-            </div>
-        ),
-    };
-  }
+
+// 수강신청 페이지 프레임
 
 export default function StuEnrolmentpageBox() {
-    // Column 정보 입력
-    const columns = React.useMemo(
+            
+        const [data_enroll, setResData] = React.useState([]);
+        const handleEnroll = async(joinData) =>{
+            await axios({
+              url: 'api/student/enroll/lecture_list/',
+              method: "post",
+              baseURL: 'http://localhost:8080',
+              withCredentials: true,
+              data: joinData
+            })
+            .then(function callback(response){
+                setResData(response.data);
+            })
+            .catch(  function CallbackERROR(response){
+              alert("ERROR!");
+            });
+          };
+
+          React.useEffect(() => {
+            handleEnroll(joinData);
+          }, []);
+        
+          const joinData = {
+            semester : "2022_1",
+            id : '21611868',
+            univ : "구름대학교",
+          };
+
+        const columns_Enroll = React.useMemo(
         () => [
             {
-                accessor: 'code' ,
+                accessor: 'index' ,
                 Header: '과목코드',
             },
             {
-                accessor:  'lecture' ,
+                accessor:  'name' ,
                 Header:     '과목명',
             },
             {
-                accessor: 'department',
+                accessor: 'major',
                 Header: '학과'
             },
             {
-                accessor:  'category' ,
+                accessor:  'classify' ,
                 Header: '전공/교양'
             },
             {
@@ -48,33 +60,59 @@ export default function StuEnrolmentpageBox() {
                 Header: '시간'
             },
             {
-                accessor:  'classroom' ,
+                accessor:  'classes' ,
                 Header: '분반'
             },
             {
-                accessor:  'score' ,
+                accessor:  'credit' ,
                 Header: '학점'
             },
             {
-                accessor:  'to' ,
+                accessor:  'remaining' ,
                 Header: '잔여 인원',
             },
         ],
         []
     );
 
+                
+    const [data_basket, setBasketData] = React.useState([]);
+    const handleBasket = async(joinData) =>{
+        await axios({
+          url: 'api/student/enrolled/basket_list/',
+          method: "post",
+          baseURL: 'http://localhost:8080',
+          withCredentials: true,
+          data: joinData
+        })
+        .then(function callback(response){
+            setBasketData(response.data);
+        })
+        .catch(  function CallbackERROR(response){
+          alert("ERROR!");
+        });
+      };
+
+      React.useEffect(() => {
+        handleBasket(joinData);
+      }, []);
+
     const columns_basket = React.useMemo(
         () => [
             {
-                accessor: 'code' ,
+                accessor: 'index' ,
                 Header: '과목코드',
             },
             {
-                accessor:  'lecture' ,
-                Header:     '과목명',
+                accessor: 'name' ,
+                Header:    '과목명',
             },
             {
-                accessor:  'category' ,
+                accessor: 'major',
+                Header: '학과'
+            },
+            {
+                accessor:  'classify' ,
                 Header: '전공/교양'
             },
             {
@@ -82,62 +120,79 @@ export default function StuEnrolmentpageBox() {
                 Header: '시간'
             },
             {
-                accessor:  'professor' ,
-                Header: '교수명',
-            },
-            {
-                accessor:  'classroom' ,
+                accessor:  'classes' ,
                 Header: '분반'
             },
             {
-                accessor:  'score' ,
+                accessor:  'credit' ,
                 Header: '학점'
             },
         ],
         []
     );
 
-    
-    const data = React.useMemo(
+
+    const [data_my, setMyData] = React.useState([]);
+    const handleMy = async(joinData) =>{
+        await axios({
+          url: 'api/student/enroll/myenroll/',
+          method: "post",
+          baseURL: 'http://localhost:8080',
+          withCredentials: true,
+          data: joinData
+        })
+        .then(function callback(response){
+            setMyData(response.data);
+        })
+        .catch(  function CallbackERROR(response){
+          alert("ERROR!");
+        });
+      };
+
+      React.useEffect(() => {
+        handleMy(joinData);
+      }, []);
+
+      const columns_My = React.useMemo(
         () => [
-            createData('AAA-0001', '알고리즘개론', '컴퓨터공학과', '전공필수', '[월]10:30~12:00 [수]9:00~10:30', 1, 3, '10/60'),
-            createData('AAA-0002', '자료구조개론', '컴퓨터공학과', '전공필수', '[월]10:30~12:00 [수]9:00~10:30', 1, 3, '10/60'),
-            createData('BBB-0003', '해석학1', '수학과', '전공필수', '[월]10:30~12:00 [수]9:00~10:30', 1, 3, '10/60'),
-            createData('DDD-0004', '논어', '공통', '교양', '[월]10:30~12:00 [수]9:00~10:30', 1, 3, '10/60'),
-            createData('EEE-0005', '전자기학', '전기전자공학부', '전공필수', '[월]10:30~12:00 [수]9:00~10:30', 1, 3, '10/60'),
-          ],
-          []
+            {
+                accessor: 'index' ,
+                Header: '과목코드',
+            },
+            {
+                accessor:  'name' ,
+                Header:     '과목명',
+            },
+            {
+                accessor: 'major',
+                Header: '학과'
+            },
+            {
+                accessor:  'classify' ,
+                Header: '전공/교양'
+            },
+            {
+                accessor:   'time',
+                Header: '시간'
+            },
+            {
+                accessor:  'classes' ,
+                Header: '분반'
+            },
+            {
+                accessor:  'credit' ,
+                Header: '학점'
+            },
+        ],
+        []
     );
     
-    function createData_basket(code, lecture, category, time, professor, classroom, score) {
-        return { 
-            code: code,
-            lecture: lecture,
-            category: category,
-            time: time,
-            professor : professor,
-            classroom: classroom,
-            score: score,
-        };
-      }
 
-        
-        const data_basket = React.useMemo(
-            () => [
-                createData_basket('AAA-0001', '알고리즘개론', '전공필수', '[월]10:30~12:00 [수]9:00~10:30','지준영', 'A', 3),
-                createData_basket('AAA-0002', '자료구조개론', '전공필수', '[월]10:30~12:00 [수]9:00~10:30', '지준영', 'A', 3),
-                createData_basket('BBB-0003', '해석학1', '전공필수', '[월]10:30~12:00 [수]9:00~10:30','지준영', 'A', 3),
-                createData_basket('DDD-0004', '논어', '교양', '[월]10:30~12:00 [수]9:00~10:30','지준영', 'B', 3),
-                createData_basket('EEE-0005', '전자기학', '전공필수', '[월]10:30~12:00 [수]9:00~10:30','지준영', 'B', 3),
-              ],
-              []
-        );
-        
     return (
         <>
-        <EnrollmentTable columns={columns} data={data}></EnrollmentTable>
+        <EnrollmentTable columns={columns_Enroll} data={data_enroll}></EnrollmentTable>
         <BasketTable columns={columns_basket} data={data_basket}></BasketTable>
-        <EnrolledTable columns={columns} data={data}></EnrolledTable>
+        <EnrolledTable columns={columns_My} data={data_my}></EnrolledTable>
         </>
     );
 }

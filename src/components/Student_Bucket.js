@@ -2,6 +2,7 @@ import * as React from 'react';
 import './Manage.css';
 import SideBar from './views/StudentHeader';
 import BucketTableBox from './views/BucketTableBox'
+import StudentMypageLayout from './views/StudentMypageLayout'
 import StudentTimeTable from './views/StudentTimeTable'
 import withRoot from './withRoot';
 import AppFooter from './views/AppFooter';

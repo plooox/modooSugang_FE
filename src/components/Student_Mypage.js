@@ -23,7 +23,7 @@ function StudentMyPage() {
           </div>
         </div>
         <Container>
-          <div>
+          <div> 
             <StudentMypageLayout></StudentMypageLayout>
             {/* <br></br><br></br>
             <table border="1" bordercolor="gray" width ="100%" height="250" align = "center" >
