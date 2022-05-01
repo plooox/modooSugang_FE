@@ -57,7 +57,7 @@ export default function TimetableBox() {
         await axios({
             method: 'GET',
             // baseURL: 'http://localhost:8080/api/manage/info/'+ sessionStorage.getItem('univ'),
-            baseURL: '/api/manage/upload/studentInfo',
+            baseURL: '/api/manage/info/'+ sessionStorage.getItem('univ'),
             withCredentials: true.valueOf,
             data: {
                 univ:univName,
