@@ -27,12 +27,12 @@ export default function StuEnrolmentpageBox() {
 
       React.useEffect(() => {
         handleEnroll(joinData);
-      }, []);
+      },[]);
     
       const joinData = { 
         semester : "2022_1",
-        id : '21611868',
-        univ : "구름대학교",
+        id : sessionStorage.getItem("id"),
+        univ : sessionStorage.getItem("univ"),
       };
 
 

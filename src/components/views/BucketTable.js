@@ -55,8 +55,8 @@ export default function BucketTable({columns, data}) {
       const RequestEnroll = {
         id : "1",
         code : sessionStorage.getItem("code"), // 세션에 저장된 code값
-        univ : "구름대학교",
-        student : "21611868",
+        univ : sessionStorage.getItem("univ"),
+        student : sessionStorage.getItem("id"),
         semester : "2022_1",
       };  
       await axios({

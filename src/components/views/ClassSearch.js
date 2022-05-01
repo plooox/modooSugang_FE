@@ -70,7 +70,8 @@ export default function Class() {
     const [resData, setResData] = React.useState([]);
     const InitGetMethod = async() => {
         await axios({
-            baseURL: '/api/student/class/'+sessionStorage.getItem('univ'),
+            // baseURL: '/api/student/class/'+sessionStorage.getItem('univ'),
+            baseURL: 'http://localhost:8080/api/student/class/'+sessionStorage.getItem('univ'),
             method: 'GET',
             withCredentials: true.valueOf,
         },
@@ -82,7 +83,7 @@ export default function Class() {
         .catch(function CallbackERROR(response){
             console.log('fail');
             alert("ERROR");
-            window.location.href = '/student';
+            // window.location.href = '/student';
         });
     }
 

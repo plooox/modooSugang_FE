@@ -44,8 +44,8 @@ export default function StuEnrolmentpageBox() {
             baseURL: 'http://localhost:8080',
             withCredentials: true.valueOf,
             data: {
-                univ: "구름대학교",
-                id: "21611868",
+                univ: sessionStorage.getItem("univ"),
+                id: sessionStorage.getItem("id"),
                 semester : "2022_1",
             }
         },

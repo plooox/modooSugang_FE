@@ -31,7 +31,8 @@ export default function BucketEnrollmentTableBox() {
     
       const joinData = { 
         semester : "2022_1",
-        id : '21611868',
+        id : sessionStorage.getItem('id'),
+        univ : sessionStorage.getItem('univ'),
       };
 
 

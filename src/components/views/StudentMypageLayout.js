@@ -39,12 +39,13 @@ export default function StuEnrolmentpageBox() {
     const [resData, setResData] = React.useState([]);
     const InitPostMethod = async() => {
         await axios({
-            baseURL: '/api/student/Mypage',
+            // baseURL: '/api/student/Mypage',
+            baseURL: 'http://localhost:8080/api/student/Mypage',
             method: 'POST',
             withCredentials: true.valueOf,
             data: {
-                univ: "구름대학교",
-                id: "21611868",
+                univ: sessionStorage.getItem("univ"),
+                id: sessionStorage.getItem("id"),
                 semester : "2022_1",
             }
         },
@@ -52,11 +53,12 @@ export default function StuEnrolmentpageBox() {
         .then(function callback(response){
             // Table data -> 서버에서 받은 데이터
             setResData(response.data);
+            console.log(response.data);
         })
         .catch(function CallbackERROR(response){
             console.log('fail');
             alert("ERROR");
-            window.location.href = '/student';
+            // window.location.href = '/student';
         });
     }
 
@@ -127,7 +129,7 @@ export default function StuEnrolmentpageBox() {
             <th bgcolor="gray">교양 학점</th>
             <th bgcolor="gray">실험 학점</th>
             <tr>
-                <td>9</td>
+                <td>{major}</td>
                 <td>{culture}</td>
                 <td>{experiment}</td>
             </tr>

@@ -55,10 +55,10 @@ export default function EnrolledTable({columns, data}) {
   const handledrop = async() =>{
       // value 수정 필요
       const RequestEnroll = {
-        id : "1",
+        id : sessionStorage.getItem("id"),
         code : sessionStorage.getItem("code"), // 세션에 저장된 code값
-        univ : "구름대학교",
-        student : "21611868",
+        univ : sessionStorage.getItem("univ"),
+        student : sessionStorage.getItem("id"),
         semester : "2022_1",
       };  
       await axios({

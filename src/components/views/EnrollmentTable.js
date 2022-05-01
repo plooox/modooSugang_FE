@@ -62,9 +62,9 @@ export default function BasketTable({columns, data}) {
   const handleApply = async() =>{
       // value 수정 필요
       const RequestEnroll = {
-        id : "1",
+        id :  sessionStorage.getItem("id"),
         code : sessionStorage.getItem("code"), // 세션에 저장된 code값
-        univ : "구름대학교",
+        univ : sessionStorage.getItem("univ"),
       };  
       await axios({
         url: 'api/student/enroll/apply/lecture',
@@ -219,6 +219,8 @@ export default function BasketTable({columns, data}) {
 
     const joinData = {
       semester : "2022_1",
+      univ : sessionStorage.getItem("univ"),
+      id : sessionStorage.getItem("id"),
     };
     React.useEffect(() => {
       TableEnroll(joinData);

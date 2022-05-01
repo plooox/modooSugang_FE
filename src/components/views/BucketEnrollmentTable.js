@@ -59,9 +59,9 @@ export default function BucketEnrollmentTable({columns, data}) {
   //수강신청 요청 (API) , bool
   const handleApply = async() =>{
     const RequestEnroll = { // value 수정 필요
-      id : sessionStorage.getItem("codeB"),
+      id : sessionStorage.getItem("id"),
       code : sessionStorage.getItem("codeB"), // 세션에 저장된 code값
-      univ : "구름대학교",
+      univ : sessionStorage.getItem("univ"),
     };  
     await axios({
       url: 'api/student/enroll/apply/basket',

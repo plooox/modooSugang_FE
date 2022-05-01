@@ -33,8 +33,8 @@ export default function StuEnrolmentpageBox() {
         
           const joinData = {
             semester : "2022_1",
-            id : '21611868',
-            univ : "구름대학교",
+            id : sessionStorage.getItem("id"),
+            univ : sessionStorage.getItem("univ"),
           };
 
         const columns_Enroll = React.useMemo(
