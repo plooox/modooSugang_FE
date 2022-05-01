@@ -3,72 +3,11 @@ import EnrollmentTable from './EnrollmentTable'
 import EnrolledTable from './EnrolledTable'
 import BasketTable from './BasketTable'
 import { Button } from '@mui/material';
-import { Box, Select, MenuItem, Input } from '@mui/material';
 import axios from 'axios';
-
-// Define a default UI for filtering
-function DefaultColumnFilter({
-    column: { filterValue, preFilteredRows, setFilter },
-  }) {  
-    return (
-        <Box>
-            <Input
-                sx={{minWidth:70}}
-                value={filterValue || ''}
-                onChange={e => {
-                    setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
-                }}
-                placeholder={`Search`}
-            />
-        </Box>
-    )
-  }
-function NullColumnFilter({
-    column: { filterValue, preFilteredRows, setFilter },
-  }) {  
-    return (
-        <Box sx={{minWidth: 70 }}/>
-    )
-  }
-  
-  // Selection Filter
-  function SelectColumnFilter({
-    column: { filterValue, setFilter, preFilteredRows, id },
-  }) {
-    // Calculate the options for filtering
-    // using the preFilteredRows
-    const options = React.useMemo(() => {
-      const options = new Set()
-      preFilteredRows.forEach(row => {
-        options.add(row.values[id])
-      })
-      return [...options.values()]
-    }, [id, preFilteredRows])
-  
-    // Render a multi-select box
-    return (
-        <Box sx={{minWidth: 70 }}>
-            <Select
-                sx={{ minWidth: 70 }}
-                value={filterValue}
-                defaultValue=""
-                onChange={e => {
-                setFilter(e.target.value || undefined)
-                }}
-            >
-                <MenuItem value="">All</MenuItem>
-                {options.map((option, i) => (
-                <MenuItem key={i} value={option}>
-                    {option}
-                </MenuItem>
-                ))}
-            </Select>
-        </Box>
-    )
-  }
 
 
 // 수강신청 페이지 프레임
+
 export default function StuEnrolmentpageBox() {
             
         const [data_enroll, setResData] = React.useState([]);
@@ -97,53 +36,44 @@ export default function StuEnrolmentpageBox() {
             univ : sessionStorage.getItem("univ"),
           };
 
-    const columns_Enroll = React.useMemo(
+        const columns_Enroll = React.useMemo(
         () => [
             {
-                accessor: 'lecture_id' ,
+                accessor: 'index' ,
                 Header: '과목코드',
-                Filter: DefaultColumnFilter,
             },
             {
-                accessor:  'lecture_name' ,
+                accessor:  'name' ,
                 Header:     '과목명',
-                Filter: DefaultColumnFilter,
             },
             {
-                accessor: 'lecture_major',
-                Header: '학과',
-                Filter: DefaultColumnFilter,
+                accessor: 'major',
+                Header: '학과'
             },
             {
-                accessor:  'lecture_classify' ,
-                Header: '전공/교양',
-                Filter: SelectColumnFilter,
-                filter: 'includes',
+                accessor:  'classify' ,
+                Header: '전공/교양'
             },
             {
-                accessor:   'lecture_time',
-                Header: '시간',
-                Filter: DefaultColumnFilter,
+                accessor:   'time',
+                Header: '시간'
             },
             {
-                accessor:  'lecture_room' ,
-                Header: '분반',
-                Filter: NullColumnFilter,
+                accessor:  'classes' ,
+                Header: '분반'
             },
             {
-                accessor:  'lecture_credit' ,
-                Header: '학점',
-                Filter: SelectColumnFilter,
-                filter: 'includes',
+                accessor:  'credit' ,
+                Header: '학점'
             },
             {
-                accessor:  'lecture_limit' ,
+                accessor:  'remaining' ,
                 Header: '잔여 인원',
-                Filter: NullColumnFilter,
             },
         ],
         []
     );
+
                 
     const [data_basket, setBasketData] = React.useState([]);
     const handleBasket = async(joinData) =>{
